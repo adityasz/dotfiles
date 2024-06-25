@@ -1,0 +1,54 @@
+set hlsearch incsearch
+set ideajoin
+set textobj-indent " https://youtrack.jetbrains.com/issue/VIM-1151
+
+" set hybrid numbering in settings so that F2 works like vim
+nnoremap <F2> :set relativenumber!<CR>
+nnoremap <F3> :noh<CR>
+
+nnoremap <SPACE>   <Nop>
+nnoremap <Tab>     gt
+nnoremap <S-Tab>   gT
+nnoremap <Leader>l gt
+nnoremap <Leader>h gT
+
+map Y y$
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+nnoremap <F1> <Esc>
+inoremap <F1> <Esc>
+vnoremap <F1> <Esc>
+xnoremap <F1> <Esc>
+snoremap <F1> <Esc>
+cnoremap <F1> <Esc>
+
+let mapleader = " "
+
+" https://github.com/JetBrains/ideavim/wiki/sethandler
+sethandler <S-F5>    n-v-i:ide " i:vim
+sethandler <C-S-F10> n-v-i:ide " i:vim
+
+map <F5>       <Action>(Run)
+map <C-F5>     <Action>(Debug)
+map <Leader>z  <Action>(ToggleDistractionFreeMode)
+map <Leader>r  <Action>(RenameElement)
+map <Leader>p  <Action>(TogglePresentationMode)
+map <Leader>b  <Action>(Build)
+map <Leader>f  V<Action>(ReformatCode)
+map <F11>      <Action>(ToggleFullScreen)
+map <F8>       <Action>(ToggleLineBreakpoint)
+map <F9>       <Action>(StepOver)
+map <F10>      <Action>(StepInto)
+map <S-F10>    <Action>(StepOut)
+map <Leader>s  <Action>(FileStructurePopup)
+" map <Leader>c  <Action>(CallHierarchyPopupMenu) " Doesn't work right now
+map <Leader>n  <Action>(NewFile)
+map <Leader>d  <Action>(NewDir)
+
+nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+vmap gq  <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+
+Plug 'tpope/vim-commentary'

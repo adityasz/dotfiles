@@ -1,0 +1,39 @@
+set ai
+
+nnoremap <F2> :set relativenumber!<CR>
+nnoremap <F3> :noh<CR>
+
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+nnoremap <Right> gt
+nnoremap <Left> gT
+nnoremap <Leader>l gt
+nnoremap <Leader>h gT
+
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+nnoremap <F1> <Esc>
+inoremap <F1> <Esc>
+vnoremap <F1> <Esc>
+xnoremap <F1> <Esc>
+snoremap <F1> <Esc>
+cnoremap <F1> <Esc>
+
+" vim-plug
+"===============================================================================
+
+call plug#begin()
+
+" Language Pack:
+" set nocompatible
+" Plug 'sheerun/vim-polyglot'
+
+" Commenting:
+Plug 'tpope/vim-commentary'
+	autocmd FileType cpp,c setlocal commentstring=//\ %s
+
+call plug#end()
