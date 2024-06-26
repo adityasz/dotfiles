@@ -72,11 +72,11 @@ tmap <C-j> <C-W><C-j>
 tmap <C-k> <C-W><C-k>
 
 " From https://vi.stackexchange.com/a/10666:
-autocmd filetype c      nnoremap <buffer> <F5> :w <bar> !clear; gcc -O3 -Wall % -o %:r<CR>
+autocmd filetype c      nnoremap <buffer> <S-F5> :w <bar> !clear; gcc -O3 -Wall % -o %:r<CR>
 autocmd filetype c      nnoremap <buffer> <C-F5> :w <bar> !clear; gcc -Wall -ggdb3 % -o %:r<CR>
-autocmd filetype cpp    nnoremap <buffer> <F5> :w <bar> !clear; g++ -std=c++23 -O3 -Wall % -o %:r<CR>
+autocmd filetype cpp    nnoremap <buffer> <S-F5> :w <bar> !clear; g++ -std=c++23 -O3 -Wall % -o %:r<CR>
 autocmd filetype cpp    nnoremap <buffer> <C-F5> :w <bar> !clear; g++ -std=c++23 -Wall % -g3 -ggdb3 -o %:r<CR>
-autocmd filetype python nnoremap <buffer> <F5> :w <bar> !clear; python %<CR>
+autocmd filetype python nnoremap <buffer> <S-F5> :w <bar> !clear; python %<CR>
 
 autocmd Filetype c          setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
 autocmd Filetype cuda       setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
