@@ -29,6 +29,7 @@ if [ "$(gsettings get org.gnome.desktop.interface color-scheme)" = "'prefer-dark
 	dconf write /org/gnome/shell/extensions/search-light/background-color "(1.0, 1.0, 1.0, 1.0)"
 	dconf write /org/gnome/shell/extensions/search-light/border-color "(0.73333334922790527, 0.73333334922790527, 0.73333334922790527, 1.0)"
 	dconf write /org/gnome/shell/extensions/blur-my-shell/panel/blur false
+	dconf write /org/gnome/shell/extensions/rounded-window-corners-reborn/border-color "(0.73333334922790527, 0.73333334922790527, 0.73333334922790527, 1.0)"
 	# dconf write /org/gnome/shell/extensions/blur-my-shell/overview/blur false
 	# dconf write /org/gnome/shell/extensions/blur-my-shell/panel/color "(1.0, 1.0, 1.0, 0.5)"
 	# dconf write /org/gnome/shell/extensions/blur-my-shell/panel/brightness 1
@@ -69,6 +70,7 @@ else
 	dconf write /org/gnome/shell/extensions/blur-my-shell/panel/color "(0.0, 0.0, 0.0, 0.5)"
 	dconf write /org/gnome/shell/extensions/blur-my-shell/panel/brightness 0.75
 	dconf write /org/gnome/shell/extensions/blur-my-shell/panel/brightness 0.75
+	dconf write /org/gnome/shell/extensions/rounded-window-corners-reborn/border-color "(0.18039216101169586, 0.18039216101169586, 0.18039216101169586, 1.0)"
 	# dconf write /org/gnome/shell/extensions/dash-to-dock/custom-background-color false
 	# gnome-extensions enable blur-my-shell@aunetx
 	# gnome-extensions disable user-theme@gnome-shell-extensions.gcampax.github.com
