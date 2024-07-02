@@ -16,6 +16,7 @@ bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 unset command_not_found_handle
 
+export TERM=tmux-256color
 export EDITOR='/bin/vimx'
 export VISUAL='/bin/vimx'
 export PROMPT_DIRTRIM=3
@@ -37,3 +38,6 @@ parse_git_branch() {
 export PATH="$HOME/.cargo/bin/:/usr/local/cuda/bin:/usr/local/sioyek/:$PATH"
 
 source ~/.zsh_aliases
+
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
