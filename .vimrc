@@ -1,11 +1,11 @@
-" set background=light
-" colorscheme onehalflight
-set background=dark
-colorscheme onehalfdark
+set background=light
+colorscheme onehalflight
+" set background=dark
+" colorscheme onehalfdark
 
 "===============================================================================
 
-set nu mouse=a tabstop=8 noexpandtab shiftwidth=4 textwidth=0 linebreak ai
+set nu mouse=a tabstop=8 noexpandtab shiftwidth=8 textwidth=0 linebreak ai
 set relativenumber
 set formatoptions+=cro shortmess-=S termguicolors updatetime=100 tw=0
 " (an asterisk in the beginning of each line of a multi-line comment in c)
@@ -54,8 +54,6 @@ nnoremap <Right> gt
 nnoremap <Left> gT
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
-nnoremap <Leader>l gt
-nnoremap <Leader>h gT
 
 nnoremap <F1> <Esc>
 inoremap <F1> <Esc>
@@ -92,14 +90,6 @@ autocmd Filetype make       setlocal noexpandtab tabstop=8 shiftwidth=8 softtabs
 autocmd Filetype arduino    setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
 autocmd Filetype haskell    setlocal tabstop=4 shiftwidth=4 softtabstop=4 nolinebreak nospell
 autocmd Filetype javascript setlocal textwidth=80 nospell
-
-" For tmux, forgot what it does:
-if &term =~ "screen"
-    let &t_BE = "\e[?2004h"
-    let &t_BD = "\e[?2004l"
-    exec "set t_PS=\e[200~"
-    exec "set t_PE=\e[201~"
-endif
 
 " if has("autocmd")
 "   augroup templates
@@ -186,9 +176,9 @@ Plug 'tpope/vim-commentary'
 
 " Snippets:
 Plug 'sirver/ultisnips'
-	let g:UltiSnipsExpandTrigger = '<tab>'
-	let g:UltiSnipsJumpForwardTrigger = '<tab>'
-	let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+	let g:UltiSnipsExpandTrigger = '<Tab>'
+	let g:UltiSnipsJumpForwardTrigger = '<Tab>'
+	let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 " Vim syntax highlighting for .kbd files, used by KMonad.
 Plug 'kmonad/kmonad-vim'
