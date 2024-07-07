@@ -16,7 +16,6 @@ bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 unset command_not_found_handle
 
-export TERM=tmux-256color
 export EDITOR='/bin/vimx'
 export VISUAL='/bin/vimx'
 export PROMPT_DIRTRIM=3
@@ -35,9 +34,13 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PATH="$HOME/.cargo/bin/:/usr/local/cuda/bin:/usr/local/sioyek/:$PATH"
-
-source ~/.zsh_aliases
+export PATH="$HOME/.cargo/bin:/usr/local/cuda/bin:/usr/local/sioyek:/opt/nvim/bin:$PATH"
 
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
+
+source ~/.zsh_aliases
+source ~/.zcrap/antigen.zsh
+
+antigen bundle jeffreytse/zsh-vi-mode
+antigen apply

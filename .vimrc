@@ -1,12 +1,16 @@
-set background=light
-colorscheme onehalflight
-" set background=dark
-" colorscheme onehalfdark
+" --- BEGIN mode dependent ---
+" --- light mode ---
+" set background=light
+" colorscheme light
+" --- dark mode ---
+set background=dark
+colorscheme dark
+" --- END mode dependent ---
 
 "===============================================================================
 
 set nu mouse=a tabstop=8 noexpandtab shiftwidth=8 textwidth=0 linebreak ai
-set relativenumber
+set relativenumber smarttab
 set formatoptions+=cro shortmess-=S termguicolors updatetime=100 tw=0
 " (an asterisk in the beginning of each line of a multi-line comment in c)
 " note the +, I want the opposite behavior of:
@@ -28,7 +32,16 @@ nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 
+nnoremap <F1> <Esc>
+inoremap <F1> <Esc>
+onoremap <F1> <Esc>
+vnoremap <F1> <Esc>
+xnoremap <F1> <Esc>
+lnoremap <F1> <Esc>
+snoremap <F1> <Esc>
+
 map Y y$
+
 nnoremap j gj
 nnoremap k gk
 nnoremap $ g$
@@ -55,13 +68,6 @@ nnoremap <Left> gT
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
-nnoremap <F1> <Esc>
-inoremap <F1> <Esc>
-vnoremap <F1> <Esc>
-xnoremap <F1> <Esc>
-snoremap <F1> <Esc>
-cnoremap <F1> <Esc>
-
 vnoremap <C-c> "+y
 
 tmap <C-h> <C-W><C-h>
@@ -70,11 +76,11 @@ tmap <C-j> <C-W><C-j>
 tmap <C-k> <C-W><C-k>
 
 " From https://vi.stackexchange.com/a/10666:
-autocmd filetype c      nnoremap <buffer> <S-F5> :w <bar> !clear; gcc -O3 -Wall % -o %:r<CR>
+autocmd filetype c      nnoremap <buffer> <F5> :w <bar> !clear; gcc -O3 -Wall % -o %:r<CR>
+autocmd filetype cpp    nnoremap <buffer> <F5> :w <bar> !clear; g++ -std=c++23 -O3 -Wall % -o %:r<CR>
+autocmd filetype python nnoremap <buffer> <F5> :w <bar> !clear; python %<CR>
 autocmd filetype c      nnoremap <buffer> <C-F5> :w <bar> !clear; gcc -Wall -ggdb3 % -o %:r<CR>
-autocmd filetype cpp    nnoremap <buffer> <S-F5> :w <bar> !clear; g++ -std=c++23 -O3 -Wall % -o %:r<CR>
 autocmd filetype cpp    nnoremap <buffer> <C-F5> :w <bar> !clear; g++ -std=c++23 -Wall % -g3 -ggdb3 -o %:r<CR>
-autocmd filetype python nnoremap <buffer> <S-F5> :w <bar> !clear; python %<CR>
 
 autocmd Filetype c          setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
 autocmd Filetype cuda       setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
@@ -82,6 +88,7 @@ autocmd Filetype cpp        setlocal noexpandtab tabstop=8 shiftwidth=8 softtabs
 autocmd Filetype asm        setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 nolinebreak nospell
 autocmd Filetype python     setlocal tabstop=4 shiftwidth=4 softtabstop=4 nolinebreak nospell
 autocmd Filetype html       setlocal expandtab textwidth=80 nospell
+autocmd Filetype rst        setlocal tabstop=8 noexpandtab textwidth=72 nospell
 autocmd Filetype css        setlocal expandtab textwidth=80 nospell
 autocmd Filetype xml        setlocal textwidth=80 nospell
 autocmd Filetype json       setlocal nolinebreak nospell
@@ -158,6 +165,10 @@ Plug 'preservim/vim-markdown'
 
 " Emmet:
 Plug 'mattn/emmet-vim'
+
+" Better python syntax highlighting:
+Plug 'vim-python/python-syntax'
+	let g:python_highlight_all = 1
 
 " Better C++ syntax highlighting:
 Plug 'octol/vim-cpp-enhanced-highlight'

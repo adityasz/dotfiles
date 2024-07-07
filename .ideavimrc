@@ -1,5 +1,5 @@
 set hlsearch incsearch
-set ideajoin
+set ideajoin ideaput
 set textobj-indent " https://youtrack.jetbrains.com/issue/VIM-1151
 
 " set hybrid numbering in settings so that F2 works like vim
@@ -33,11 +33,12 @@ sethandler <C-S-F10> n-v-i:ide " i:vim
 
 map <F5>       <Action>(Run)
 map <C-F5>     <Action>(Debug)
+map <Leader>a  <Action>(CLionShowAssembly)
 map <Leader>z  <Action>(ToggleDistractionFreeMode)
 map <Leader>r  <Action>(RenameElement)
 map <Leader>p  <Action>(TogglePresentationMode)
 map <Leader>b  <Action>(Build)
-map <Leader>f  V<Action>(ReformatCode)
+map <Leader>f  <Action>(FindInPath)
 map <F11>      <Action>(ToggleFullScreen)
 map <F8>       <Action>(ToggleLineBreakpoint)
 map <F9>       <Action>(StepOver)
