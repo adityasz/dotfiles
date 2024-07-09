@@ -1,0 +1,43 @@
+snippet template "Basic template" b
+%! TeX program = xelatex
+\documentclass[a4paper]{article}
+
+% \usepackage{fontspec}
+% 	 % \setmainfont{TeX Gyre Termes}
+% 	 \setmonofont{JetBrains Mono}[Scale = MatchLowercase]
+%  	 % https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage[usenames,dvipsnames]{xcolor}
+	\definecolor{link-color}{HTML}{3584E3}
+\usepackage{url}
+\usepackage{hyperref}
+	\hypersetup{
+		pdfauthor={Aditya Singh},
+		pdftitle={},
+		pdfsubject={},
+		pdfproducer={},
+		hidelinks,
+		colorlinks,
+		linkcolor=link-color,
+		citecolor=link-color,
+		urlcolor=link-color,
+		anchorcolor=link-color
+	}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage{parskip}
+\usepackage{caption}
+\usepackage{upgreek}
+\usepackage{booktabs}
+\usepackage{tikz}
+
+\begin{document}
+	$0
+\end{document}
+endsnippet
