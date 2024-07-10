@@ -7,7 +7,7 @@ set background=dark
 colorscheme dark
 " --- END mode dependent ---
 
-"===============================================================================
+" ==============================================================================
 
 set nu mouse=a tabstop=8 noexpandtab shiftwidth=8 textwidth=0 linebreak ai
 set relativenumber smarttab
@@ -62,11 +62,6 @@ vnoremap g0 0
 " Remove any mapping from the space key in normal mode (to use as leader)
 nnoremap <SPACE> <Nop>
 let mapleader = " "
-
-nnoremap <Right> gt
-nnoremap <Left> gT
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
 
 vnoremap <C-c> "+y
 
@@ -123,11 +118,6 @@ call plug#begin()
 
 " Copilot:
 Plug 'github/copilot.vim'
-
-" Orgmode:
-Plug 'jceb/vim-orgmode'
-    " dependency:
-    Plug 'tpope/vim-speeddating'
 
 " For LaTeX:
 Plug 'lervag/vimtex'
@@ -191,15 +181,6 @@ Plug 'sirver/ultisnips'
 	let g:UltiSnipsJumpForwardTrigger = '<Tab>'
 	let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
-" Vim syntax highlighting for .kbd files, used by KMonad.
-Plug 'kmonad/kmonad-vim'
-
-" For :Goyo (zen mode bs):
-Plug 'junegunn/goyo.vim'
-
-" For IDE like jump-to-definition:
-Plug 'pechorin/any-jump.vim'
-
 " Blueprint support:
 Plug 'https://gitlab.com/gabmus/vim-blueprint'
 
@@ -225,9 +206,6 @@ Plug 'itchyny/lightline.vim'
 	function! LightlineFiletype()
 	  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 	endfunction
-
-" Debugging:
-" Plug 'puremourning/vimspector'
 
 " Arduino:
 " Plug 'stevearc/vim-arduino'

@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 vim.api.nvim_create_autocmd('ColorScheme', {
-    pattern = 'solarized',
+    pattern = '*',
     callback = function()
         vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
             fg = '#555555',
@@ -81,5 +81,10 @@ vim.api.nvim_create_autocmd("FocusGained", {
     callback = function()
         require("config.options").set_color_scheme()
         require('lualine').setup()
+        vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
+            fg = '#555555',
+            ctermfg = 8,
+            force = true
+        })
     end
 })
