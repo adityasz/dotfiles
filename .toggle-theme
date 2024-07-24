@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+
+
+BEGIN = "BEGIN"
+FENCE = "="
+SEPARATOR = ""
+END = "END"
+comment_tokens = {
+    "/home/aditya/.tmux.conf": "#",
+    "/home/aditya/.config/kitty/kitty.conf": "#",
+    "/home/aditya/.config/bat/config": "#",
+    "/home/aditya/.vimrc": "\"",
+    "/home/aditya/.config/sioyek/prefs_user.config": "#"
+}
+
+mode_command = "gsettings get org.gnome.desktop.interface color-scheme"
+commands_dark_to_light = [
+    "gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'",
+	"gsettings set org.gnome.desktop.interface cursor-theme 'custom'",
+    "pgrep kitty | xargs -I {} kill -SIGUSR1 {}",
+    "tmux source-file /home/aditya/.tmux.conf"
+]
+commands_light_to_dark = [
+    "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'",
+    "gsettings set org.gnome.desktop.interface cursor-theme 'custom-white'",
+    "pgrep kitty | xargs -I {} kill -SIGUSR1 {}",
+    "tmux source-file /home/aditya/.tmux.conf"
+]
+extensions_light = {
+    "search-light/background-color": '"(1.0, 1.0, 1.0, 1.0)"',
+    "search-light/border-color": '"(0.73333334922790527, 0.73333334922790527, 0.73333334922790527, 1.0)"',
+    "rounded-window-corners-reborn/border-color": '"(0.73333334922790527, 0.73333334922790527, 0.73333334922790527, 1.0)"',
+    "blur-my-shell/panel/blur": "false"
+}
+extensions_dark = {
+    "search-light/background-color": '"(0.0, 0.0, 0.0, 1.0)"',
+    "search-light/border-color": '"(0.18823529779911041, 0.18823529779911041, 0.18823529779911041, 1.0)"',
+    "rounded-window-corners-reborn/border-color": '"(0.18039216101169586, 0.18039216101169586, 0.18039216101169586, 1.0)"',
+    "blur-my-shell/panel/blur": '"true"',
+    "blur-my-shell/panel/color": '"(0.0, 0.0, 0.0, 0.5)"',
+    "blur-my-shell/panel/brightness": '0.75'
+}
+
+
+def comment(line, comment_token):
+    if line.startswith(comment_token):
+        return line
+    return f"{comment_token} {line}"
+
+
+def uncomment(line, comment_token):
+    if not line.startswith(comment_token):
+        return line
+    return line[len(comment_token) :].lstrip()
+
+
+def toggle_theme(file, comment_token, current_mode):
+    with open(file, "r") as f:
+        lines = f.readlines()
+
+    section = None
+    for i, line in enumerate(lines):
+        if line.replace(comment_token, "").replace(" ", "").replace("\n", "").replace(FENCE, "") == BEGIN:
+            section = "light"
+            continue
+        if line.replace(comment_token, "").replace(" ", "").replace("\n", "").replace(FENCE, "") == END:
+            break
+        if (
+            section == "light"
+            and line.replace(comment_token, "").replace(" ", "").replace("\n", "").replace(FENCE, "") == SEPARATOR
+        ):
+            section = "dark"
+            continue
+
+        if current_mode == "light" and section == "light":
+            lines[i] = comment(lines[i], comment_token)
+
+        if current_mode == "light" and section == "dark":
+            lines[i] = uncomment(lines[i], comment_token)
+
+        if current_mode == "dark" and section == "light":
+            lines[i] = uncomment(lines[i], comment_token)
+
+        if current_mode == "dark" and section == "dark":
+            lines[i] = comment(lines[i], comment_token)
+
+    with open(file, "w") as f:
+        f.writelines(lines)
+
+
+result = subprocess.run(mode_command.split(), capture_output=True, text=True, check=True)
+current_mode = "dark" if result.stdout.strip() == "'prefer-dark'" else "light"
+for file, comment_token in comment_tokens.items():
+    toggle_theme(file, comment_token, current_mode)
+if current_mode == "dark":
+    for extension, value in extensions_light.items():
+        os.system(f"dconf write /org/gnome/shell/extensions/{extension} {value}")
+    for command in commands_dark_to_light:
+        os.system(command)
+else:
+    for extension, value in extensions_dark.items():
+        os.system(f"dconf write /org/gnome/shell/extensions/{extension} {value}")
+    for command in commands_light_to_dark:
+        os.system(command)

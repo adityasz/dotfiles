@@ -1,11 +1,10 @@
-" --- BEGIN mode dependent ---
-" --- light mode ---
-" set background=light
-" colorscheme light
-" --- dark mode ---
-set background=dark
-colorscheme dark
-" --- END mode dependent ---
+" === BEGIN ===
+set background=light
+colorscheme light
+" =============
+" set background=dark
+" colorscheme dark
+" ===  END  ===
 
 " ==============================================================================
 
