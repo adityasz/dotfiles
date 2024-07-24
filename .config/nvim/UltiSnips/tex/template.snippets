@@ -3,13 +3,12 @@ snippet template "Basic template" b
 \documentclass[a4paper]{article}
 
 % \usepackage{fontspec}
-% 	 % \setmainfont{TeX Gyre Termes}
 % 	 \setmonofont{JetBrains Mono}[Scale = MatchLowercase]
-%  	 % https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc} % not needed with XeLaTeX
 \usepackage{hyperref}
-\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}
+\usepackage{unicode-math}
+\usepackage{amsmath, amsfonts, amsthm, amssymb}
 \usepackage[usenames,dvipsnames]{xcolor}
 	\definecolor{link-color}{HTML}{3584E3}
 \usepackage{url}

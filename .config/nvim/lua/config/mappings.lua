@@ -22,3 +22,8 @@ map('n', '<C-h>', ':wincmd h<CR>', opts)
 map('n', '<C-l>', ':wincmd l<CR>', opts)
 
 map('v', '<C-c>', '"+y', opts)
+
+map('n', '<leader>f', ':Telescope live_grep<CR>', opts)
+map('n', '<leader>lf', ':Telescope find_files<CR>', opts)
+map('n', '<leader>lb', ':Telescope buffers<CR>', opts)
+map('n', '<leader>lh', ':Telescope help_tags<CR>', opts)

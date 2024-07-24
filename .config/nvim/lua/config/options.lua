@@ -34,6 +34,51 @@ M.set_color_scheme = function()
     end
 end
 
+M.compile_and_run_c = function()
+    local file = vim.fn.expand('%:p')
+    local name = vim.fn.expand('%:t:r')
+    local cmd = string.format('tmux new-window -n "%s" "gcc -O3 -march=native -mtune=native %s -o %s && ./%s; read"', name, file, name, name)
+    vim.cmd("write")
+    vim.fn.system(cmd)
+    vim.fn.system('tmux select-window -t "' .. name .. '"')
+end
+
+M.compile_and_run_cpp = function()
+    local file = vim.fn.expand('%:p')
+    local name = vim.fn.expand('%:t:r')
+    local cmd = string.format('tmux new-window -n "%s" "g++ -std=c++23 -O3 -march=native -mtune=native -lfmt %s -o %s && ./%s; read"', name, file, name, name)
+    vim.cmd("write")
+    vim.fn.system(cmd)
+    vim.fn.system('tmux select-window -t "' .. name .. '"')
+end
+
+M.compile_and_debug_c = function()
+    local file = vim.fn.expand('%:p')
+    local name = vim.fn.expand('%:t:r')
+    local cmd = string.format('tmux new-window -n "%s" "gcc -ggdb3 %s -o %s; gdb -tui %s"', name, file, name, name)
+    vim.cmd("write")
+    vim.fn.system(cmd)
+    vim.fn.system('tmux select-window -t "' .. name .. '"')
+end
+
+M.compile_and_debug_cpp = function()
+    local file = vim.fn.expand('%:p')
+    local name = vim.fn.expand('%:t:r')
+    local cmd = string.format('tmux new-window -n "%s" "g++ -std=c++23 -ggdb3 -lfmt %s -o %s; gdb -tui %s"', name, file, name, name)
+    vim.cmd("write")
+    vim.fn.system(cmd)
+    vim.fn.system('tmux select-window -t "' .. name .. '"')
+end
+
+M.run_python_script = function()
+    local file = vim.fn.expand('%:p')
+    local name = vim.fn.expand('%:t:r')
+    local cmd = string.format('tmux new-window -n "%s" "python %s; read"', name, file)
+    vim.cmd("write")
+    vim.fn.system(cmd)
+    vim.fn.system('tmux select-window -t "' .. name .. '"')
+end
+
 M.set_color_scheme()
 
 return M

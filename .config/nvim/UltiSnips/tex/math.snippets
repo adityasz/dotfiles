@@ -217,8 +217,8 @@ snippet R0+ "R0+" iA
 endsnippet
 
 context "math()"
-snippet mcal "mathcal" iA
-\mathcal{$1}$0
+snippet mcal "symcal" iA
+\symcal{$1}$0
 endsnippet
 
 context "math()"
@@ -448,13 +448,13 @@ endsnippet
 priority 100
 context "math()"
 snippet "([A-Z])scr" "scr" riA
-\mathscr{`!p snip.rv=match.group(1)`}
+\symscr{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 100
 context "math()"
 snippet "([A-Z])cal" "cal" riA
-\mathcal{`!p snip.rv=match.group(1)`}
+\symcal{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 100
@@ -490,32 +490,22 @@ snippet "(\\?\w+)dddot" "dddot" riA
 \dddot{`!p snip.rv=match.group(1)`}
 endsnippet
 
-context "math()"
-snippet HH "H" iA
-\mathbb{H}
-endsnippet
-
-context "math()"
-snippet DD "D" iA
-\mathbb{D}
-endsnippet
-
 priority 100
 context "math()"
 snippet "(\\?\w+)(\.\/|\/\.)" "differential" riA
-\mathrm{`!p snip.rv=match.group(1)`}
+\symrm{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 100
 context "math()"
-snippet "(\\?\w+)(,\.)" "boldsymbol" riA
-\boldsymbol{`!p snip.rv=match.group(1)`}
+snippet "(\\?\w+)(,\.)" "symbfit" riA
+\symbfit{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 100
 context "math()"
 snippet "(\\?\w+)(\.,)" "vector postfix" riA
-\mathbf{`!p snip.rv=match.group(1)`}
+\symbf{`!p snip.rv=match.group(1)`}
 endsnippet
 
 context "math()"
