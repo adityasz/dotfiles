@@ -27,3 +27,5 @@ map('n', '<leader>f', ':Telescope live_grep<CR>', opts)
 map('n', '<leader>lf', ':Telescope find_files<CR>', opts)
 map('n', '<leader>lb', ':Telescope buffers<CR>', opts)
 map('n', '<leader>lh', ':Telescope help_tags<CR>', opts)
+
+map('n', '<leader>r', ':IncRename ', opts)

@@ -25,10 +25,10 @@ M.set_color_scheme = function()
 
     local gnome_scheme = execute_command("gsettings get org.gnome.desktop.interface color-scheme")
 
-    if gnome_scheme == "'prefer-dark'" then
+    if gnome_scheme == "'prefer-dark'" and vim.g.colors_name ~= "dark" then
         vim.opt.background = "dark"
         vim.cmd("colorscheme dark")
-    else
+    elseif gnome_scheme == "'prefer-light'" and vim.g.colors_name ~= "light" then
         vim.opt.background = "light"
         vim.cmd("colorscheme light")
     end
@@ -77,6 +77,10 @@ M.run_python_script = function()
     vim.cmd("write")
     vim.fn.system(cmd)
     vim.fn.system('tmux select-window -t "' .. name .. '"')
+end
+
+M.cursor_position = function()
+    return tostring(vim.fn['line']("."))..":"..tostring(vim.fn['virtcol']("."))
 end
 
 M.set_color_scheme()
