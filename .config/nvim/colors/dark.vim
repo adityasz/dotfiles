@@ -28,13 +28,13 @@ let s:cyan        = { "gui": "#56b6c2", "cterm": "73"  }
 let s:white       = { "gui": "#dcdfe4", "cterm": "188" }
 let s:pink        = { "gui": "#f97bb0", "cterm": "211" }
 
-let s:fg          = s:white
-let s:bg          = s:black
-
 let s:comment_fg  = { "gui": "#5c6370", "cterm": "241" }
 let s:gutter_bg   = { "gui": "#242424", "cterm": "236" }
 let s:gutter_fg   = { "gui": "#919baa", "cterm": "247" }
 let s:non_text    = { "gui": "#373C45", "cterm": "239" }
+
+let s:fg          = s:white
+let s:bg          = s:gutter_bg
 
 let s:cursor_line = { "gui": "#313640", "cterm": "237" }
 let s:color_col   = { "gui": "#313640", "cterm": "237" }

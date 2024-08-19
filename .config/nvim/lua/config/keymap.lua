@@ -29,3 +29,8 @@ map('n', '<leader>lb', ':Telescope buffers<CR>', opts)
 map('n', '<leader>lh', ':Telescope help_tags<CR>', opts)
 
 map('n', '<leader>r', ':IncRename ', opts)
+
+-- S-F5 is F17
+-- C-F5 is F29
+map({'n', 'v', 'i'}, '<F17>', function() require('config.options').run_single_file() end, {noremap = true, silent = true})
+map({'n', 'v', 'i'}, '<F29>', function() require('config.options').debug_single_file() end, {noremap = true, silent = true})

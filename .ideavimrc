@@ -31,6 +31,7 @@ let mapleader = " "
 sethandler <S-F5>    n-v-i:ide " i:vim
 sethandler <C-S-F10> n-v-i:ide " i:vim
 
+map g<Tab>     <Action>(Switcher)
 map <F5>       <Action>(Run)
 map <C-F5>     <Action>(Debug)
 map <Leader>a  <Action>(CLionShowAssembly)

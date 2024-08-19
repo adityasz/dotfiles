@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = {"*.html", "*.css", "*.xml", "*.json", "*.yaml", "*.yml", "*.js"},
     callback = function()
-        vim.opt.tw = 0
+        vim.opt.tw = 99
         vim.opt.spell = false
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
@@ -61,6 +61,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*.tex",
     callback = function()
+        vim.opt.spell = true
         vim.opt.tw = 99
         vim.opt.tabstop = 2
         vim.opt.shiftwidth = 2
@@ -70,7 +71,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*.md",
     callback = function()
-        vim.opt.tw = 72
+        vim.opt.tw = 80
         vim.opt.spell = true
         vim.opt.tabstop = 4
         vim.opt.softtabstop = 4
@@ -83,7 +84,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*.rst",
     callback = function()
-        vim.opt.tw = 72
+        vim.opt.tw = 80
         vim.opt.spell = true
         vim.opt.tabstop = 8
         vim.opt.shiftwidth = 8
@@ -103,40 +104,56 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     end
 })
 
--- S-F5 is F17
--- C-F5 is F29
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.c"},
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+    pattern = "*.txt",
     callback = function()
-        vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.compile_and_run_c() end, {noremap = true, silent = true})
-        vim.keymap.set({'n', 'v', 'i'}, '<F29>', function() opts.compile_and_debug_c() end, {noremap = true, silent = true})
+        vim.opt.spell = true
     end
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.c{pp,xx,++,u}"},
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+    pattern = "*.typ",
     callback = function()
-        vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.compile_and_run_cpp() end, {noremap = true, silent = true})
-        vim.keymap.set({'n', 'v', 'i'}, '<F29>', function() opts.compile_and_debug_cpp() end, {noremap = true, silent = true})
-    end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.py",
-    callback = function()
-        vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.run_python_script() end, {noremap = true, silent = true})
+        vim.opt.spell = true
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+        vim.opt.textwidth = 99
+        vim.opt.expandtab = false
     end
 })
 
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead",}, {
     pattern = "*.typ",
     callback = function()
-        local buf = vim.api.nvim_get_current_buf()
-        vim.opt.tabstop = 2
-        vim.opt.shiftwidth = 2
-        vim.opt.textwidth = 99
+        vim.opt.spell = true
         vim.keymap.set('n', '<leader>ll', ':TypstWatch<CR>', {noremap = true, silent = true})
+        local buf = vim.api.nvim_get_current_buf()
         vim.api.nvim_buf_set_option(buf, "filetype", "typst")
     end
 })
+
+-- S-F5 is F17
+-- C-F5 is F29
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     pattern = {"*.c"},
+--     callback = function()
+--         vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.compile_and_run_c() end, {noremap = true, silent = true})
+--         vim.keymap.set({'n', 'v', 'i'}, '<F29>', function() opts.compile_and_debug_c() end, {noremap = true, silent = true})
+--     end
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     pattern = {"*.c{pp,xx,++,u}"},
+--     callback = function()
+--         vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.compile_and_run_cpp() end, {noremap = true, silent = true})
+--         vim.keymap.set({'n', 'v', 'i'}, '<F29>', function() opts.compile_and_debug_cpp() end, {noremap = true, silent = true})
+--     end
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     pattern = "*.py",
+--     callback = function()
+--         vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.run_python_script() end, {noremap = true, silent = true})
+--     end
+-- })

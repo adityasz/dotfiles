@@ -16,3 +16,4 @@ lspconfig.tinymist.setup{
     }
 }
 lspconfig.texlab.setup{}
+lspconfig.racket_langserver.setup{}
