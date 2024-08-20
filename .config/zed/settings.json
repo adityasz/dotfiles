@@ -1,0 +1,60 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "show_inline_completions": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "terminal": {
+    "shell": {
+      "program": "zsh"
+    }
+  },
+  "base_keymap": "VSCode",
+  "vim_mode": true,
+  "buffer_font_family": "JetBrains Mono",
+  "ui_font_size": 20,
+  "buffer_font_size": 20,
+  "buffer_font_weight": 600,
+  "format_on_save": "off",
+  "current_line_highlight": "none",
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false
+  },
+  "vim": {
+    "use_system_clipboard": "never"
+  },
+  "theme": {
+    "mode": "system",
+    "dark": "Fleet Dark",
+    "light": "One Light"
+  },
+  "languages": {
+    "Typst": {
+      "show_inline_completions": false
+    },
+    "JSON": {
+      "tab_size": 2
+    },
+    "C": {
+      "tab_size": 8,
+      "hard_tabs": true
+    },
+    "C++": {
+      "tab_size": 8,
+      "hard_tabs": true
+    },
+    "Python": {
+      "tab_size": 4,
+      "hard_tabs": false
+    }
+  }
+}

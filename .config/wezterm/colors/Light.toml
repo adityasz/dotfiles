@@ -1,0 +1,53 @@
+[colors]
+ansi = [
+    "#484848",  # Dark Gray
+    "#ff3b30",  # Red
+    "#34c759",  # Green
+    "#ff9500",  # Orange
+    "#007aff",  # Blue
+    "#af52de",  # Purple
+    "#5ac8fa",  # Light Blue
+    "#f2f2f7",  # Light Gray
+]
+brights = [
+    "#6e6e73",  # Medium Gray
+    "#ff453a",  # Bright Red
+    "#32d74b",  # Bright Green
+    "#ff9f0a",  # Bright Orange
+    "#0a84ff",  # Bright Blue
+    "#bf5af2",  # Bright Purple
+    "#64d2ff",  # Bright Light Blue
+    "#ffffff",  # White
+]
+cursor_bg = "#cccccc"
+cursor_border = "#ffffff"
+cursor_fg = "#ffffff"        # White
+background = "#ffffff"       # White
+foreground = "#000000"       # Black
+selection_bg = "#bfceff"     # Blue
+selection_fg = "#000000"     # White
+
+[colors.tab_bar]
+background = "#ffffff"
+foreground = "#000000"
+
+[colors.tab_bar.active_tab]
+bg_color = "#ffffff"
+fg_color = "#000000"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#ffffff"
+fg_color = "#cccccc"
+
+[colors.tab_bar.new_tab]
+bg_color = "#ffffff"
+fg_color = "#000000"
+
+[colors.indexed]
+
+[metadata]
+aliases = []
+author = "Aditya Singh <1adityasingh@proton.me"
+name = "Light"
+origin_url = "https://github.com/adityas"
+wezterm_version = "Always"

@@ -42,17 +42,17 @@ M.run_single_file = function()
 
     vim.cmd("write")
 
-    -- if filetype == "c" then
-    --     cmd = string.format('gcc -Ofast -march=native -mtune=native -Wall %s -o %s && ./%s', file, name, name)
-    -- elseif filetype == "cpp" then
-    --     cmd = string.format('g++ -std=c++23 -Ofast -march=native -mtune=native -Wall -lfmt %s -o %s && ./%s', file, name, name)
-    -- elseif filetype == "python" then
-    --     cmd = string.format('python 3 %s', file)
-    -- else
-    --     print("Not implemented for this filetype")
-    -- end
-    --
-    -- vim.fn.system(string.format('kitty @ launch --type os-window --title "%s" %s; read', name, cmd))
+    if filetype == "c" then
+        cmd = string.format('gcc -Ofast -march=native -mtune=native -Wall %s -o %s && ./%s\n', file, name, name)
+    elseif filetype == "cpp" then
+        cmd = string.format('g++ -std=c++23 -Ofast -march=native -mtune=native -Wall -lfmt %s -o %s && ./%s\n', file, name, name)
+    elseif filetype == "python" then
+        cmd = string.format('python 3 %s', file)
+    else
+        print("Not implemented for this filetype")
+    end
+
+    vim.fn.system(string.format("kitty @ launch --type os-window --title %s && kitten @ send-text --match 'title:%s' \"%s\"\n", name, name, cmd))
 end
 
 M.debug_single_file = function()
