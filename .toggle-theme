@@ -1,91 +1,116 @@
 #!/usr/bin/env python3
 
 import os
+import platformdirs
+import yaml
 import time
+from box import Box
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib
 
 
-BEGIN = "BEGIN"
-FENCE = "="
-SEPARATOR = ""
-END = "END"
-comment_tokens = {
-    "/home/aditya/.tmux.conf": "#",
-    "/home/aditya/.config/kitty/kitty.conf": "#",
-    "/home/aditya/.config/bat/config": "#",
-    "/home/aditya/.vimrc": "\"",
-    "/home/aditya/.config/sioyek/prefs_user.config": "#"
-}
+BUS_NAME = "org.freedesktop.portal.Desktop"
+OBJECT_PATH = "/org/freedesktop/portal/desktop"
+SIGNAL_NAME = "SettingChanged"
+DBUS_INTERFACE = "org.freedesktop.portal.Settings"
+APPEARANCE_NAMESPACE = "org.freedesktop.appearance"
+COLOR_SCHEME_KEY = "color-scheme"
 
-commands_dark_to_light = [
-    "gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'",
-	"gsettings set org.gnome.desktop.interface cursor-theme 'custom'",
-    "pgrep kitty | xargs -I {} kill -SIGUSR1 {}",
-    "tmux source-file /home/aditya/.tmux.conf"
-]
-commands_light_to_dark = [
-    "gsettings set org.gnome.desktop.interface cursor-theme 'custom-white'",
-    "pgrep kitty | xargs -I {} kill -SIGUSR1 {}",
-    "tmux source-file /home/aditya/.tmux.conf"
-]
-extensions_light = {
-    "search-light/background-color": '"(1.0, 1.0, 1.0, 1.0)"',
-    "search-light/border-color": '"(0.73333334922790527, 0.73333334922790527, 0.73333334922790527, 1.0)"',
-    "rounded-window-corners-reborn/border-color": '"(0.73333334922790527, 0.73333334922790527, 0.73333334922790527, 1.0)"',
-    "blur-my-shell/panel/blur": "false"
-}
-extensions_dark = {
-    "search-light/background-color": '"(0.0, 0.0, 0.0, 1.0)"',
-    "search-light/border-color": '"(0.18823529779911041, 0.18823529779911041, 0.18823529779911041, 1.0)"',
-    "rounded-window-corners-reborn/border-color": '"(0.18039216101169586, 0.18039216101169586, 0.18039216101169586, 1.0)"',
-    "blur-my-shell/panel/blur": '"true"',
-    "blur-my-shell/panel/color": '"(0.0, 0.0, 0.0, 0.5)"',
-    "blur-my-shell/panel/brightness": '0.75'
-}
+CONFIG_DIR = platformdirs.user_config_dir()
+CONFIG_FILE_NAME = "theme-switcher.yaml"
+if CONFIG_DIR is None:
+    RuntimeError("User config directory not found. Specify manually.")
+CONFIG_FILE = os.path.join(CONFIG_DIR, CONFIG_FILE_NAME)
+
+with open(CONFIG_FILE, 'r') as file:
+    config = yaml.safe_load(file.read())
+config = Box(config)
 
 
-def comment(line, comment_token):
+def comment(line: str, comment_token: str):
+    r"""
+    Comment a line with the given comment token.
+
+    .. TODO::
+        Add support for closing comment token.
+
+        Currently, only config files with a comment token on the beginning of
+        the line are supported.
+
+    :param line: The line
+    :param comment_token: The comment token
+
+    :return: The commented line
+    """
     if line.startswith(comment_token):
         return line
     return f"{comment_token} {line}"
 
 
-def uncomment(line, comment_token):
+def uncomment(line: str, comment_token: str):
+    r"""
+    Uncomment a line with the given comment token.
+
+    .. TODO::
+        Add support for closing comment token.
+
+        Currently, only config files with a comment token on the beginning of
+        the line are supported.
+
+    :param line: The line
+    :param comment_token: The comment token
+
+    :return: The uncommented line
+    """
     if not line.startswith(comment_token):
         return line
     return line[len(comment_token) :].lstrip()
 
 
-def modify_config_file(file, comment_token, mode):
+def modify_config_file(file: str, comment_token: str, theme: str):
+    """
+    Comment/uncomment lines in a config file depending on the theme
+
+    .. TODO::
+        Add support for closing comment token.
+
+        Currently, only config files with a comment token on the beginning of
+        the line are supported.
+
+    :param file: Path to the config file
+    :param comment_token: The comment token
+    :param theme: The theme
+    """
     with open(file, "r") as f:
         lines = f.readlines()
 
     section = None
     for i, line in enumerate(lines):
-        if line.replace(comment_token, "").replace(" ", "").replace("\n", "").replace(FENCE, "") == BEGIN:
+        if not line:
+            continue
+
+        cleaned_line = (line.replace(comment_token, "").replace(" ", "")
+                            .replace("\n", "").replace(config.delimiters.fence, ""))
+        if cleaned_line == config.delimiters.begin:
             section = "light"
             continue
-        if line.replace(comment_token, "").replace(" ", "").replace("\n", "").replace(FENCE, "") == END:
+        if cleaned_line == config.delimiters.end:
             break
-        if (
-            section == "light"
-            and line.replace(comment_token, "").replace(" ", "").replace("\n", "").replace(FENCE, "") == SEPARATOR
-        ):
+        if section == "light" and cleaned_line == config.delimiters.separator:
             section = "dark"
             continue
 
-        if mode == "dark" and section == "light":
+        if theme == "dark" and section == "light":
             lines[i] = comment(lines[i], comment_token)
 
-        if mode == "dark" and section == "dark":
+        if theme == "dark" and section == "dark":
             lines[i] = uncomment(lines[i], comment_token)
 
-        if mode == "light" and section == "light":
+        if theme == "light" and section == "light":
             lines[i] = uncomment(lines[i], comment_token)
 
-        if mode == "light" and section == "dark":
+        if theme == "light" and section == "dark":
             lines[i] = comment(lines[i], comment_token)
 
     with open(file, "w") as f:
@@ -93,7 +118,7 @@ def modify_config_file(file, comment_token, mode):
 
 
 def toggle_theme(namespace, key, value):
-    if namespace == "org.freedesktop.appearance" and key == "color-scheme":
+    if namespace == APPEARANCE_NAMESPACE and key == COLOR_SCHEME_KEY:
         match value:
             case 0:
                 mode = "light"
@@ -101,24 +126,26 @@ def toggle_theme(namespace, key, value):
                 mode = "dark"
             case _:
                 return
-        for file, comment_token in comment_tokens.items():
+
+        for file, comment_token in config.comment_tokens.items():
             modify_config_file(file, comment_token, mode)
+
         if mode == "light":
-            for extension, value in extensions_light.items():
-                os.system(f"dconf write /org/gnome/shell/extensions/{extension} {value}")
-            for command in commands_dark_to_light:
+            for extension, value in config.extensions.light.items():
+                os.system(f'dconf write /org/gnome/shell/extensions/{extension} "{value}"')
+            for command in config.commands.dark_to_light:
                 os.system(command)
         else:
-            for extension, value in extensions_dark.items():
-                os.system(f"dconf write /org/gnome/shell/extensions/{extension} {value}")
-            for command in commands_light_to_dark:
+            for extension, value in config.extensions.dark.items():
+                os.system(f'dconf write /org/gnome/shell/extensions/{extension} "{value}"')
+            for command in config.commands.light_to_dark:
                 os.system(command)
 
 def main():
     DBusGMainLoop(set_as_default=True)
     bus = dbus.SessionBus()
-    settings = bus.get_object("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
-    settings.connect_to_signal("SettingChanged", toggle_theme, dbus_interface="org.freedesktop.portal.Settings")
+    settings = bus.get_object(BUS_NAME, OBJECT_PATH)
+    settings.connect_to_signal(SIGNAL_NAME, toggle_theme, dbus_interface=DBUS_INTERFACE)
     loop = GLib.MainLoop()
     loop.run()
 

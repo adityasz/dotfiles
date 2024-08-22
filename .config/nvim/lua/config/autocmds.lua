@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*.tex",
     callback = function()
         vim.opt.spell = true
-        vim.opt.tw = 99
+        vim.opt.tw = 80
         vim.opt.tabstop = 2
         vim.opt.shiftwidth = 2
     end
@@ -117,7 +117,7 @@ vim.api.nvim_create_autocmd({"BufEnter"}, {
         vim.opt.spell = true
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
-        vim.opt.textwidth = 99
+        vim.opt.textwidth = 80
         vim.opt.expandtab = false
     end
 })

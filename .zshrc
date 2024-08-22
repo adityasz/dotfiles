@@ -33,7 +33,7 @@ parse_git_branch() {
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
-source $HOME/.zsh/.zshenv
+source $HOME/.env
 source $HOME/.zsh/.zsh_aliases
 source $HOME/.zsh/antigen.zsh
 
