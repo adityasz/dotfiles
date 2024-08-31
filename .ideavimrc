@@ -1,6 +1,7 @@
 set hlsearch incsearch
 set ideajoin ideaput
 set textobj-indent " https://youtrack.jetbrains.com/issue/VIM-1151
+set NERDTree
 
 " set hybrid numbering in settings so that F2 works like vim
 nnoremap <F2> :set relativenumber!<CR>
@@ -40,6 +41,9 @@ map <Leader>r  <Action>(RenameElement)
 map <Leader>p  <Action>(TogglePresentationMode)
 map <Leader>b  <Action>(Build)
 map <Leader>f  <Action>(FindInPath)
+map <Leader>e  <Action>(ShowErrorDescription)
+map [e         <Action>(GotoPreviousError)
+map ]e         <Action>(GotoNextError)
 map <F11>      <Action>(ToggleFullScreen)
 map <F8>       <Action>(ToggleLineBreakpoint)
 map <F9>       <Action>(StepOver)
@@ -47,6 +51,7 @@ map <F10>      <Action>(StepInto)
 map <S-F10>    <Action>(StepOut)
 map <Leader>s  <Action>(FileStructurePopup)
 " map <Leader>c  <Action>(CallHierarchyPopupMenu) " Doesn't work right now
+map <Leader>l  <Action>(ChooseRunConfiguration)
 map <Leader>n  <Action>(NewFile)
 map <Leader>d  <Action>(NewDir)
 

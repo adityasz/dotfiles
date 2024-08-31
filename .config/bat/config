@@ -1,7 +1,7 @@
 # === BEGIN ===
---theme="OneHalfLight"
+# --theme="OneHalfLight"
 # =============
-# --theme="OneHalfDark"
+--theme="OneHalfDark"
 # ===  END  ===
 
 # This is `bat`s configuration file. Each line either contains a comment or

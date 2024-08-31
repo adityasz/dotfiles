@@ -28,13 +28,12 @@ vman() {
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-# export LD_LIBRARY_PATH=/opt/missing-mojo-deps/lib/x86_64-linux-gnu:/opt/missing-mojo-deps/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
 source $HOME/.env
-source $HOME/.zsh/.zsh_aliases
+source $HOME/.zsh/aliases
 source $HOME/.zsh/antigen.zsh
 
 antigen bundle jeffreytse/zsh-vi-mode

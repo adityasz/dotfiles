@@ -1,9 +1,9 @@
 " === BEGIN ===
-set background=light
-colorscheme light
+" set background=light
+" colorscheme light
 " =============
-" set background=dark
-" colorscheme dark
+set background=dark
+colorscheme dark
 " ===  END  ===
 
 " ==============================================================================

@@ -30,6 +30,13 @@ api.unmap("7", /youtube.com/);
 api.unmap("8", /youtube.com/);
 api.unmap("9", /youtube.com/);
 
+api.map("<Ctrl-y>", "<Alt-s>");
+api.map("gt", "R");
+api.map("gT", "E");
+api.map("g<Tab>", "<Ctrl-6>");
+api.map("<Ctrl-o>", "S");
+api.map("<Ctrl-i>", "F");
+
 settings.lurkingPattern = /https:\/\/.*monkeytype\.com.*|.*calendar\.google\.com.*|.*docs\.google\.com.*|.*figma\.com.*|.*leetcode\.com.*|.*photopea\.com.*|.*web\.whatsapp\.com.*|.*hackerrank\.com.*|.*humanbenchmark.com\/tests\/typing/i;
 
 
