@@ -24,13 +24,13 @@ map('n', '<C-l>', ':wincmd l<CR>', opts)
 map('v', '<C-c>', '"+y', opts)
 
 map('n', '<leader>f', ':Telescope live_grep<CR>', opts)
-map('n', '<leader>lf', ':Telescope find_files<CR>', opts)
-map('n', '<leader>lb', ':Telescope buffers<CR>', opts)
+map('n', '<leader> ', ':Telescope find_files<CR>', opts)
+map('n', '<leader>tb', ':Telescope buffers<CR>', opts)
 map('n', '<leader>lh', ':Telescope help_tags<CR>', opts)
 
 map('n', '<leader>r', ':IncRename ', opts)
 
 -- S-F5 is F17
 -- C-F5 is F29
-map({'n', 'v', 'i'}, '<F17>', function() require('config.options').run_single_file() end, {noremap = true, silent = true})
-map({'n', 'v', 'i'}, '<F29>', function() require('config.options').debug_single_file() end, {noremap = true, silent = true})
+-- map({'n', 'v', 'i'}, '<F17>', function() require('config.options').run_single_file() end, {noremap = true, silent = true})
+-- map({'n', 'v', 'i'}, '<F29>', function() require('config.options').debug_single_file() end, {noremap = true, silent = true})

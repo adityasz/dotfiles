@@ -8,7 +8,7 @@ return {
     },
     config = function()
         require('nvim-autopairs').setup({
-            disable_filetype = {"", "tex"},
+            disable_filetype = {"", "tex", "racket"},
         })
     end
 }

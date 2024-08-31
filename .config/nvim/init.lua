@@ -1,9 +1,9 @@
+require("config.lazy")
 require("config.options")
 require("config.keymap")
 require("config.autocmds")
-require("config.lazy")
 
-local lspconfig = require('lspconfig')
+local lspconfig = require("lspconfig")
 
 lspconfig.clangd.setup{}
 lspconfig.pyright.setup{}
