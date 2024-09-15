@@ -1,61 +1,97 @@
 snippet beg "begin{} / end{}" bA
 \\begin{$1}
-	$0
+  $0
 \\end{$1}
 endsnippet
 
-snippet tablef "Table environment" b
+snippet table "Table environment" bA
 \begin{table}[${1:htpb}]
-	\centering
-	\caption{${2:caption}}
-	\label{tab:${3:label}}
-	\begin{tabular}{${5:c}}
-	$0${5/((?<=.)c|l|r)|./(?1: & )/g}
-	\end{tabular}
+  \centering
+  \caption{${2:caption}}
+  \label{tab:${3:label}}
+  \begin{tabular}{${5:c}}
+  $0${5/((?<=.)c|l|r)|./(?1: & )/g}
+  \end{tabular}
 \end{table}
 endsnippet
 
-snippet table "tabular environment" b
-\begin{tabular}{${1:l l}}
-	$2
-\end{tabular}
+snippet img "Figure environment for images" bA
+\begin{figure}[${1:htpb}]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/$2}
+  \caption{$3}
+  \label{fig:${4:${2/^(.+?)(\.[^.]*$|$)/$1/g}}}
+\end{figure}
 endsnippet
 
-snippet fig "Figure environment" b
+snippet image "Figure environment for images" b
 \begin{figure}[${1:htpb}]
-	\centering
-	${2:\includegraphics[width=0.8\textwidth]{$3}}
-	\caption{${4:$3}}
-	\label{fig:${5:${3/\W+/-/g}}}
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/$2}
+  \caption{$3}
+  \label{fig:${4:${2/^(.+?)(\.[^.]*$|$)/$1/g}}}
+\end{figure}
+endsnippet
+
+snippet fig "Figure environment for pgf" bA
+\begin{figure}[${1:htpb}]
+  \centering
+  \input{figures/$2}
+  \caption{$3}
+  \label{fig:${4:${2/^(.+?)(\.[^.]*$|$)/$1/g}}}
 \end{figure}
 endsnippet
 
 snippet enum "Enumerate" bA
 \begin{enumerate}
-	\item $0
+  \item $0
 \end{enumerate}
 endsnippet
 
 snippet item "Itemize" bA
 \begin{itemize}
-	\item $0
+  \item $0
 \end{itemize}
 endsnippet
 
 snippet desc "Description" b
 \begin{description}
-	\item[$1] $0
+  \item[$1] $0
+\end{description}
+endsnippet
+
+snippet description "Description" b
+\begin{description}
+  \item[$1] $0
 \end{description}
 endsnippet
 
 snippet ali "Align" bA
 \begin{align*}
-	${1:${VISUAL}}
+  ${1:${VISUAL}}
+\end{align*}
+endsnippet
+
+snippet align "Align" b
+\begin{align*}
+  ${1:${VISUAL}}
 \end{align*}
 endsnippet
 
 snippet eqn "Labelled equation" bA
 \begin{equation} \label{$1}
-	$2
+  $2
 \end{equation}
+endsnippet
+
+snippet equation "Labelled equation" b
+\begin{equation} \label{$1}
+  $2
+\end{equation}
+endsnippet
+
+snippet gather "Multiple equations" b
+\begin{gather}
+  $1
+\end{gather}
 endsnippet

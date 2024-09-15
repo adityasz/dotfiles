@@ -8,8 +8,6 @@ nnoremap <F2> :set relativenumber!<CR>
 nnoremap <F3> :noh<CR>
 
 nnoremap <SPACE>   <Nop>
-nnoremap <Tab>     gt
-nnoremap <S-Tab>   gT
 nnoremap <Leader>l gt
 nnoremap <Leader>h gT
 
@@ -32,7 +30,7 @@ let mapleader = " "
 sethandler <S-F5>    n-v-i:ide " i:vim
 sethandler <C-S-F10> n-v-i:ide " i:vim
 
-map g<Tab>     <Action>(Switcher)
+map <Tab>      <Action>(Switcher)
 map <F5>       <Action>(Run)
 map <C-F5>     <Action>(Debug)
 map <Leader>a  <Action>(CLionShowAssembly)

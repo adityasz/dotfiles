@@ -31,6 +31,8 @@ api.unmap("8", /youtube.com/);
 api.unmap("9", /youtube.com/);
 
 api.map("<Ctrl-y>", "<Alt-s>");
+api.unmap("<Alt-s>");
+api.unmap("<Ctrl-h>");
 api.map("gt", "R");
 api.map("gT", "E");
 api.map("g<Tab>", "<Ctrl-6>");
@@ -177,5 +179,3 @@ settings.theme = `
 	${dark_theme}
 }
 `
-
-// click `Save` button to make above settings to take effect.</ctrl-i></ctrl-y>

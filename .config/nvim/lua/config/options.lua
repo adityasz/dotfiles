@@ -28,7 +28,8 @@ M.set_color_scheme = function()
 
     if gnome_scheme == "'prefer-dark'" and vim.g.colors_name ~= "dark" then
         vim.opt.background = "dark"
-        vim.cmd("colorscheme carbonfox")
+        -- vim.cmd("colorscheme carbonfox")
+        vim.cmd("colorscheme dark")
     elseif (gnome_scheme == "'prefer-light'" or gnome_scheme == "'default'") and vim.g.colors_name ~= "light" then
         vim.opt.background = "light"
         vim.cmd("colorscheme light")
@@ -37,6 +38,13 @@ end
 
 M.cursor_position = function()
     return tostring(vim.fn['line']("."))..":"..tostring(vim.fn['virtcol']("."))
+end
+
+M.run_python_script = function()
+    local filename = vim.fn.expand("%:p")
+    local command = string.format("!python %s", filename)
+    vim.cmd("write")
+    vim.cmd(command)
 end
 
 M.set_color_scheme()

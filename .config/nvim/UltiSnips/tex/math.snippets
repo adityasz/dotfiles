@@ -1,13 +1,13 @@
 global !p
 def math():
-	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+    return vim.eval('vimtex#syntax#in_mathzone()') == '1'
 
 def comment(): 
-	return vim.eval('vimtex#syntax#in_comment()') == '1'
+    return vim.eval('vimtex#syntax#in_comment()') == '1'
 
 def env(name):
-	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
-	return x != '0' and y != '0'
+    [x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+    return x != '0' and y != '0'
 endglobal
 
 context "math()"
@@ -122,6 +122,11 @@ snippet td "to the ... power" iA
 endsnippet
 
 context "math()"
+snippet ^^ "superscript" iA
+^{$1}$0
+endsnippet
+
+context "math()"
 snippet rd "to the ... power" iA
 ^{($1)}$0
 endsnippet
@@ -129,11 +134,6 @@ endsnippet
 context "math()"
 snippet __ "subscript" iA
 _{$1}$0
-endsnippet
-
-context "math()"
-snippet ^^ "superscript" iA
-^{$1}$0
 endsnippet
 
 context "math()"
@@ -227,11 +227,6 @@ snippet lll "l" iA
 endsnippet
 
 context "math()"
-snippet nabl "nabla" iA
-\nabla
-endsnippet
-
-context "math()"
 snippet xx "cross" iA
 \times
 endsnippet
@@ -261,6 +256,11 @@ endsnippet
 context "math()"
 snippet invs "inverse" iA
 ^{-1}
+endsnippet
+
+context "math()"
+snippet .T "transpose" iA
+^\top
 endsnippet
 
 context "math()"
@@ -405,7 +405,7 @@ endsnippet
 context "math()"
 snippet case "cases" wA
 \begin{cases}
-	$1
+  $1
 \end{cases}
 endsnippet
 
@@ -417,9 +417,9 @@ endsnippet
 context "math()"
 snippet bigfun "Big function" iA
 \begin{align*}
-	$1: $2 &\longrightarrow $3 \\\\
-	$4 &\longmapsto $1($4) = $0
-.\end{align*}
+  $1: $2 &\longrightarrow $3 \\\\
+  $4 &\longmapsto $1($4) = $0
+\end{align*}
 endsnippet
 
 context "math()"

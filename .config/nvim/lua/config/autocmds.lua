@@ -63,6 +63,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         vim.opt.spell = true
         vim.opt.tw = 80
+        -- Until TeX has a good formatter, use spaces for indentation.
+        vim.opt.expandtab = true
         vim.opt.tabstop = 2
         vim.opt.shiftwidth = 2
     end
@@ -78,6 +80,17 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.opt.shiftwidth = 4
         vim.opt.expandtab = true
         vim.opt.linebreak = true
+    end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.rkt",
+    callback = function()
+        vim.opt.tw = 80
+        vim.opt.tabstop = 2
+        vim.opt.softtabstop=  2
+        vim.opt.shiftwidth = 2
+        vim.opt.expandtab = true
     end
 })
 
@@ -129,6 +142,13 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead",}, {
         vim.keymap.set('n', '<leader>ll', ':TypstWatch<CR>', {noremap = true, silent = true})
         local buf = vim.api.nvim_get_current_buf()
         vim.api.nvim_buf_set_option(buf, "filetype", "typst")
+    end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.py",
+    callback = function()
+        vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_python_script() end, {noremap = true, silent = true})
     end
 })
 

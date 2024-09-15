@@ -18,7 +18,7 @@ let g:colors_name="dark"
 let colors_name="dark"
 
 
-let s:black       = { "gui": "#181818", "cterm": "234" }
+let s:black       = { "gui": "#1e1e1e", "cterm": "234" }
 let s:red         = { "gui": "#e06c75", "cterm": "168" }
 let s:green       = { "gui": "#98c379", "cterm": "114" }
 let s:yellow      = { "gui": "#e5c07b", "cterm": "180" }
@@ -29,7 +29,7 @@ let s:white       = { "gui": "#dcdfe4", "cterm": "188" }
 let s:pink        = { "gui": "#f97bb0", "cterm": "211" }
 
 let s:comment_fg  = { "gui": "#5c6370", "cterm": "241" }
-let s:gutter_bg   = { "gui": "#242424", "cterm": "236" }
+let s:gutter_bg   = { "gui": "#1e1e1e", "cterm": "236" }
 let s:gutter_fg   = { "gui": "#919baa", "cterm": "247" }
 let s:non_text    = { "gui": "#373C45", "cterm": "239" }
 
