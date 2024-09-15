@@ -76,3 +76,31 @@ tar -C /opt -xzf nvim-linux64.tar.gz
 
 # GNOME Settings
 dconf load / < $HOME/.config/gnome-settings/{application-settings,extensions,keybindings,shell-settings}.ini
+
+# GNOME Extensions
+extensions=(
+    "appindicatorsupport@rgcjonas.gmail.com"
+    "places-menu@gnome-shell-extensions.gcampax.github.com"
+    "Battery-Health-Charging@maniacx.github.com"
+    "battery-indicator-icon@Deminder"
+    "blur-my-shell@aunetx"
+    "caffeine@patapon.info"
+    "clipboard-indicator@tudmotu.com"
+    "drive-menu@gnome-shell-extensions.gcampax.github.com"
+    "gnome-ui-tune@itstime.tech"
+    "gsconnect@andyholmes.github.io"
+    "just-perfection-desktop@just-perfection"
+    "middleclickclose@paolo.tranquilli.gmail.com"
+    "rounded-window-corners@fxgn"
+    "search-light@icedman.github.com"
+    "smile-extension@mijorus.it"
+    "tiling-assistant@leleat-on-github"
+    "user-theme@gnome-shell-extensions.gcampax.github.com"
+    "valent@andyholmes.ca"
+    "vim-altTab@kokong.info"
+    "windowsNavigator@gnome-shell-extensions.gcampax.github.com"
+)
+
+for extension in "${extensions[@]}"; do
+    gext install "$extension"
+done
