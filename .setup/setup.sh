@@ -42,27 +42,37 @@ else
 	echo "Bash skill issue; can't change that value :-("
 fi
 
-bluetoothctl system-alias 'Intel AX201'
-echo "Bluetooth alias is now 'Intel AX201'"
+read -p "Enter the desired Bluetooth system alias: " bt_alias
+bluetoothctl system-alias "${bt_alias}"
+echo "Bluetooth alias is now '${bt_alias}'"
 
-nmcli con modify Hotspot connection.autoconnect true
-echo "Hotspot will now turn on when the machine turns on"
+read -p "Do you want to set up Hotspot to autoconnect on startup? (yes/no): " setup_hotspot
+if [[ "${setup_hotspot,,}" =~ ^(y|yes)$ ]]; then
+    nmcli con modify Hotspot connection.autoconnect true
+    echo "Hotspot will now turn on when the machine turns on"
+else
+    echo "Hotspot autoconnect setup skipped"
+fi
 
 cp libinput.conf /etc/libinput.conf
 mkdir -p /etc/keyd && cp keyd/default.conf /etc/keyd/
 echo -e "\nCopied keyd and libinput configs"
 echo -e "\nInstall libinput-config manually!"
 
+# Dotfiles
 git clone --separate-git-dir=$HOME/.dotfiles https://github.com/adityasz/.dotfiles.git tmpdotfiles
 rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
 rm -r tmpdotfiles
 
+# Important packages
 dnf install @development-tools python3-pip fd-find zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel -y
+dnf install jetbrains-mono-fonts-all rsms-inter-{,vf-}fonts
 cargo install ripdrag csvlens
 
-curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
-mkdir -p $HOME/.local/bin
-mv nvim.appimage $HOME/.local/bin/nvim
+# Neovim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+rm -rf /opt/nvim
+tar -C /opt -xzf nvim-linux64.tar.gz
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+# GNOME Settings
+dconf load / < $HOME/.config/gnome-settings/{application-settings,extensions,keybindings,shell-settings}.ini
