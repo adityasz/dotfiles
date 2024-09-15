@@ -57,7 +57,6 @@ fi
 cp libinput.conf /etc/libinput.conf
 mkdir -p /etc/keyd && cp keyd/default.conf /etc/keyd/
 echo -e "\nCopied keyd and libinput configs"
-echo -e "\nInstall libinput-config manually!"
 
 # Dotfiles
 git clone --separate-git-dir=$HOME/.dotfiles https://github.com/adityasz/.dotfiles.git tmpdotfiles
@@ -65,11 +64,28 @@ rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
 rm -r tmpdotfiles
 
 # Important packages
-dnf install @development-tools python3-pip fd-find zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel -y
+dnf install @development-tools python3-pip fd-find zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel meson ninja-build libinput-devel systemd-devel -y
 dnf install jetbrains-mono-fonts-all rsms-inter-{,vf-}fonts
 cargo install ripdrag csvlens
 
+# Keyd
+cd /tmp
+git clone https://github.com/rvaiya/keyd
+cd keyd
+make && sudo make install
+sudo systemctl enable keyd && sudo systemctl start keyd
+
+# libinput-config
+cd /tmp
+git clone https://gitlab.com/warningnonpotablewater/libinput-config
+cd libinput-config
+meson build
+cd build
+ninja
+sudo ninja install
+
 # Neovim
+cd /tmp
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
 rm -rf /opt/nvim
 tar -C /opt -xzf nvim-linux64.tar.gz
@@ -79,6 +95,8 @@ dnf install -y python3-neovim
 dconf load / < $HOME/.config/gnome-settings/{application-settings,extensions,keybindings,shell-settings}.ini
 
 # GNOME Extensions
+pip install gnome-extensions-cli
+
 extensions=(
     "appindicatorsupport@rgcjonas.gmail.com"
     "places-menu@gnome-shell-extensions.gcampax.github.com"
@@ -97,7 +115,6 @@ extensions=(
     "smile-extension@mijorus.it"
     "tiling-assistant@leleat-on-github"
     "user-theme@gnome-shell-extensions.gcampax.github.com"
-    "valent@andyholmes.ca"
     "vim-altTab@kokong.info"
     "windowsNavigator@gnome-shell-extensions.gcampax.github.com"
 )
