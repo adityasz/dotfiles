@@ -1,4 +1,4 @@
-HISTFILE=~/.histfile
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
 
@@ -16,6 +16,7 @@ zstyle :compinstall filename '/home/aditya/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 PROMPT="%B%n%b%B@%b%B%m%b%B:%b%B%(5~|%-1~/…/%3~|%4~)$%b "
 
@@ -33,8 +34,8 @@ fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
 source $HOME/.env
-source $HOME/.zsh/aliases
-source $HOME/.zsh/antigen.zsh
+source $ZDOTDIR/.zsh_aliases
+source $ZDOTDIR/antigen.zsh
 
 antigen bundle jeffreytse/zsh-vi-mode
 antigen apply

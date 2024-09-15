@@ -5,11 +5,11 @@ delimiters:
   end: "END"
 
 comment_tokens:
-  "/home/aditya/.tmux.conf": "#"
+  "/home/aditya/.config/tmux/tmux.conf": "#"
   "/home/aditya/.config/kitty/kitty.conf": "#"
   "/home/aditya/.config/kitty/diff.conf": "#"
   "/home/aditya/.config/bat/config": "#"
-  "/home/aditya/.vimrc": "\""
+  "/home/aditya/.config/vim/vimrc": "\""
   "/home/aditya/.config/sioyek/prefs_user.config": "#"
 
 commands:
