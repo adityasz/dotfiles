@@ -8,12 +8,12 @@ export EDITOR='/opt/nvim-linux64/bin/nvim'
 export VISUAL='/opt/nvim-linux64/bin/nvim'
 export PROMPT_DIRTRIM=3
 
-# Since some stupid peple have difficulty understanding the XDG Base Directory
-# Specification, good people have to explicitly define redundant variables:
+# TODO: Sort out env mess
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export ADOTDIR="$XDG_DATA_HOME/antigen"
@@ -28,7 +28,7 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java -Djavafx.cachedir=$XDG_CACHE_HOME/openjfx"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
-export JUPYTER_RUNTIME_DIR="$XDG_CACHE_HOME/jupyter"
+export JUPYTER_RUNTIME_DIR="$XDG_RUNTIME_DIR/jupyter"
 export MATHEMATICA_USERBASE="$XDG_CONFIG_HOME/mathematica"
 export MODULAR_HOME="$XDG_DATA_HOME/modular"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
