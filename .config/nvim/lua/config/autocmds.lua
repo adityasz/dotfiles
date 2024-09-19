@@ -91,6 +91,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.opt.softtabstop=  2
         vim.opt.shiftwidth = 2
         vim.opt.expandtab = true
+        vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_racket_file() end, {noremap = true, silent = true})
     end
 })
 

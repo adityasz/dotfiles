@@ -47,52 +47,16 @@ M.run_python_script = function()
     vim.cmd(command)
 end
 
+M.run_racket_file = function()
+    local filename = vim.fn.expand("%:p")
+    local command = string.format("!racket %s", filename)
+    vim.cmd("write")
+    vim.cmd(command)
+end
+
 M.set_color_scheme()
 
 return M
-
--- TODO
--- M.run_single_file = function()
---     local file = vim.fn.expand("%:p")
---     local name = vim.fn.expand('%:t:r')
---     local filetype = vim.bo.filetype
---     local cmd
---
---     vim.cmd("write")
---
---     if filetype == "c" then
---         cmd = string.format('gcc -Ofast -march=native -mtune=native -Wall %s -o %s && ./%s\n', file, name, name)
---     elseif filetype == "cpp" then
---         cmd = string.format('g++ -std=c++23 -Ofast -march=native -mtune=native -Wall -lfmt %s -o %s && ./%s\n', file, name, name)
---     elseif filetype == "python" then
---         cmd = string.format('python 3 %s', file)
---     else
---         print("Not implemented for this filetype")
---     end
---
---     vim.fn.system(string.format("kitty @ launch --type os-window --title %s && kitten @ send-text --match 'title:%s' \"%s\"\n", name, name, cmd))
--- end
---
--- M.debug_single_file = function()
---     local file = vim.fn.expand("%:p")
---     local name = vim.fn.expand('%:t:r')
---     local filetype = vim.bo.filetype
---     local cmd
---
---     vim.cmd("write")
---
---     -- if filetype == "c" then
---     --     cmd = string.format('gcc -Ofast -march=native -mtune=native -Wall %s -o %s && ./%s', file, name, name)
---     -- elseif filetype == "cpp" then
---     --     cmd = string.format('g++ -std=c++23 -Ofast -march=native -mtune=native -Wall -lfmt %s -o %s && ./%s', file, name, name)
---     -- elseif filetype == "python" then
---     --     cmd = string.format('python 3 %s', file)
---     -- else
---     --     print("Not implemented for this filetype")
---     -- end
---     --
---     -- vim.fn.system(string.format('kitty @ launch --type os-window --title "%s" %s; read', name, cmd))
--- end
 
 -- I no longer use tmux. I do not need session persistence and
 -- Kitty is better in every measurable metric.
