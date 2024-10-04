@@ -26,9 +26,20 @@ vim.api.nvim_create_autocmd("FocusGained", {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.{c,pp,xx,++,u}", "*.{h, hh,xx}", "*.asm", "Makefile"},
+    pattern = {"*.c{c,pp,xx,++}", "*.{h, hh,xx}", "*.asm", "Makefile"},
     callback = function()
         vim.opt.tw = 80
+        vim.opt.spell = false
+        vim.opt.linebreak = false
+    end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.cu",
+    callback = function()
+        vim.opt.tw = 99
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
         vim.opt.spell = false
         vim.opt.linebreak = false
     end
@@ -84,11 +95,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.rkt",
+    pattern = {"*.rkt", "*.hs"},
     callback = function()
         vim.opt.tw = 80
         vim.opt.tabstop = 2
-        vim.opt.softtabstop=  2
+        vim.opt.softtabstop = 2
         vim.opt.shiftwidth = 2
         vim.opt.expandtab = true
         vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_racket_file() end, {noremap = true, silent = true})

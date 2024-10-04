@@ -39,3 +39,4 @@ source $ZDOTDIR/antigen.zsh
 
 antigen bundle jeffreytse/zsh-vi-mode
 antigen apply
+export PATH="$PATH:/home/aditya/.local/share/modular/bin"

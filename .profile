@@ -2,7 +2,6 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]] then
 	PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-export PATH="/usr/local/cuda/bin:/usr/local/sioyek:/opt/nvim-linux64/bin:$PATH"
 export TERM='xterm-kitty'
 export EDITOR='/opt/nvim-linux64/bin/nvim'
 export VISUAL='/opt/nvim-linux64/bin/nvim'
@@ -20,3 +19,5 @@ if [[ -f ~/.config/environment.d/all.conf ]]; then
         fi
     done < ~/.config/environment.d/all.conf
 fi
+
+export PATH="/usr/local/cuda/bin:/usr/local/sioyek:/opt/nvim-linux64/bin:$CARGO_HOME/bin:$PATH"

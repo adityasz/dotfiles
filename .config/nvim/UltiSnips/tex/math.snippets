@@ -161,6 +161,11 @@ snippet := "define" iA
 endsnippet
 
 context "math()"
+snippet =: "define2" iA
+\eqcolon
+endsnippet
+
+context "math()"
 snippet EE "exists" iA
 \exists
 endsnippet
@@ -281,7 +286,7 @@ endsnippet
 priority 300
 context "math()"
 snippet dint "integral" wA
-\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} $0
+\int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} \,\symrm{d}${4:x}$0
 endsnippet
 
 priority 200

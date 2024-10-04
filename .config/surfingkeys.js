@@ -31,8 +31,12 @@ api.unmap("8", /youtube.com/);
 api.unmap("9", /youtube.com/);
 
 api.map("<Ctrl-y>", "<Alt-s>");
+api.unmap("/");
+api.unmap("W");
 api.unmap("<Alt-s>");
+api.unmap("<Alt-c>");
 api.unmap("<Ctrl-h>");
+api.unmap("<Ctrl-b>");
 api.map("gt", "R");
 api.map("gT", "E");
 api.map("g<Tab>", "<Ctrl-6>");
@@ -103,8 +107,9 @@ light_theme = `
     background: #eeeeee;
 }
 #sk_status, #sk_find {
-    font-size: 20pt;
+	font-size: 12pt;
 }`;
+
 
 dark_theme = `
 .sk_theme {

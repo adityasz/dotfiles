@@ -18,7 +18,8 @@ GNOME_SETTINGS_DIR="$HOME/.config/gnome-settings"
 
 check_root() {
     if [ "$EUID" -ne 0 ]; then
-        echo "This script requires root privileges."
+	# TODO: there are better ways to handle this
+        echo "This script requires root privileges. sudo su in this directory."
         exit 1
     fi
 }
@@ -72,16 +73,17 @@ setup_hotspot_autoconnect() {
 }
 
 install_packages() {
-    dnf install @development-tools python3-pip fd-find zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel meson ninja-build libinput-devel systemd-devel -y
-    dnf install jetbrains-mono-fonts-all rsms-inter-{,vf-}fonts
+    dnf install -y @development-tools python3-pip fd-find zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel meson ninja-build libinput-devel systemd-devel
+    dnf install -y jetbrains-mono-fonts-all rsms-inter-{,vf-}fonts
     cargo install ripdrag csvlens
 }
 
-setup_dotfiles() {
-    git clone --separate-git-dir="$DOTFILES_GIT" https://github.com/adityasz/.dotfiles.git "$DOTFILES_TEMP"
-    rsync --recursive --verbose --exclude '.git' "$DOTFILES_TEMP/" "$HOME/"
-    rm -r "$DOTFILES_TEMP"
-}
+# Do this manually before starting the script (clone over SSH instead)
+# setup_dotfiles() {
+#     git clone --separate-git-dir="$DOTFILES_GIT" https://github.com/adityasz/.dotfiles.git "$DOTFILES_TEMP"
+#     rsync --recursive --verbose --exclude '.git' "$DOTFILES_TEMP/" "$HOME/"
+#     rm -r "$DOTFILES_TEMP"
+# }
 
 copy_config_files() {
     cp zshenv /etc/zshenv
@@ -116,12 +118,16 @@ install_neovim() {
     dnf install -y python3-neovim
 }
 
-create_hist_files() {
-    # for idiotic software that doesn't create them
-}
+# create_hist_files() {
+#     # for idiotic software that doesn't create them
+#     # python history file
+#     # zsh history file
+# }
 
 load_gnome_settings() {
-    dconf load / < "$GNOME_SETTINGS_DIR"/{application-settings,extensions,keybindings,shell-settings}.ini
+	for file in {application-settings,extensions,keybindings,shell-settings};
+		do dconf load / < "$GNOME_SETTINGS_DIR"/$file.ini;
+	done;
 }
 
 install_gnome_extensions() {
@@ -162,7 +168,7 @@ run_all() {
     set_bluetooth_alias
     setup_hotspot_autoconnect
     copy_config_files
-    setup_dotfiles
+    # setup_dotfiles
     install_packages
     install_keyd
     install_libinput_config
@@ -182,7 +188,7 @@ show_help() {
     echo "  set_bluetooth_alias"
     echo "  setup_hotspot_autoconnect"
     echo "  copy_config_files"
-    echo "  setup_dotfiles"
+    # echo "  setup_dotfiles"
     echo "  install_packages"
     echo "  install_keyd"
     echo "  install_libinput_config"

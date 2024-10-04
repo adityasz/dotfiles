@@ -52,6 +52,7 @@ map <Leader>s  <Action>(FileStructurePopup)
 map <Leader>l  <Action>(ChooseRunConfiguration)
 map <Leader>n  <Action>(NewFile)
 map <Leader>d  <Action>(NewDir)
+map <Leader>h <Action>(ReplaceInPath)
 
 nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
 vmap gq  <Action>(com.andrewbrookins.idea.wrap.WrapAction)

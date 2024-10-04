@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Theme Toggle
+Exec=/usr/bin/python3 /home/aditya/.local/bin/toggle-theme
