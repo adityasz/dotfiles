@@ -1,5 +1,6 @@
 alias sudo='sudo '
 alias vim='vimx'
+alias ls='eza'
 alias adb='HOME="$XDG_DATA_HOME/android" adb'
 alias wolfram='/opt/Wolfram/Mathematica/12.1/Executables/wolfram'
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME/nvidia/settings"'

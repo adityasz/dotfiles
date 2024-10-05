@@ -33,10 +33,11 @@ parse_git_branch() {
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
+typeset -a ANTIGEN_CHECK_FILES=(${ZDOTDIR:-~}/.zshrc ${ZDOTDIR:-~}/antigen.zsh)
+
 source $HOME/.profile
 source $ZDOTDIR/.zsh_aliases
 source $ZDOTDIR/antigen.zsh
 
 antigen bundle jeffreytse/zsh-vi-mode
 antigen apply
-export PATH="$PATH:/home/aditya/.local/share/modular/bin"
