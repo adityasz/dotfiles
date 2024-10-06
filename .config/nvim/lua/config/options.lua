@@ -4,7 +4,7 @@ vim.opt.relativenumber = true
 vim.opt.updatetime = 100
 
 vim.opt.ai = true
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.linebreak = true
 vim.opt.formatoptions:append('cro')
 vim.opt.shortmess:remove('S')
