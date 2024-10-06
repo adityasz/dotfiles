@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
-        vim.opt.textwidtdh = 99
+        vim.opt.textwidth = 99
         vim.opt.linebreak = false
         vim.opt.spell = false
     end
