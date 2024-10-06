@@ -23,6 +23,15 @@ M.cursor_position = function()
     return tostring(vim.fn['line']("."))..":"..tostring(vim.fn['virtcol']("."))
 end
 
+-- credits: jdhao/nvim-config
+function M.may_create_dir(dir)
+    local res = vim.fn.isdirectory(dir)
+
+    if res == 0 then
+        vim.fn.mkdir(dir, "p")
+    end
+end
+
 -- TODO: combine into one function:
 
 M.run_python_script = function()

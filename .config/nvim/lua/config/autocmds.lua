@@ -25,6 +25,16 @@ vim.api.nvim_create_autocmd("FocusGained", {
     end
 })
 
+-- credits: jdhao/nvim-config
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("auto_create_dir", {clear = true}),
+    callback = function(ctx)
+        local dir = vim.fn.fnamemodify(ctx.file, ":p:h")
+        utils.may_create_dir(dir)
+    end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {"c", "cpp", "asm", "make"},
     callback = function()
