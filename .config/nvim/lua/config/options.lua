@@ -4,15 +4,16 @@ vim.opt.relativenumber = true
 vim.opt.updatetime = 100
 
 vim.opt.ai = true
-vim.opt.spell = false
+vim.opt.spell = true
 vim.opt.linebreak = true
 vim.opt.formatoptions:append('cro')
 vim.opt.shortmess:remove('S')
 
-vim.opt.tw = 0
-vim.opt.tabstop = 8
-vim.opt.shiftwidth = 8
-vim.opt.expandtab = false
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.textwidth = 0
 
 local M = {}
 
@@ -28,7 +29,6 @@ M.set_color_scheme = function()
 
     if gnome_scheme == "'prefer-dark'" and vim.g.colors_name ~= "dark" then
         vim.opt.background = "dark"
-        -- vim.cmd("colorscheme carbonfox")
         vim.cmd("colorscheme dark")
     elseif (gnome_scheme == "'prefer-light'" or gnome_scheme == "'default'") and vim.g.colors_name ~= "light" then
         vim.opt.background = "light"
@@ -39,6 +39,8 @@ end
 M.cursor_position = function()
     return tostring(vim.fn['line']("."))..":"..tostring(vim.fn['virtcol']("."))
 end
+
+-- TODO: combine into one function:
 
 M.run_python_script = function()
     local filename = vim.fn.expand("%:p")

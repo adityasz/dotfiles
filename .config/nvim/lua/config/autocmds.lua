@@ -25,125 +25,120 @@ vim.api.nvim_create_autocmd("FocusGained", {
     end
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.c{c,pp,xx,++}", "*.{h, hh,xx}", "*.asm", "Makefile"},
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"c", "cpp", "asm", "make"},
     callback = function()
-        vim.opt.tw = 80
+        vim.opt.tabstop = 8
+        vim.opt.shiftwidth = 8
+        vim.opt.textwidth = 80
+        vim.opt.expandtab = false
+        vim.opt.linebreak = false
         vim.opt.spell = false
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "cuda",
+    callback = function()
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+        vim.opt.textwidtdh = 99
+        vim.opt.linebreak = false
+        vim.opt.spell = false
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"html", "css", "xml", "json", "yaml", "javascript"},
+    callback = function()
+        vim.opt.textwidth = 99
+        vim.opt.expandtab = false
         vim.opt.linebreak = false
     end
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.cu",
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"python", "lua"},
     callback = function()
-        vim.opt.tw = 99
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
-        vim.opt.spell = false
+        vim.opt.textwidth = 99
         vim.opt.linebreak = false
-    end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.html", "*.css", "*.xml", "*.json", "*.yaml", "*.yml", "*.js"},
-    callback = function()
-        vim.opt.tw = 99
         vim.opt.spell = false
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
-        vim.opt.linebreak = false
     end
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.py", "*.lua"},
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "tex",
     callback = function()
-        vim.opt.tw = 99
-        vim.opt.spell = false
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
-        vim.opt.softtabstop = 4
-        vim.opt.expandtab = true
-        vim.opt.linebreak = false
-    end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.tex",
-    callback = function()
-        vim.opt.spell = true
-        vim.opt.tw = 80
-        -- Until TeX has a good formatter, use spaces for indentation.
-        vim.opt.expandtab = true
-        vim.opt.tabstop = 2
-        vim.opt.shiftwidth = 2
-    end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.md",
-    callback = function()
-        vim.opt.tw = 80
-        vim.opt.spell = true
-        vim.opt.tabstop = 4
-        vim.opt.softtabstop = 4
-        vim.opt.shiftwidth = 4
-        vim.opt.expandtab = true
-        vim.opt.linebreak = true
-    end
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = {"*.rkt", "*.hs"},
-    callback = function()
-        vim.opt.tw = 80
         vim.opt.tabstop = 2
         vim.opt.softtabstop = 2
         vim.opt.shiftwidth = 2
-        vim.opt.expandtab = true
+        vim.opt.textwidth = 80
+        vim.opt.expandtab = true -- Until TeX has a good formatter, use spaces for indentation.
+        vim.opt.spell = true
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt.textwidth = 80
+        vim.opt.linebreak = true
+        vim.opt.spell = true
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"scheme", "racket", "haskell"},
+    callback = function()
+        vim.opt.tabstop = 2
+        vim.opt.softtabstop = 2
+        vim.opt.shiftwidth = 2
+        vim.opt.textwidth = 80
+    end
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*.rkt",
+    callback = function()
         vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_racket_file() end, {noremap = true, silent = true})
     end
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = "*.rst",
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "rst",
     callback = function()
-        vim.opt.tw = 80
-        vim.opt.spell = true
         vim.opt.tabstop = 8
         vim.opt.shiftwidth = 8
+        vim.opt.textwidth = 80
         vim.opt.expandtab = false
         vim.opt.linebreak = true
+        vim.opt.spell = true
     end
 })
 
-vim.api.nvim_create_autocmd('ColorScheme', {
-    pattern = '*',
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
     callback = function()
-        vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
-            fg = '#555555',
+        vim.api.nvim_set_hl(0, "CopilotSuggestion", {
+            fg = "#555555",
             ctermfg = 8,
             force = true
         })
     end
 })
 
-vim.api.nvim_create_autocmd({"BufEnter"}, {
-    pattern = "*.txt",
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "txt",
     callback = function()
         vim.opt.spell = true
     end
 })
 
-vim.api.nvim_create_autocmd({"BufEnter"}, {
-    pattern = "*.typ",
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "typst",
     callback = function()
-        vim.opt.spell = true
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
         vim.opt.textwidth = 80
-        vim.opt.expandtab = false
+        vim.opt.spell = true
     end
 })
 
@@ -163,29 +158,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_python_script() end, {noremap = true, silent = true})
     end
 })
-
--- S-F5 is F17
--- C-F5 is F29
-
--- vim.api.nvim_create_autocmd("BufEnter", {
---     pattern = {"*.c"},
---     callback = function()
---         vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.compile_and_run_c() end, {noremap = true, silent = true})
---         vim.keymap.set({'n', 'v', 'i'}, '<F29>', function() opts.compile_and_debug_c() end, {noremap = true, silent = true})
---     end
--- })
---
--- vim.api.nvim_create_autocmd("BufEnter", {
---     pattern = {"*.c{pp,xx,++,u}"},
---     callback = function()
---         vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.compile_and_run_cpp() end, {noremap = true, silent = true})
---         vim.keymap.set({'n', 'v', 'i'}, '<F29>', function() opts.compile_and_debug_cpp() end, {noremap = true, silent = true})
---     end
--- })
---
--- vim.api.nvim_create_autocmd("BufEnter", {
---     pattern = "*.py",
---     callback = function()
---         vim.keymap.set({'n', 'v', 'i'}, '<F17>', function() opts.run_python_script() end, {noremap = true, silent = true})
---     end
--- })
