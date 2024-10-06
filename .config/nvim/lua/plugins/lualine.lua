@@ -28,7 +28,7 @@ return {
                 lualine_c = {'filename'},
                 lualine_x = {'searchcount', 'filetype', 'fileformat', 'encoding'},
                 lualine_y = {'progress'},
-                lualine_z = {require('config.options').cursor_position}
+                lualine_z = {require('config.utils').cursor_position}
             },
             inactive_sections = {
                 lualine_a = {},

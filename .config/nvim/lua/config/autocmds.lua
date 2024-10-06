@@ -1,9 +1,9 @@
-local opts = require('config.options')
+local utils = require("config.utils")
 
 vim.api.nvim_create_autocmd("FocusGained", {
     pattern = "*",
     callback = function()
-        opts.set_color_scheme()
+        utils.set_color_scheme()
         require('lualine').setup()
 
         local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme")
@@ -100,7 +100,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*.rkt",
     callback = function()
-        vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_racket_file() end, {noremap = true, silent = true})
+        vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() utils.run_racket_file() end, {noremap = true, silent = true})
     end
 })
 
@@ -155,6 +155,6 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead",}, {
 vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*.py",
     callback = function()
-        vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() opts.run_python_script() end, {noremap = true, silent = true})
+        vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() utils.run_python_script() end, {noremap = true, silent = true})
     end
 })
