@@ -6,15 +6,14 @@ return {
         vim.g.vimtex_compiler_latexmk = {
             aux_dir = '.aux',
             options = {
-	            '-pdf',
 	            '-shell-escape',
+	            '-pdf',
 	            '-verbose',
 	            '-file-line-error',
 	            '-synctex=1',
 	            '-interaction=nonstopmode'
             },
         }
-        vim.g.vimtex_view_method = 'sioyek'
         vim.g.tex_flavor = 'latex'
         vim.g.tex_fast = ''
         vim.g.vimtex_matchparen_enabled = 0
