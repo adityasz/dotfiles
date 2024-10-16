@@ -12,13 +12,10 @@ bindkey "^?" backward-delete-char
 unset command_not_found_handle
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/aditya/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
-
-PROMPT="%B%n%b%B@%b%B%m%b%B:%b%B%(5~|%-1~/…/%3~|%4~)$%b "
 
 vman() {
     # export MANPAGER="col -b" # for macOS
@@ -26,9 +23,18 @@ vman() {
     unset MANPAGER
 }
 
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+function git_branch_name() {
+    branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+    if [[ $branch == "" ]];
+    then
+        :
+    else
+        echo ' ('$branch')'
+    fi
 }
+
+setopt PROMPT_SUBST
+prompt='%B%n%b%B@%b%B%m%b%B:%b%B%(5~|%-1~/…/%3~|%4~)%b$(git_branch_name)$ '
 
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
@@ -41,3 +47,5 @@ source $ZDOTDIR/antigen.zsh
 
 antigen bundle jeffreytse/zsh-vi-mode
 antigen apply
+
+eval "$(magic completion --shell zsh)"
