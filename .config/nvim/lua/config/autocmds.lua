@@ -48,6 +48,18 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    pattern = "sh",
+    callback = function()
+        vim.opt.tabstop = 4
+        vim.opt.shiftwidth = 4
+        vim.opt.textwidth = 80
+        vim.opt.expandtab = false
+        vim.opt.linebreak = false
+        vim.opt.spell = false
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     pattern = "cuda",
     callback = function()
         vim.opt.tabstop = 4
@@ -59,7 +71,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"html", "css", "xml", "json", "yaml", "javascript"},
+    pattern = {"html", "css", "xml", "json", "javascript"},
     callback = function()
         vim.opt.textwidth = 99
         vim.opt.expandtab = false
@@ -152,10 +164,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead",}, {
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     pattern = "*.typ",
     callback = function()
         vim.opt.spell = true
+        vim.opt.tabstop = 4         -- the creator of kaarmu/typst.vim sets it to 2 for some reason
+        vim.opt.shiftwidth = 4
+        vim.opt.textwidth = 80
         vim.keymap.set('n', '<leader>ll', ':TypstWatch<CR>', {noremap = true, silent = true})
         local buf = vim.api.nvim_get_current_buf()
         vim.api.nvim_buf_set_option(buf, "filetype", "typst")
