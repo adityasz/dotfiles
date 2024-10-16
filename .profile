@@ -21,7 +21,6 @@ if [[ -f ~/.config/environment.d/all.conf ]]; then
 fi
 
 export PATH="$PATH:/usr/local/cuda/bin"
-export PATH="$PATH:/usr/local/sioyek"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:/home/aditya/.local/share/modular/bin"
