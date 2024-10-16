@@ -1,8 +1,8 @@
 delimiters:
-  begin: "BEGIN"
+  begin: "<<< theme-switcher <<<"
   fence: "="
   separator: ""
-  end: "END"
+  end: ">>> theme-switcher >>>"
 
 comment_tokens:
   "$XDG_CONFIG_HOME/tmux/tmux.conf": "#"

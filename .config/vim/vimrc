@@ -1,10 +1,10 @@
-" === BEGIN ===
+" <<< theme-switcher <<<
 set background=light
 colorscheme light
-" =============
+" ======================
 " set background=dark
 " colorscheme dark
-" ===  END  ===
+" >>> theme-switcher >>>
 
 " ==============================================================================
 

@@ -1,8 +1,8 @@
-# === BEGIN ===
+# <<< theme-switcher <<<
 --theme="OneHalfLight"
-# =============
+# =====================
 # --theme="OneHalfDark"
-# ===  END  ===
+# >>> theme-switcher >>>
 
 # This is `bat`s configuration file. Each line either contains a comment or
 # a command-line option that you want to pass to `bat` by default. You can
