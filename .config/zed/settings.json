@@ -7,6 +7,13 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-20240620"
+    },
+    "version": "2"
+  },
   "show_inline_completions": false,
   "telemetry": {
     "diagnostics": false,
@@ -25,16 +32,22 @@
   "buffer_font_weight": 600,
   "format_on_save": "off",
   "current_line_highlight": "none",
+  "buffer_font_features": {
+    "liga": true,
+    "calt": true,
+    "dlig": true
+  },
   "toolbar": {
     "breadcrumbs": false,
     "quick_actions": false
   },
   "vim": {
-    "use_system_clipboard": "never"
+    "use_system_clipboard": "on_yank",
+    "toggle_relative_line_numbers": true
   },
   "theme": {
     "mode": "system",
-    "dark": "Fleet Dark",
+    "dark": "One Dark",
     "light": "One Light"
   },
   "languages": {
@@ -42,7 +55,8 @@
       "show_inline_completions": false
     },
     "JSON": {
-      "tab_size": 2
+      "tab_size": 2,
+      "hard_tabs": false
     },
     "C": {
       "tab_size": 8,

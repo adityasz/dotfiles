@@ -7,15 +7,39 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
-    "bindings": {
-      "shift shift": "file_finder::Toggle"
-    }
+  	"context": "Workspace",
+  	"bindings": {
+  	  "shift shift": "file_finder::Toggle"
+  	}
   },
   {
-    "context": "Editor",
-    "bindings": {
-      // "j k": ["workspace::SendKeystrokes", "escape"]
-    }
+  	"context": "Editor",
+  	"bindings": {
+      "ctrl-c": "editor::Copy",
+      "ctrl-shift-v": "editor::Paste"
+  	  // "j k": ["workspace::SendKeystrokes", "escape"]
+  	}
+  },
+  {
+  	"context": "vim_mode == normal",
+  	"bindings": {
+  	  "j": [
+    		"vim::Down",
+    		{
+    		  "displayLines": true
+    		}
+  	  ],
+  	  "k": [
+    		"vim::Up",
+    		{
+    		  "displayLines": true
+    		}
+  	  ],
+  	  "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
+  	  "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
+  	  "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
+  	  "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
+      "Y": ["workspace::SendKeystrokes", "y$"]
+  	}
   }
 ]
