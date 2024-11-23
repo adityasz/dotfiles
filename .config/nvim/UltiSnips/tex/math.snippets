@@ -118,17 +118,17 @@ endsnippet
 
 context "math()"
 snippet td "to the ... power" iA
-^{$1}$0
+^{$1} $0
 endsnippet
 
 context "math()"
 snippet ^^ "superscript" iA
-^{$1}$0
+^{$1} $0
 endsnippet
 
 context "math()"
 snippet rd "to the ... power" iA
-^{($1)}$0
+^{($1)} $0
 endsnippet
 
 context "math()"
@@ -263,8 +263,9 @@ snippet invs "inverse" iA
 ^{-1}
 endsnippet
 
+priority 100
 context "math()"
-snippet .T "transpose" iA
+snippet "\.T" "transpose" riA
 ^\top
 endsnippet
 
@@ -410,7 +411,7 @@ endsnippet
 context "math()"
 snippet case "cases" wA
 \begin{cases}
-  $1
+	$1
 \end{cases}
 endsnippet
 
@@ -422,8 +423,8 @@ endsnippet
 context "math()"
 snippet bigfun "Big function" iA
 \begin{align*}
-  $1: $2 &\longrightarrow $3 \\\\
-  $4 &\longmapsto $1($4) = $0
+	$1: $2 &\longrightarrow $3 \\\\
+	$4 &\longmapsto $1($4) = $0
 \end{align*}
 endsnippet
 

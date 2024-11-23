@@ -30,7 +30,7 @@ let mapleader = " "
 sethandler <S-F5>    n-v-i:ide " i:vim
 sethandler <C-S-F10> n-v-i:ide " i:vim
 
-map <Tab>      <Action>(Switcher)
+map <Tab>      <Action>(RecentFiles)
 map <F5>       <Action>(Run)
 map <C-F5>     <Action>(Debug)
 map <Leader>a  <Action>(CLionShowAssembly)
@@ -52,7 +52,8 @@ map <Leader>s  <Action>(FileStructurePopup)
 map <Leader>l  <Action>(ChooseRunConfiguration)
 map <Leader>n  <Action>(NewFile)
 map <Leader>d  <Action>(NewDir)
-map <Leader>h <Action>(ReplaceInPath)
+map <Leader>h  <Action>(ReplaceInPath)
+" map <S-CR>     <Action>(JupyterNotebookRunCellInsertBelowCommandModeAction)
 
 nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
 vmap gq  <Action>(com.andrewbrookins.idea.wrap.WrapAction)

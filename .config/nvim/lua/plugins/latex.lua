@@ -14,6 +14,7 @@ return {
 	            '-interaction=nonstopmode'
             },
         }
+        vim.g.vimtex_view_method = 'sioyek'
         vim.g.tex_flavor = 'latex'
         vim.g.tex_fast = ''
         vim.g.vimtex_matchparen_enabled = 0

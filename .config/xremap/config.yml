@@ -1,0 +1,109 @@
+# xremap /home/aditya/.config/xremap/config.yml
+
+modmap:
+  - name: Global
+    remap:
+      CapsLock: esc
+
+keymap:
+  - name: Right alt layer
+    remap:
+      alt_R-1: f1
+      alt_R-2: f2
+      alt_R-3: f3
+      alt_R-4: f4
+      alt_R-5: f5
+      alt_R-6: f6
+      alt_R-7: f7
+      alt_R-8: f8
+      alt_R-9: f9
+      alt_R-0: f10
+      alt_R-minus: f11
+      alt_R-equal: f12
+      alt_R-h: left
+      alt_R-j: down
+      alt_R-k: up
+      alt_R-l: right
+      alt_R-semicolon: home
+      alt_R-apostrophe: end
+      alt_R-leftbrace: pageup
+      alt_R-slash: pagedown
+      alt_R-tab: alt-tab
+
+  - name: comfy keymap
+    application:
+      not: [kitty,
+            jetbrains-idea,
+            jetbrains-clion,
+            jetbrains-pycharm,
+            dev.zed.Zed,
+            com.raggesilver.BlackBox,
+            sioyek,
+            Cursor,
+            mpv]
+    remap:
+      alt_L-a: C-a
+      alt_L-b: C-b
+      alt_L-c: C-c
+      alt_L-d: C-d
+      alt_L-e: C-e
+      alt_L-f: C-f
+      alt_L-g: C-g
+      alt_L-h: C-h
+      alt_L-i: C-i
+      alt_L-j: C-j
+      alt_L-k: C-k
+      alt_L-l: C-l
+      alt_L-m: C-m
+      alt_L-n: C-n
+      alt_L-o: C-o
+      alt_L-p: C-p
+      alt_L-q: C-q
+      alt_L-r: C-r
+      alt_L-s: C-s
+      alt_L-t: C-t
+      alt_L-u: C-u
+      alt_L-v: C-v
+      alt_L-w: C-w
+      alt_L-x: C-x
+      alt_L-y: C-y
+      alt_L-z: C-z
+      alt_L-backspace: C-backspace
+
+      alt_L-minus: c-minus
+      alt_L-equal: c-equal
+      alt_L-shift-equal: C-shift-equal
+
+      alt_L-shift-a: C-shift-a
+      alt_L-shift-b: C-shift-b
+      alt_L-shift-c: C-shift-c
+      alt_L-shift-d: C-shift-d
+      alt_L-shift-e: C-shift-e
+      alt_L-shift-f: C-shift-f
+      alt_L-shift-g: C-shift-g
+      alt_L-shift-h: C-shift-h
+      alt_L-shift-i: C-shift-i
+      alt_L-shift-j: C-shift-j
+      alt_L-shift-k: C-shift-k
+      alt_L-shift-l: C-shift-l
+      alt_L-shift-m: C-shift-m
+      alt_L-shift-n: C-shift-n
+      alt_L-shift-o: C-shift-o
+      alt_L-shift-p: C-shift-p
+      alt_L-shift-q: C-shift-q
+      alt_L-shift-r: C-shift-r
+      alt_L-shift-s: C-shift-s
+      alt_L-shift-t: C-shift-t
+      alt_L-shift-u: C-shift-u
+      alt_L-shift-v: C-shift-v
+      alt_L-shift-w: C-shift-w
+      alt_L-shift-x: C-shift-x
+      alt_L-shift-y: C-shift-y
+      alt_L-shift-z: C-shift-z
+
+  - name: comfy keymap
+    application:
+      only: Cursor
+    remap:
+      alt_L-p: C-p
+      alt_L-shift-p: C-shift-p

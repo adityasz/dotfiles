@@ -1,65 +1,18 @@
-api.unmap("h", /youtube.com/);
-api.unmap("j", /youtube.com/);
-api.unmap("k", /youtube.com/);
-api.unmap("l", /youtube.com/);
-api.unmap("i", /youtube.com/);
-api.unmap("t", /youtube.com/);
-api.unmap("f", /youtube.com/);
-api.unmap("m", /youtube.com/);
-api.unmap("c", /youtube.com/);
-api.unmap("w", /youtube.com/);
-api.unmap("a", /youtube.com/);
-api.unmap("s", /youtube.com/);
-api.unmap("d", /youtube.com/);
-api.unmap("+", /youtube.com/);
-api.unmap("-", /youtube.com/);
-api.unmap("]", /youtube.com/);
-api.unmap("[", /youtube.com/);
-api.unmap(">>", /youtube.com/);
-api.unmap("<<", /youtube.com/);
-api.unmap(",", /youtube.com/);
-api.unmap(".", /youtube.com/);
-api.unmap("0", /youtube.com/);
-api.unmap("1", /youtube.com/);
-api.unmap("2", /youtube.com/);
-api.unmap("3", /youtube.com/);
-api.unmap("4", /youtube.com/);
-api.unmap("5", /youtube.com/);
-api.unmap("6", /youtube.com/);
-api.unmap("7", /youtube.com/);
-api.unmap("8", /youtube.com/);
-api.unmap("9", /youtube.com/);
-
-api.map("<Ctrl-y>", "<Alt-s>");
-api.unmap("/");
-api.unmap("n");
-api.unmap("N");
-api.unmap("m");
-api.unmap("`");
-api.unmap("'");
-api.unmap(";");
-api.unmap("t");
-api.unmap("?");
-api.unmap("s");
-api.unmap("z");
-api.unmap("y");
-api.unmap("T");
-api.unmap("B");
-api.unmap("F");
-api.unmap("w");
-api.unmap("W");
-api.unmap("<Alt-s>");
-api.unmap("<Alt-c>");
-api.unmap("<Ctrl-h>");
-api.unmap("<Ctrl-b>");
-api.map("gt", "R");
-api.map("gT", "E");
-api.map("g<Tab>", "<Ctrl-6>");
-api.map("<Ctrl-o>", "S");
-api.map("<Ctrl-i>", "F");
-
-settings.lurkingPattern = /https:\/\/.*monkeytype\.com.*|.*calendar\.google\.com.*|.*docs\.google\.com.*|.*figma\.com.*|.*leetcode\.com.*|.*photopea\.com.*|.*web\.whatsapp\.com.*|.*hackerrank\.com.*|.*humanbenchmark.com\/tests\/typing/i;
-
+api.unmapAllExcept(["h", "j", "k", "l", "f", "u", "d", "gg", "G", "0", "$", "i"])
+api.unmapAllExcept(["i", "gg", "G"], /.*youtube.com\/watch.*/)
+settings.richHintsForKeystroke = 0;
+settings.lurkingPattern = new RegExp([
+  '.*monkeytype\\.com.*',
+  '.*calendar\\.google\\.com.*',
+  '.*docs\\.google\\.com.*',
+  '.*figma\\.com.*',
+  '.*leetcode\\.com.*',
+  '.*photopea\\.com.*',
+  '.*web\\.whatsapp\\.com.*',
+  '.*hackerrank\\.com.*',
+  '.*humanbenchmark.com\\/tests\\/typing',
+  '.*app.*ironcalc.com.*'
+].join('|'), 'i');
 
 light_theme = `
 .sk_theme {
@@ -126,6 +79,7 @@ light_theme = `
 }`;
 
 
+// incomplete
 dark_theme = `
 .sk_theme {
     font-family: sans-serif;

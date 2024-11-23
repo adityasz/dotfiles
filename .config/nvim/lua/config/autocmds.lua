@@ -168,8 +168,8 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
     pattern = "*.typ",
     callback = function()
         vim.opt.spell = true
-        vim.opt.tabstop = 4         -- the creator of kaarmu/typst.vim sets it to 2 for some reason
-        vim.opt.shiftwidth = 4
+        vim.opt.tabstop = 2
+        vim.opt.shiftwidth = 2
         vim.opt.textwidth = 80
         vim.keymap.set('n', '<leader>ll', ':TypstWatch<CR>', {noremap = true, silent = true})
         local buf = vim.api.nvim_get_current_buf()

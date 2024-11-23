@@ -1,0 +1,23 @@
+snippet img "Image" bA
+#figure(
+	image("figures/$1"),
+	placement: ${2:auto},
+	caption: [$3]
+) <fig:${4:${1/^(.+?)(\.[^.]*$|$)/$1/g}}>
+endsnippet
+
+snippet image "Image" bA
+#figure(
+	image("figures/$1"),
+	placement: ${2:auto},
+	caption: [$3]
+) <fig:${4:${1/^(.+?)(\.[^.]*$|$)/$1/g}}>
+endsnippet
+
+snippet figure "Figure" bA
+#figure(
+	include "figures/$1",
+	placement: ${2:auto},
+	caption: [$3]
+) <fig:${4:${1/^(.+?)(\.[^.]*$|$)/$1/g}}>
+endsnippet

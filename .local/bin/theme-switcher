@@ -2,7 +2,6 @@
 
 import os
 import yaml
-from box import Box
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import GLib
@@ -15,7 +14,7 @@ DBUS_INTERFACE = "org.freedesktop.portal.Settings"
 APPEARANCE_NAMESPACE = "org.freedesktop.appearance"
 COLOR_SCHEME_KEY = "color-scheme"
 
-HOME = os.getenv("HOME")
+HOME = os.getenv("HOME", None)
 if HOME is None:
     raise RuntimeError("Environment variable $HOME is not set. Specify it manually.")
 CONFIG_DIR = os.getenv("XDG_CONFIG_HOME", os.path.join(HOME, ".config"))
@@ -24,7 +23,6 @@ CONFIG_FILE = os.path.join(CONFIG_DIR, CONFIG_FILE_NAME)
 
 with open(CONFIG_FILE, 'r') as file:
     config = yaml.safe_load(file.read())
-config = Box(config)
 
 
 def comment(line: str, comment_token: str):
@@ -89,14 +87,16 @@ def modify_config_file(file: str, comment_token: str, theme: str):
         if not line:
             continue
 
-        cleaned_line = (line.replace(comment_token, "").replace(" ", "")
-                            .replace("\n", "").replace(config.delimiters.fence, ""))
-        if cleaned_line == config.delimiters.begin:
+        cleaned_line = (line.replace(comment_token, "")
+                            .replace(config["delimiters"]["fence"], "")
+                            .strip())
+
+        if cleaned_line == config["delimiters"]["begin"]:
             section = "light"
             continue
-        if cleaned_line == config.delimiters.end:
+        if cleaned_line == config["delimiters"]["end"]:
             break
-        if section == "light" and cleaned_line == config.delimiters.separator:
+        if section == "light" and cleaned_line == config["delimiters"]["separator"]:
             section = "dark"
             continue
 
@@ -126,18 +126,18 @@ def toggle_theme(namespace, key, value):
             case _:
                 return
 
-        for file, comment_token in config.comment_tokens.items():
+        for file, comment_token in config["comment_tokens"].items():
             modify_config_file(os.path.expandvars(file), comment_token, mode)
 
         if mode == "light":
-            for extension, value in config.extensions.light.items():
+            for extension, value in config["extensions"]["light"].items():
                 os.system(f'dconf write /org/gnome/shell/extensions/{extension} "{value}"')
-            for command in config.commands.dark_to_light:
+            for command in config["commands"]["dark_to_light"]:
                 os.system(command)
         else:
-            for extension, value in config.extensions.dark.items():
+            for extension, value in config["extensions"]["dark"].items():
                 os.system(f'dconf write /org/gnome/shell/extensions/{extension} "{value}"')
-            for command in config.commands.light_to_dark:
+            for command in config["commands"]["light_to_dark"]:
                 os.system(command)
 
 

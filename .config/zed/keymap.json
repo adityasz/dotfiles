@@ -9,20 +9,36 @@
   {
   	"context": "Workspace",
   	"bindings": {
-  	  "shift shift": "file_finder::Toggle"
+      "ctrl-shift-e": "workspace::ToggleLeftDock",
+      "ctrl-shift-a": "assistant::ToggleFocus",
+      "alt-,": "zed::OpenSettings",
+      "alt-k  alt-s": "zed::OpenKeymap"
+      // they break file renaming/creation in the file tree on the left (ctrl-shift-e)
+      // "k": "menu::SelectPrev",
+      // "j": "menu::SelectNext"
   	}
   },
   {
   	"context": "Editor",
   	"bindings": {
-      "ctrl-c": "editor::Copy",
-      "ctrl-shift-v": "editor::Paste"
+      "alt-c": "editor::Copy",
+      "alt-v": "editor::Paste",
+      "tab": "tab_switcher::Toggle"
   	  // "j k": ["workspace::SendKeystrokes", "escape"]
   	}
   },
   {
+    "bindings": {
+    }
+  },
+  {
   	"context": "vim_mode == normal",
   	"bindings": {
+  	  "space space": "file_finder::Toggle",
+  	  "space s": "outline::Toggle",
+      "space r": "editor::Rename",
+      "space e": "editor::GoToDiagnostic",
+      "[ e": "editor::GoToPrevDiagnostic",
   	  "j": [
     		"vim::Down",
     		{

@@ -2,9 +2,10 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]] then
 	PATH="$HOME/.local/bin:$PATH"
 fi
 
-export TERM='xterm-kitty'
-export EDITOR='/opt/nvim-linux64/bin/nvim'
-export VISUAL='/opt/nvim-linux64/bin/nvim'
+export CDPATH="$HOME/IITB/year-3/autumn"
+export TERM="xterm-kitty"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export PROMPT_DIRTRIM=3
 
 export OPENAI_API_KEY=$(secret-tool lookup key openai_api_key)
@@ -23,4 +24,6 @@ fi
 export PATH="$PATH:/usr/local/cuda/bin"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
-export PATH="$PATH:/home/aditya/.local/share/modular/bin"
+export PATH="$PATH:$MODULAR_HOME/bin"
+export PATH="$PATH:/usr/local/sioyek"
+. "/home/aditya/.local/share/cargo/env"

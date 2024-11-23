@@ -1,0 +1,83 @@
+# https://www.reddit.com/r/vim/comments/1f3q612/comment/ll7hlub/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+global !p
+def math():
+    name = vim.eval("synIDattr(synID(line('.'), col('.')-1, 0), 'name')")
+    patterns = ["typstMarkupDollar","typstMathScripts","typstMathNumber",
+                "typstMathSymbol","typstMathIdentifier","typstMathFunction"]
+    return name in patterns
+endglobal
+
+priority 100
+context "math()"
+snippet "(\\?\w+)(\.,)" "vector postfix" riA
+vb(`!p snip.rv=match.group(1)`)
+endsnippet
+
+priority 100
+context "math()"
+snippet "\.T" "transpose" riA
+^top
+endsnippet
+
+priority 100
+context "math()"
+snippet dint "definite integral" wA
+Integral(${1:-oo}, ${2:oo}, ${3:f(x)}, ${4:x})
+endsnippet
+
+priority 100
+context "math()"
+snippet int "indefinite integral" wA
+Integral(${1:f(x)}, ${2:x})
+endsnippet
+
+priority 100
+context "math()"
+snippet sum "sum" w
+Sum(${1:n}, ${2:0}, ${3:oo}) ${4:f(n)}
+endsnippet
+
+context "math()"
+snippet sr "^2" iA
+^2
+endsnippet
+
+context "math()"
+snippet cb "^3" iA
+^3
+endsnippet
+
+context "math()"
+snippet td "^power" iA
+^($1)$0
+endsnippet
+
+context "math()"
+snippet ^^ "^power" iA
+^($1)$0
+endsnippet
+
+context "math()"
+snippet __ "subscript" iA
+_($1)$0
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+context "math()"
+snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
+`!p snip.rv = match.group(1)`_(`!p snip.rv = match.group(2)`)
+endsnippet
+
+context "math()"
+snippet bmat "bracket delimitted matrix" iA
+mat(delim: "[", $1)$0
+endsnippet
+
+context "math()"
+snippet invs "inverse" iA
+^(-1)
+endsnippet

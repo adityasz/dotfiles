@@ -1,5 +1,10 @@
 #!/bin/bash
 
+XDG_DATA_HOME="$HOME/.local/share"
+XDG_CONFIG_HOME="$HOME/.config"
+XDG_STATE_HOME="$HOME/.local/state"
+XDG_CACHE_HOME="$HOME/.cache"
+
 SYSRQ_CONF="/etc/sysctl.d/90-sysrq.conf"
 SYSRQ_PROC="/proc/sys/kernel/sysrq"
 
@@ -35,6 +40,11 @@ enable_sysrq() {
 	else
 		echo "sysrq already enabled"
 	fi
+}
+
+enable_dmesg() {
+	# if ! grep -qE "^"
+	echo "Make this work!"
 }
 
 
@@ -81,16 +91,21 @@ setup_hotspot_autoconnect() {
 
 
 install_packages() {
-	dnf install -y @development-tools python3-pip fd-find sd procs eza zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel meson ninja-build libinput-devel systemd-devel
+	dnf install -y @development-tools python3-pip fd-find sd procs eza zsh kitty ranger cargo gdk-pixbuf2-devel pango-devel graphene-devel cairo-gobject-devel cairo-devel python2-cairo-devel gtk4-devel meson ninja-build libinput-devel systemd-devel clang clang-tools-extra
 	dnf install -y jetbrains-mono-fonts-all rsms-inter-{,vf-}fonts
 }
 
 
 copy_config_files() {
-	cp zshenv /etc/zshenv
+    cat << 'EOF' >> "/etc/zshenv"
+export XDG_DATA_HOME="\$HOME/.local/share"
+export XDG_CONFIG_HOME="\$HOME/.config"
+export XDG_STATE_HOME="\$HOME/.local/state"
+export XDG_CACHE_HOME="\$HOME/.cache"
+export ZDOTDIR="\$XDG_CONFIG_HOME/zsh"
+EOF
 	cp $LIBINPUT_CONF $LIBINPUT_CONF_DIR
 	mkdir -p "$KEYD_CONF_DIR" && cp "keyd/$KEYD_CONF" "$KEYD_CONF_DIR"
-	echo -e "\nCopied keyd and libinput configs"
 }
 
 
@@ -130,10 +145,10 @@ user_installs() {
 
 
 create_hist_files() {
-	mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/python"
-	mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
-	touch "${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
-	touch "${XDG_STATE_HOME:-$HOME/.local/state}/python/python_history"
+	mkdir -p "$XDG_STATE_HOME/python"
+	mkdir -p "$XDG_STATE_HOME/zsh"
+	touch "$XDG_STATE_HOME/zsh/history"
+	touch "$XDG_STATE_HOME/python/python_history"
 }
 
 
@@ -175,7 +190,7 @@ install_gnome_extensions() {
 }
 
 
-run_all() {
+run_root_stuff() {
 	trap SIGINT
 	check_root
 
@@ -192,7 +207,9 @@ $(declare -f install_keyd)
 $(declare -f install_libinput_config)
 $(declare -f install_neovim)
 EOF
+}
 
+run_other_stuff() {
 	user_installs
 	load_gnome_settings
 	install_gnome_extensions

@@ -1,7 +1,8 @@
 vim.opt.number = true
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.relativenumber = true
 vim.opt.updatetime = 100
+vim.opt.statuscolumn = '%s  %=%{&rnu?v:relnum:v:lnum}   %C'
 
 vim.opt.ai = true
 vim.opt.spell = false

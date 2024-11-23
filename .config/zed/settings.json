@@ -7,10 +7,16 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "tab_bar": {
+    "show": false
+  },
   "assistant": {
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
+      "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
@@ -24,12 +30,15 @@
       "program": "zsh"
     }
   },
+  "soft_wrap": "editor_width",
   "base_keymap": "VSCode",
   "vim_mode": true,
   "buffer_font_family": "JetBrains Mono",
-  "ui_font_size": 20,
   "buffer_font_size": 20,
-  "buffer_font_weight": 600,
+  "buffer_font_weight": 500,
+  "ui_font_size": 18,
+  "ui_font_family": "Inter",
+  "ui_font_weight": 500,
   "format_on_save": "off",
   "current_line_highlight": "none",
   "buffer_font_features": {
@@ -47,8 +56,8 @@
   },
   "theme": {
     "mode": "system",
-    "dark": "One Dark",
-    "light": "One Light"
+    "dark": "VSCode Dark Modern",
+    "light": "Github Light"
   },
   "languages": {
     "Typst": {
@@ -69,6 +78,26 @@
     "Python": {
       "tab_size": 4,
       "hard_tabs": false
+    }
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "lsp": {
+    "mojo": {
+      "settings": {
+        "lsp_path": "/home/aditya/.local/share/modular/bin/mojo-lsp-server",
+        "args": ["--log=verbose"]
+      }
+    },
+    "tinymist": {
+      "initialization_options": {
+        "exportPdf": "onSave",
+        "outputPath": "$root/$name",
+        "typstExtraArgs": ["--root ..", "master.typ"]
+      }
     }
   }
 }
