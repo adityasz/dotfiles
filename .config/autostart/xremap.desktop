@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=xremap
+Exec=/home/aditya/.local/share/cargo/bin/xremap /home/aditya/.config/xremap/config.yml
