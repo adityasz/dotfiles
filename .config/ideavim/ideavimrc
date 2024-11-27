@@ -37,7 +37,13 @@ map <Leader>a  <Action>(CLionShowAssembly)
 map <Leader>z  <Action>(ToggleDistractionFreeMode)
 map <Leader>r  <Action>(RenameElement)
 map <Leader>p  <Action>(TogglePresentationMode)
-map <Leader>b  <Action>(Build)
+if has('ide')
+    if &ide =~? 'rustrover'
+        map <Leader>b  <Action>(Rust.Build)
+    else
+        map <Leader>b  <Action>(Build)
+    endif
+endif
 map <Leader>f  <Action>(FindInPath)
 map <Leader>e  <Action>(ShowErrorDescription)
 map [e         <Action>(GotoPreviousError)
