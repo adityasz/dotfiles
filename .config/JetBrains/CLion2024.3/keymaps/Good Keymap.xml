@@ -4,6 +4,11 @@
     <keyboard-shortcut first-keystroke="ctrl insert" />
     <keyboard-shortcut first-keystroke="alt c" />
   </action>
+  <action id="$Cut">
+    <keyboard-shortcut first-keystroke="ctrl x" />
+    <keyboard-shortcut first-keystroke="shift delete" />
+    <keyboard-shortcut first-keystroke="alt x" />
+  </action>
   <action id="$Paste">
     <keyboard-shortcut first-keystroke="ctrl v" />
     <keyboard-shortcut first-keystroke="shift insert" />
@@ -19,15 +24,28 @@
   </action>
   <action id="AIAssistant.Editor.CompleteCodeWithAI" />
   <action id="ActivateBookmarksToolWindow" />
+  <action id="ActivateDebugToolWindow">
+    <keyboard-shortcut first-keystroke="alt d" />
+  </action>
   <action id="ActivateFindToolWindow" />
+  <action id="ActivateProblemsViewToolWindow">
+    <keyboard-shortcut first-keystroke="alt m" />
+  </action>
+  <action id="ActivateProjectToolWindow">
+    <keyboard-shortcut first-keystroke="alt e" />
+  </action>
   <action id="ActivateRunToolWindow">
-    <keyboard-shortcut first-keystroke="shift ctrl r" />
+    <keyboard-shortcut first-keystroke="alt r" />
   </action>
   <action id="ActivateServicesToolWindow" />
   <action id="ActivateStructureToolWindow" />
+  <action id="ActivateVersionControlToolWindow">
+    <keyboard-shortcut first-keystroke="alt g" />
+  </action>
   <action id="CIDR.Debugger.CopyAddress">
     <keyboard-shortcut first-keystroke="shift alt c" />
   </action>
+  <action id="ChangesView.Move" />
   <action id="CloseAllEditors" />
   <action id="CloseAllEditorsButActive" />
   <action id="CloseContent">
@@ -59,9 +77,7 @@
   <action id="Console.TableResult.EditValueMaximized">
     <keyboard-shortcut first-keystroke="shift alt enter" />
   </action>
-  <action id="CopyAbsolutePath">
-    <keyboard-shortcut first-keystroke="shift alt c" />
-  </action>
+  <action id="CopyAbsolutePath" />
   <action id="CopyPaths">
     <keyboard-shortcut first-keystroke="shift alt c" />
   </action>
@@ -77,12 +93,24 @@
   <action id="Editor Copy">
     <keyboard-shortcut first-keystroke="alt c" />
   </action>
+  <action id="Editor Cut">
+    <keyboard-shortcut first-keystroke="alt x" />
+  </action>
   <action id="Editor Paste">
     <keyboard-shortcut first-keystroke="shift ctrl v" />
     <keyboard-shortcut first-keystroke="alt v" />
   </action>
   <action id="Editor SelectAll">
     <keyboard-shortcut first-keystroke="alt a" />
+  </action>
+  <action id="EditorCut">
+    <keyboard-shortcut first-keystroke="ctrl x" />
+    <keyboard-shortcut first-keystroke="shift delete" />
+    <keyboard-shortcut first-keystroke="alt x" />
+  </action>
+  <action id="EditorDecreaseFontSize">
+    <keyboard-shortcut first-keystroke="ctrl minus" />
+    <keyboard-shortcut first-keystroke="alt minus" />
   </action>
   <action id="EditorDeleteToWordStart">
     <keyboard-shortcut first-keystroke="ctrl back_space" />
@@ -94,7 +122,12 @@
   <action id="EditorEscape">
     <keyboard-shortcut first-keystroke="escape" />
   </action>
+  <action id="EditorIncreaseFontSize">
+    <keyboard-shortcut first-keystroke="ctrl equals" />
+    <keyboard-shortcut first-keystroke="alt equals" />
+  </action>
   <action id="EditorJoinLines" />
+  <action id="ExecuteInPyConsoleAction" />
   <action id="ExpandAllRegions" />
   <action id="ExpandExpandableComponent">
     <keyboard-shortcut first-keystroke="ctrl add" />
@@ -191,7 +224,7 @@
   </action>
   <action id="Resume" />
   <action id="RevealIn">
-    <keyboard-shortcut first-keystroke="shift alt r" />
+    <keyboard-shortcut first-keystroke="shift ctrl r" />
   </action>
   <action id="Run">
     <keyboard-shortcut first-keystroke="f5" />
@@ -233,23 +266,26 @@
     <keyboard-shortcut first-keystroke="shift ctrl c" />
     <keyboard-shortcut first-keystroke="alt c" />
   </action>
+  <action id="Terminal.DeletePreviousWord">
+    <keyboard-shortcut first-keystroke="ctrl w" />
+    <keyboard-shortcut first-keystroke="alt back_space" />
+  </action>
+  <action id="Terminal.Find">
+    <keyboard-shortcut first-keystroke="alt f" />
+  </action>
+  <action id="Terminal.NewTab">
+    <keyboard-shortcut first-keystroke="shift ctrl back_quote" />
+    <keyboard-shortcut first-keystroke="alt t" />
+  </action>
   <action id="Terminal.Paste">
     <keyboard-shortcut first-keystroke="shift ctrl v" />
+    <keyboard-shortcut first-keystroke="alt v" />
   </action>
   <action id="Terminal.SelectAll">
     <keyboard-shortcut first-keystroke="ctrl a" />
     <keyboard-shortcut first-keystroke="alt a" />
   </action>
-  <action id="Terminal.SplitHorizontally">
-    <keyboard-shortcut first-keystroke="alt d" />
-  </action>
-  <action id="Terminal.SplitVertically">
-    <keyboard-shortcut first-keystroke="shift ctrl 5" />
-    <keyboard-shortcut first-keystroke="alt r" />
-  </action>
-  <action id="Terminal.SwitchFocusToEditor">
-    <keyboard-shortcut first-keystroke="alt h" />
-  </action>
+  <action id="Terminal.SwitchFocusToEditor" />
   <action id="TextEditorWithPreview.Layout.EditorAndPreview" />
   <action id="ToggleFullScreen">
     <keyboard-shortcut first-keystroke="f11" />
@@ -259,6 +295,8 @@
     <keyboard-shortcut first-keystroke="up" />
     <keyboard-shortcut first-keystroke="ctrl k" />
   </action>
+  <action id="Vcs.MoveChangedLinesToChangelist" />
+  <action id="Vcs.ToggleAmendCommitMode" />
   <action id="WelcomeScreen.CopyProjectPath">
     <keyboard-shortcut first-keystroke="shift alt c" />
   </action>
@@ -268,6 +306,7 @@
   </action>
   <action id="context.clear" />
   <action id="copilot.disposeInlays" />
+  <action id="hg4idea.QFold" />
   <action id="hg4idea.QPushAction" />
   <action id="texify.analysis.WordCount" />
 </keymap>
