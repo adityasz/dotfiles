@@ -1,4 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Theme Switcher
-Exec=/usr/bin/python3 /home/aditya/.local/bin/theme-switcher
