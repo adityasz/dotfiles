@@ -3,39 +3,50 @@
 modmap:
   - name: Global
     remap:
-      CapsLock: esc
+      rightalt:
+        held: fn
+        alone: fn
+      capslock: esc
+
+virtual_modifiers:
+  - fn
 
 keymap:
-  - name: Right alt layer
+  - name: right alt layer
     remap:
-      alt_R-1: f1
-      alt_R-2: f2
-      alt_R-3: f3
-      alt_R-4: f4
-      alt_R-5: f5
-      alt_R-6: f6
-      alt_R-7: f7
-      alt_R-8: f8
-      alt_R-9: f9
-      alt_R-0: f10
-      alt_R-minus: f11
-      alt_R-equal: f12
-      alt_R-h: left
-      alt_R-j: down
-      alt_R-k: up
-      alt_R-l: right
-      alt_R-semicolon: home
-      alt_R-apostrophe: end
-      alt_R-leftbrace: pageup
-      alt_R-slash: pagedown
-      alt_R-tab: alt-tab
+      fn-1: f1
+      fn-2: f2
+      fn-3: f3
+      fn-4: f4
+      fn-5: f5
+      fn-6: f6
+      fn-7: f7
+      fn-8: f8
+      fn-9: f9
+      fn-0: f10
+      fn-minus: f11
+      fn-equal: f12
+      fn-h: left
+      fn-j: down
+      fn-k: up
+      fn-l: right
+      fn-semicolon: home
+      fn-apostrophe: end
+      fn-leftbrace: pageup
+      fn-slash: pagedown
+      fn-tab: alt-tab
 
   - name: comfy keymap
+    exact_match: true
     application:
       not: [kitty,
+            zen-twilight,
+            zen-beta,
+            zen-alpha,
             jetbrains-idea,
             jetbrains-clion,
             jetbrains-pycharm,
+            jetbrains-rustrover,
             dev.zed.Zed,
             com.raggesilver.BlackBox,
             sioyek,
@@ -70,38 +81,117 @@ keymap:
       alt_L-z: C-z
       alt_L-backspace: C-backspace
 
-      alt_L-minus: c-minus
-      alt_L-equal: c-equal
-      alt_L-shift-equal: C-shift-equal
+      alt_l-leftbrace: C-leftbrace
+      alt_l-rightbrace: C-rightbrace
 
-      alt_L-shift-a: C-shift-a
-      alt_L-shift-b: C-shift-b
-      alt_L-shift-c: C-shift-c
-      alt_L-shift-d: C-shift-d
-      alt_L-shift-e: C-shift-e
-      alt_L-shift-f: C-shift-f
-      alt_L-shift-g: C-shift-g
-      alt_L-shift-h: C-shift-h
-      alt_L-shift-i: C-shift-i
-      alt_L-shift-j: C-shift-j
-      alt_L-shift-k: C-shift-k
-      alt_L-shift-l: C-shift-l
-      alt_L-shift-m: C-shift-m
-      alt_L-shift-n: C-shift-n
-      alt_L-shift-o: C-shift-o
-      alt_L-shift-p: C-shift-p
-      alt_L-shift-q: C-shift-q
-      alt_L-shift-r: C-shift-r
-      alt_L-shift-s: C-shift-s
-      alt_L-shift-t: C-shift-t
-      alt_L-shift-u: C-shift-u
-      alt_L-shift-v: C-shift-v
-      alt_L-shift-w: C-shift-w
-      alt_L-shift-x: C-shift-x
-      alt_L-shift-y: C-shift-y
-      alt_L-shift-z: C-shift-z
+      alt_l-minus: c-minus
+      alt_l-equal: c-equal
+      alt_l-shift-equal: C-shift-equal
 
-  - name: comfy keymap
+      alt_l-shift-a: C-shift-a
+      alt_l-shift-b: C-shift-b
+      alt_l-shift-c: C-shift-c
+      alt_l-shift-d: C-shift-d
+      alt_l-shift-e: C-shift-e
+      alt_l-shift-f: C-shift-f
+      alt_l-shift-g: C-shift-g
+      alt_l-shift-h: C-shift-h
+      alt_l-shift-i: C-shift-i
+      alt_l-shift-j: C-shift-j
+      alt_l-shift-k: C-shift-k
+      alt_l-shift-l: C-shift-l
+      alt_l-shift-m: C-shift-m
+      alt_l-shift-n: C-shift-n
+      alt_l-shift-o: C-shift-o
+      alt_l-shift-p: C-shift-p
+      alt_l-shift-q: C-shift-q
+      alt_l-shift-r: C-shift-r
+      alt_l-shift-s: C-shift-s
+      alt_l-shift-t: C-shift-t
+      alt_l-shift-u: C-shift-u
+      alt_l-shift-v: C-shift-v
+      alt_l-shift-w: C-shift-w
+      alt_l-shift-x: C-shift-x
+      alt_l-shift-y: C-shift-y
+      alt_l-shift-z: C-shift-z
+
+  - name: zen browser
+    exact_match: true
+    application:
+      only: [zen-twilight,
+             zen-beta,
+             zen-alpha]
+    remap:
+      ctrl_L-s: C-alt-s
+      ctrl_L-c: C-alt-c
+      ctrl_L-h: C-alt-h
+      ctrl_L-v: C-alt-v
+      ctrl_L-g: C-alt-g
+      ctrl_L-u: C-alt-u
+      alt_L-a: C-a
+      alt_L-b: C-b
+      alt_L-c: C-c
+      alt_L-d: C-d
+      alt_L-e: C-e
+      alt_L-f: C-f
+      alt_L-g: C-g
+      alt_L-h: C-h
+      alt_L-i: C-i
+      alt_L-j: C-j
+      alt_L-k: C-k
+      alt_L-l: C-l
+      alt_L-m: C-m
+      alt_L-n: C-n
+      alt_L-o: C-o
+      alt_L-p: C-p
+      alt_L-q: C-q
+      alt_L-r: C-r
+      alt_L-s: C-s
+      alt_L-t: C-t
+      alt_L-u: C-u
+      alt_L-v: C-v
+      alt_L-w: C-w
+      alt_L-x: C-x
+      alt_L-y: C-y
+      alt_L-z: C-z
+      alt_L-backspace: C-backspace
+
+      alt_l-leftbrace: C-pageup
+      alt_l-rightbrace: C-pagedown
+
+      alt_l-minus: c-minus
+      alt_l-equal: c-equal
+      alt_l-shift-equal: C-shift-equal
+
+      alt_l-shift-a: C-shift-a
+      alt_l-shift-b: C-shift-b
+      alt_l-shift-c: C-shift-c
+      alt_l-shift-d: C-shift-d
+      alt_l-shift-e: C-shift-e
+      alt_l-shift-f: C-shift-f
+      alt_l-shift-g: C-shift-g
+      alt_l-shift-h: C-shift-h
+      alt_l-shift-i: C-shift-i
+      alt_l-shift-j: C-shift-j
+      alt_l-shift-k: C-shift-k
+      alt_l-shift-l: C-shift-l
+      alt_l-shift-m: C-shift-m
+      alt_l-shift-n: C-shift-n
+      alt_l-shift-o: C-shift-o
+      alt_l-shift-p: C-shift-p
+      alt_l-shift-q: C-shift-q
+      alt_l-shift-r: C-shift-r
+      alt_l-shift-s: C-shift-s
+      alt_l-shift-t: C-shift-t
+      alt_l-shift-u: C-shift-u
+      alt_l-shift-v: C-shift-v
+      alt_l-shift-w: C-shift-w
+      alt_l-shift-x: C-shift-x
+      alt_l-shift-y: C-shift-y
+      alt_l-shift-z: C-shift-z
+
+  - name: comfy keymap for stupid apps that allow only a few keybinds to be changed
+    exact_match: true
     application:
       only: Cursor
     remap:
