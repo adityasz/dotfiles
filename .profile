@@ -1,8 +1,8 @@
-if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]] then
+if ! [[ "$PATH" =~ $HOME/.local/bin: ]]; then
 	PATH="$HOME/.local/bin:$PATH"
 fi
 
-export CDPATH="$HOME/IITB/year-3/autumn"
+export CDPATH="$HOME/IITB/year-3/spring"
 export TERM="xterm-kitty"
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -22,8 +22,6 @@ if [[ -f ~/.config/environment.d/all.conf ]]; then
 fi
 
 export PATH="$PATH:/usr/local/cuda/bin"
-export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$MODULAR_HOME/bin"
-export PATH="$PATH:/usr/local/sioyek"
-. "/home/aditya/.local/share/cargo/env"
+export PATH="$PATH:$XDG_DATA_HOME/JetBrains/Toolbox/scripts"
