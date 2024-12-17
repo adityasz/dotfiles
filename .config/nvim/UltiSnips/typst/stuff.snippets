@@ -1,4 +1,4 @@
-snippet img "Image" bA
+snippet image "Image" b
 #figure(
 	image("figures/$1"),
 	placement: ${2:auto},
@@ -6,15 +6,7 @@ snippet img "Image" bA
 ) <fig:${4:${1/^(.+?)(\.[^.]*$|$)/$1/g}}>
 endsnippet
 
-snippet image "Image" bA
-#figure(
-	image("figures/$1"),
-	placement: ${2:auto},
-	caption: [$3]
-) <fig:${4:${1/^(.+?)(\.[^.]*$|$)/$1/g}}>
-endsnippet
-
-snippet figure "Figure" bA
+snippet figure "Figure" b
 #figure(
 	include "figures/$1",
 	placement: ${2:auto},
