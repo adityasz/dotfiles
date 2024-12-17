@@ -61,7 +61,8 @@ map <Leader>d  <Action>(NewDir)
 map <Leader>h  <Action>(ReplaceInPath)
 " map <S-CR>     <Action>(JupyterNotebookRunCellInsertBelowCommandModeAction)
 
-nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
-vmap gq  <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+" `gq` reformats code now, think of something else
+" nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
+" vmap gq  <Action>(com.andrewbrookins.idea.wrap.WrapAction)
 
 Plug 'tpope/vim-commentary'
