@@ -1,12 +1,11 @@
 return {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    "nvim-lualine/lualine.nvim",
+    requires = { "nvim-tree/nvim-web-devicons", opt = true },
     config = function()
-        require('lualine').setup {
+        require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = 'auto',
-                -- component_separators = { left = '', right = ''},
+                theme = "light",
                 component_separators = { left = '', right = ''},
                 section_separators = { left = '', right = ''},
                 disabled_filetypes = {
@@ -15,7 +14,7 @@ return {
                 },
                 ignore_focus = {},
                 always_divide_middle = true,
-                globalstatus = false,
+                globalstatus = true,
                 refresh = {
                     statusline = 1,
                     tabline = 1000,
@@ -23,18 +22,18 @@ return {
                 }
             },
             sections = {
-                lualine_a = {'mode'},
-                lualine_b = {'branch', 'diff', 'diagnostics'},
-                lualine_c = {'filename'},
-                lualine_x = {'searchcount', 'filetype', 'fileformat', 'encoding'},
-                lualine_y = {'progress'},
-                lualine_z = {require('config.utils').cursor_position}
+                lualine_a = { "mode" },
+                lualine_b = { "branch", "diff", "diagnostics" },
+                lualine_c = { "filename", },
+                lualine_x = { "searchcount", "filetype", "fileformat", "encoding" },
+                lualine_y = { "progress" },
+                lualine_z = { require("config.utils").cursor_position },
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = {'filename'},
-                lualine_x = {'location'},
+                lualine_c = { "filename" },
+                lualine_x = { "location" },
                 lualine_y = {},
                 lualine_z = {}
             },
@@ -42,6 +41,6 @@ return {
             winbar = {},
             inactive_winbar = {},
             extensions = {}
-        }
+        })
     end
 }

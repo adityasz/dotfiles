@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"c", "cpp", "asm", "make"},
+    pattern = {"lex", "c", "asm", "make"},
     callback = function()
         vim.opt.tabstop = 8
         vim.opt.shiftwidth = 8
@@ -44,6 +44,13 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.expandtab = false
         vim.opt.linebreak = false
         vim.opt.spell = false
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "yacc",
+    callback = function()
+        vim.opt.commentstring = "// %s"
     end
 })
 
@@ -60,11 +67,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "cuda",
+    pattern = {"cpp", "cuda"},
     callback = function()
         vim.opt.tabstop = 4
         vim.opt.shiftwidth = 4
         vim.opt.textwidth = 99
+        vim.opt.expandtab = false
         vim.opt.linebreak = false
         vim.opt.spell = false
     end

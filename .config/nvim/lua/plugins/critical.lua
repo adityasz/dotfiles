@@ -6,9 +6,6 @@ return {
         'michaeljsmith/vim-indent-object'
     },
     {
-        'NMAC427/guess-indent.nvim'
-    },
-    {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         config = true,

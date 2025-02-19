@@ -9,17 +9,29 @@ return {
         -- version = '^5.0.0', -- pin major version, include fixes and features that do not have breaking changes
         config = function()
             require('kitty-scrollback').setup({
-                status_window = {
-                    enabled = true,
-                    style_simple = false,
-                    autoclose = false,
-                    show_timer = false,
-                    icons = {
-                        kitty = ' ',
-                        heart = ' ',
-                        nvim = ' '
+                myconfig = {
+                    status_window = {
+                        enabled = false,
+                        style_simple = false,
+                        autoclose = false,
+                        show_timer = false,
+                        icons = {
+                            kitty = ' ',
+                            heart = ' ',
+                            nvim = ' '
+                        },
                     },
-                },
+                    callbacks = {
+                        after_ready = function()
+                            vim.opt.wrap = true
+                            -- vim.opt_local.modifiable = true
+                            -- vim.opt_local.listchars = { eol = '$', space = '_', tab = '> ', trail = '*' }
+                            -- vim.cmd('silent! %s/\\s\\+$//e')
+                            -- vim.cmd('%s/\\s\\+$//e')
+                            -- vim.opt_local.modifiable = false
+                        end,
+                    },
+                }
             })
         end
     },

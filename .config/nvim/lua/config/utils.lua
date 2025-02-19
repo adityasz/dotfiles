@@ -13,10 +13,16 @@ M.set_color_scheme = function()
     if gnome_scheme == "'prefer-dark'" and vim.g.colors_name ~= "dark" then
         vim.opt.background = "dark"
         vim.cmd("colorscheme dark")
+        require("lualine").setup({options = {theme = require("config.themes.lualine.dark")}})
+        return "dark"
     elseif (gnome_scheme == "'prefer-light'" or gnome_scheme == "'default'") and vim.g.colors_name ~= "light" then
         vim.opt.background = "light"
         vim.cmd("colorscheme light")
+        require("lualine").setup({options = {theme = require("config.themes.lualine.light")}})
+        return "light"
     end
+
+    return "light"
 end
 
 M.cursor_position = function()
