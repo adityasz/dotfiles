@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Sioyek
+Type=Application
+Icon=/home/aditya/.local/share/icons/sioyek.png
+Exec=/home/aditya/.local/bin/sioyek-wrapper
+# /usr/local/sioyek/sioyek
+Terminal=false
+StartupWMClass=sioyek
+StartupNotify=true
+MimeType=application/pdf;application/x-pdf;application/x-bzpdf;application/x-gzpdf
