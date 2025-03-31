@@ -42,6 +42,10 @@ let s:color_col   = { "gui": "#f0f0f0", "cterm": "255" }
 let s:selection   = { "gui": "#bfceff", "cterm": "153" }
 let s:vertsplit   = { "gui": "#f0f0f0", "cterm": "255" }
 
+let s:diff_add_bg    = { "gui": "#e6ffed", "cterm": "157" }
+let s:diff_change_bg = { "gui": "#e7effa", "cterm": "195" }
+let s:diff_delete_bg = { "gui": "#ffebee", "cterm": "217" }
+let s:diff_text_bg   = { "gui": "#c2d8f2", "cterm": "153" }
 
 function! s:h(group, fg, bg, attr)
   if type(a:fg) == type({})
@@ -72,10 +76,10 @@ call s:h("CursorLine", "", s:cursor_line, "")
 call s:h("LineNr", s:gutter_fg, s:gutter_bg, "")
 call s:h("CursorLineNr", s:fg, "", "")
 
-call s:h("DiffAdd", s:green, "", "")
-call s:h("DiffChange", s:yellow, "", "")
-call s:h("DiffDelete", s:red, "", "")
-call s:h("DiffText", s:blue, "", "")
+call s:h("DiffAdd", s:fg, s:diff_add_bg, "")
+call s:h("DiffChange", s:fg, s:diff_change_bg, "")
+call s:h("DiffDelete", s:fg, s:diff_delete_bg, "")
+call s:h("DiffText", s:fg, s:diff_text_bg, "")
 
 call s:h("IncSearch", s:bg, s:yellow, "")
 call s:h("Search", s:bg, s:yellow, "")
