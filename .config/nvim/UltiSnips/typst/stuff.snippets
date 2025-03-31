@@ -13,3 +13,11 @@ snippet figure "Figure" b
 	caption: [$3]
 ) <fig:${4:${1/^(.+?)(\.[^.]*$|$)/$1/g}}>
 endsnippet
+
+# TODO: make label lowercase
+# FIXME: quotes don't disappear
+snippet def "Definition" b
+#definition($1)[
+	$2
+] <def:${3:${1/"(.*)"/$0/g}}>
+endsnippet

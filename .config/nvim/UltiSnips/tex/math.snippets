@@ -504,14 +504,14 @@ endsnippet
 
 priority 100
 context "math()"
-snippet "(\\?\w+)(,\.)" "symbfit" riA
-\symbfit{`!p snip.rv=match.group(1)`}
+snippet "(\\?\w+)(,\.)" "matrix postfix" riA
+\mb{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 100
 context "math()"
 snippet "(\\?\w+)(\.,)" "vector postfix" riA
-\symbf{`!p snip.rv=match.group(1)`}
+\vb{`!p snip.rv=match.group(1)`}
 endsnippet
 
 context "math()"
