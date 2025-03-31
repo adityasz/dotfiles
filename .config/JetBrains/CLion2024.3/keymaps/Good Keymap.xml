@@ -83,6 +83,7 @@
   </action>
   <action id="DatabaseView.DeactivateAction" />
   <action id="DatabaseView.PropertiesAction" />
+  <action id="DatabaseView.Tools" />
   <action id="Debug">
     <keyboard-shortcut first-keystroke="ctrl f5" />
   </action>
@@ -216,6 +217,7 @@
     <keyboard-shortcut first-keystroke="ctrl k" />
   </action>
   <action id="PrevSplitter" />
+  <action id="ProblemsView.QuickFixes" />
   <action id="QuickChangeScheme" />
   <action id="QuickJavaDoc" />
   <action id="Refactorings.QuickListPopupAction" />
@@ -236,6 +238,13 @@
   <action id="RunDashboard.Stop" />
   <action id="SaveAll" />
   <action id="SelectInProjectView" />
+  <action id="SelectNextOccurrence">
+    <keyboard-shortcut first-keystroke="ctrl d" />
+    <keyboard-shortcut first-keystroke="ctrl f3" />
+    <keyboard-shortcut first-keystroke="ctrl period" />
+  </action>
+  <action id="SetShortcutAction" />
+  <action id="ShowIntentionActions" />
   <action id="ShowPopupMenu">
     <keyboard-shortcut first-keystroke="context_menu" />
   </action>
