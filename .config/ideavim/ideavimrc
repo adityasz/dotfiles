@@ -3,10 +3,7 @@ set ideajoin ideaput
 set textobj-indent " https://youtrack.jetbrains.com/issue/VIM-1151
 set NERDTree
 
-" set hybrid numbering in settings so that F2 works like vim
-nnoremap <F2> :set relativenumber!<CR>
-nnoremap <F3> :noh<CR>
-
+nnoremap <F3>      :noh<CR>
 nnoremap <SPACE>   <Nop>
 nnoremap <Leader>l gt
 nnoremap <Leader>h gT
@@ -30,18 +27,28 @@ let mapleader = " "
 sethandler <S-F5>    n-v-i:ide " i:vim
 sethandler <C-S-F10> n-v-i:ide " i:vim
 
+map <F2>       <Action>(EditorToggleShowLineNumbers)
 map <Tab>      <Action>(RecentFiles)
 map <F5>       <Action>(Run)
 map <C-F5>     <Action>(Debug)
-map <Leader>a  <Action>(CLionShowAssembly)
+map <Leader>a  <Action>(CidrShowAssembly)
 map <Leader>z  <Action>(ToggleDistractionFreeMode)
 map <Leader>r  <Action>(RenameElement)
 map <Leader>p  <Action>(TogglePresentationMode)
+map <Leader>t  <Action>(ChangeSignature)
 if has('ide')
     if &ide =~? 'rustrover'
         map <Leader>b  <Action>(Rust.Build)
     else
         map <Leader>b  <Action>(Build)
+    endif
+
+    if &ide =~? 'dataspell'
+        map <Leader>q  <Action>(Console.Jdbc.Execute)
+    endif
+
+    if &ide =~? 'pycharm'
+        map <Leader>q  <Action>(Console.Jdbc.Execute)
     endif
 endif
 map <Leader>f  <Action>(FindInPath)
