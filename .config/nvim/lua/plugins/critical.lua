@@ -47,13 +47,24 @@ return {
     {
         'vim-scripts/TagHighlight',
     },
+    -- {
+    --     'octol/vim-cpp-enhanced-highlight',
+    --     init = function()
+    --         vim.g.cpp_class_scope_highlight = 1
+    --         vim.g.cpp_member_variable_highlight = 1
+    --         vim.g.cpp_class_decl_highlight = 1
+    --         vim.g.cpp_posix_standard = 1
+    --     end
+    -- },
     {
-        'octol/vim-cpp-enhanced-highlight',
+        'bfrg/vim-c-cpp-modern',
         init = function()
-            vim.g.cpp_class_scope_highlight = 1
-            vim.g.cpp_member_variable_highlight = 1
-            vim.g.cpp_class_decl_highlight = 1
-            vim.g.cpp_posix_standard = 1
+            vim.g.cpp_function_highlight = 1
+            vim.g.cpp_attributes_highlight = 1
+            vim.g.cpp_member_highlight = 1
+            vim.g.cpp_type_name_highlight = 1
+            vim.g.cpp_operator_highlight = 1
+            vim.g.cpp_simple_highlight = 1
         end
     },
     {

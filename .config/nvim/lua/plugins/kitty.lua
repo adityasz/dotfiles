@@ -24,11 +24,6 @@ return {
                     callbacks = {
                         after_ready = function()
                             vim.opt.wrap = true
-                            -- vim.opt_local.modifiable = true
-                            -- vim.opt_local.listchars = { eol = '$', space = '_', tab = '> ', trail = '*' }
-                            -- vim.cmd('silent! %s/\\s\\+$//e')
-                            -- vim.cmd('%s/\\s\\+$//e')
-                            -- vim.opt_local.modifiable = false
                         end,
                     },
                 }

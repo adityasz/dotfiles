@@ -10,7 +10,7 @@ return {
             layout.results.borderchars = { '─', '│', '─', '│', '├', '┤', '┘', '└'}
             layout.results.line = layout.results.line - 1
             layout.results.height = layout.results.height -- + 1
-            if picker.previewer then
+            if picker.previewer and layout.preview then
                 layout.results.borderchars = { '─', '│', '─', '│', '├', '┤', '┤', '├' }
                 layout.preview.borderchars = { '─', '│', '─', '│', '├', '┤', '┘', '└' }
                 layout.preview.line = layout.preview.line - 2
@@ -25,6 +25,7 @@ return {
                 selection_caret = "  ",
                 sorting_strategy = "ascending",
                 layout_strategy = "vertical_merged",
+                previewer = false,
                 layout_config = {
                     vertical = {
                         prompt_position = "top",
@@ -87,6 +88,12 @@ return {
                     }
                 }
             },
+            extensions = {
+                aerial = {
+                    show_columns = "lines",
+                    previewer = false,
+                }
+            }
         })
     end
 }
