@@ -1,61 +1,112 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
+// Docs: https://zed.dev/docs/key-bindings
+// Default keymap: `zed: open default keymap` command
 [
   {
-  	"context": "Workspace",
-  	"bindings": {
-      "ctrl-shift-e": "workspace::ToggleLeftDock",
-      "ctrl-shift-a": "assistant::ToggleFocus",
+    "context": "Workspace",
+    "bindings": {
+      "alt-shift-p": "command_palette::Toggle",
+      "alt-w": "pane::CloseActiveItem",
+      "alt-o": "workspace::Open",
+      "alt-e": "workspace::ToggleLeftDock",
+      "alt-shift-a": "assistant::ToggleFocus",
+      "alt-=": "zed::IncreaseBufferFontSize",
+      "alt-+": "zed::IncreaseBufferFontSize",
+      "alt--": "zed::DecreaseBufferFontSize",
+      "alt-0": "zed::ResetBufferFontSize",
       "alt-,": "zed::OpenSettings",
-      "alt-k  alt-s": "zed::OpenKeymap"
-      // they break file renaming/creation in the file tree on the left (ctrl-shift-e)
+      "alt-k  alt-m": "zed::OpenKeymap",
+      "alt-shift-x": "zed::Extensions",
+      "alt-q": "zed::Quit",
+      "shift shift": "project_symbols::Toggle"
+      // they break file renaming/creation in the file tree on the left
       // "k": "menu::SelectPrev",
       // "j": "menu::SelectNext"
-  	}
-  },
-  {
-  	"context": "Editor",
-  	"bindings": {
-      "alt-c": "editor::Copy",
-      "alt-v": "editor::Paste",
-      "tab": "tab_switcher::Toggle"
-  	  // "j k": ["workspace::SendKeystrokes", "escape"]
-  	}
-  },
-  {
-    "bindings": {
     }
   },
   {
-  	"context": "vim_mode == normal",
-  	"bindings": {
-  	  "space space": "file_finder::Toggle",
-  	  "space s": "outline::Toggle",
+    "context": "Editor",
+    "bindings": {
+      "alt-c": "editor::Copy",
+      "alt-v": "editor::Paste",
+      "alt-backspace": "editor::DeleteToPreviousWordStart",
+      "alt-shift-f": "editor::FormatSelections"
+    }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "alt->": "assistant::QuoteSelection",
+      "alt-<": "assistant::InsertIntoEditor",
+      "alt-a": "workspace::ToggleRightDock",
+      "ctrl-`": "workspace::ToggleBottomDock",
+      "alt-shift-e": "pane::RevealInProjectPanel"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "alt-backspace": ["terminal::SendKeystroke", "ctrl-w"],
+      "alt-c": "terminal::Copy",
+      "alt-v": "terminal::Paste",
+      "alt-h": "pane::SplitLeft",
+      "alt-l": "pane::SplitRight",
+      "alt-j": "pane::SplitDown",
+      "alt-k": "pane::SplitUp",
+      "alt-p": "terminal::ToggleViMode",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "Markdown",
+    "bindings": {
+      "alt-c": "markdown::Copy"
+    }
+  },
+  {
+    "context": "AssistantPanel",
+    "bindings": {
+      "alt-k c": "assistant::CopyCode",
+      "alt-g": "search::SelectNextMatch",
+      "alt-shift-m": "assistant::ToggleModelSelector",
+      "alt-k h": "assistant::DeployHistory",
+      "alt-k l": "assistant::DeployPromptLibrary"
+    }
+  },
+  {
+    "context": "PromptLibrary",
+    "bindings": {
+      "alt-n": "prompt_library::NewPrompt",
+      "alt-shift-s": "prompt_library::ToggleDefaultPrompt"
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      // "f3": ["workspace::SendKeystrokes", ":nohlsearch"],
+      "j": ["vim::Down", { "display_lines": true }],
+      "k": ["vim::Up", { "display_lines": true }],
+      "Y": ["workspace::SendKeystrokes", "y $"],
+      "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
+      "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
+      "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
+      "space space": "file_finder::Toggle",
+      "space s": "outline::Toggle",
+      "space l": "task::Spawn",
       "space r": "editor::Rename",
       "space e": "editor::GoToDiagnostic",
-      "[ e": "editor::GoToPrevDiagnostic",
-  	  "j": [
-    		"vim::Down",
-    		{
-    		  "displayLines": true
-    		}
-  	  ],
-  	  "k": [
-    		"vim::Up",
-    		{
-    		  "displayLines": true
-    		}
-  	  ],
-  	  "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
-  	  "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
-  	  "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
-  	  "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
-      "Y": ["workspace::SendKeystrokes", "y$"]
-  	}
+      "] e": "editor::GoToDiagnostic",
+      "[ e": "editor::GoToPreviousDiagnostic"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
+      "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
+    }
   }
 ]

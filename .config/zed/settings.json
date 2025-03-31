@@ -1,44 +1,17 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run the `open default settings` command
-// from the command palette or from `Zed` application menu.
+// Docs: https://zed.dev/docs/configuring-zed
+// Default settings: `zed: open default settings` command
 {
   "features": {
-    "inline_completion_provider": "none"
+    "edit_prediction_provider": "none"
   },
-  "tab_bar": {
-    "show": false
-  },
-  "assistant": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    },
-    "version": "2"
-  },
-  "show_inline_completions": false,
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "terminal": {
-    "shell": {
-      "program": "zsh"
-    }
-  },
-  "soft_wrap": "editor_width",
-  "base_keymap": "VSCode",
-  "vim_mode": true,
   "buffer_font_family": "JetBrains Mono",
-  "buffer_font_size": 20,
+  "buffer_font_size": 18,
   "buffer_font_weight": 500,
   "ui_font_size": 18,
   "ui_font_family": "Inter",
   "ui_font_weight": 500,
+  "ensure_final_newline_on_save": true,
+  "soft_wrap": "editor_width",
   "format_on_save": "off",
   "current_line_highlight": "none",
   "buffer_font_features": {
@@ -46,22 +19,38 @@
     "calt": true,
     "dlig": true
   },
-  "toolbar": {
-    "breadcrumbs": false,
-    "quick_actions": false
-  },
-  "vim": {
-    "use_system_clipboard": "on_yank",
-    "toggle_relative_line_numbers": true
-  },
   "theme": {
     "mode": "system",
     "dark": "VSCode Dark Modern",
     "light": "Github Light"
   },
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "on_yank", // No way to copy to system clipboard if this is set to never
+    "toggle_relative_line_numbers": true
+  },
+  "base_keymap": "VSCode",
+  "terminal": {
+    "shell": {
+      "program": "zsh"
+    }
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  // "show_inline_completions": true,
+  // "features": {
+    // "inline_completion_provider": "none"
+  // },
   "languages": {
     "Typst": {
-      "show_inline_completions": false
+      "show_edit_predictions": false
     },
     "JSON": {
       "tab_size": 2,
@@ -72,18 +61,22 @@
       "hard_tabs": true
     },
     "C++": {
-      "tab_size": 8,
+      "tab_size": 4,
       "hard_tabs": true
     },
     "Python": {
       "tab_size": 4,
       "hard_tabs": false
+    },
+    "JavaScript": {
+      "tab_size": 4,
+      "hard_tabs": true
     }
   },
-  "git": {
-    "inline_blame": {
-      "enabled": false
-    }
+  "file_types": {
+      "CMake": [
+        "CMakeLists.txt"
+      ]
   },
   "lsp": {
     "mojo": {
@@ -96,8 +89,19 @@
       "initialization_options": {
         "exportPdf": "onSave",
         "outputPath": "$root/$name",
-        "typstExtraArgs": ["--root ..", "master.typ"]
+        "rootPath": "/home/aditya/Notes/"
       }
     }
-  }
+  },
+  "assistant": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.5-pro-exp-03-25"
+    },
+    "version": "2"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
 }
