@@ -40,6 +40,7 @@ keymap:
     exact_match: true
     application:
       not: [kitty,
+            zen,
             zen-twilight,
             zen-beta,
             zen-alpha,
@@ -47,10 +48,13 @@ keymap:
             jetbrains-clion,
             jetbrains-pycharm,
             jetbrains-rustrover,
+            jetbrains-dataspell,
             dev.zed.Zed,
+            dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
             sioyek,
             Cursor,
+            qemu-system-x86_64,
             mpv]
     remap:
       alt_L-a: C-a
@@ -118,7 +122,8 @@ keymap:
   - name: zen browser
     exact_match: true
     application:
-      only: [zen-twilight,
+      only: [zen,
+             zen-twilight,
              zen-beta,
              zen-alpha]
     remap:
