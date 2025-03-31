@@ -191,3 +191,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.keymap.set({'n', 'v', 'i'}, '<F5>', function() utils.run_python_script() end, {noremap = true, silent = true})
     end
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "man",
+    callback = function()
+        -- vim.keymap.set({'n', 'v', 'i'}, '<leader>s', ':AerialOpen<CR>', {noremap = true, silent = true})
+        vim.keymap.set({'n', 'v', 'i'}, '<leader>s', ':Telescope aerial<CR>', {noremap = true, silent = true})
+    end
+})

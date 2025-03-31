@@ -9,6 +9,7 @@ vim.opt.spell = false
 vim.opt.linebreak = true
 vim.opt.formatoptions:append('cro')
 vim.opt.shortmess:remove('S')
+vim.opt.fillchars:append('diff: ')
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

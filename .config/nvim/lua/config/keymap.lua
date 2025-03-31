@@ -63,6 +63,8 @@ map('n', '<leader>s', ":Telescope lsp_document_symbols<CR>", opts)
 map('n', '<leader>f', ":Telescope live_grep<CR>", opts)
 map('n', '<leader>w', ":Telescope lsp_workspace_symbols<CR>", opts)
 
+map('n', '<M-a>', ":CodeCompanionChat<CR>", opts)
+
 -- Handled by the kitty plugin
 -- map('n', '<C-j>', ':wincmd j<CR>', opts)
 -- map('n', '<C-k>', ':wincmd k<CR>', opts)
