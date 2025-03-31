@@ -1,0 +1,13 @@
+# credit: https://github.com/zed-industries/zed/issues/8279#issuecomment-2264087539
+# (this guy: https://github.com/vjdhanota)
+# TODO: `--hidden` only when `-H` given.
+vg() {
+    QUERY="$1"
+    FILE=$(rg --column --hidden --line-number --no-heading --color=always --smart-case --colors match:fg:green --colors path:fg:white --colors path:style:nobold --glob "!**/.git/" --glob "!**/node_modules" "${QUERY:-.}" . | fzf --ansi --delimiter : --preview "bat --style=numbers,changes,header --color=always --highlight-line {2} {1}" --preview-window "up:60%:+{2}+3/3" --layout=reverse --query "$QUERY" --print-query | tail -1)
+    if [ -n "$FILE" ]; then
+        LINE=$(echo $FILE | cut -d":" -f2)
+        COL=$(echo $FILE | cut -d":" -f3)
+        FILE=$(echo $FILE | cut -d":" -f1)
+        nvim "+call cursor($LINE,$COL)" "$FILE"
+    fi
+}

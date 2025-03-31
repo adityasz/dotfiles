@@ -1,0 +1,4 @@
+zmodule completion
+zmodule jeffreytse/zsh-vi-mode
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions
