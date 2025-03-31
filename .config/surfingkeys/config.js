@@ -1,5 +1,5 @@
 api.unmapAllExcept(["h", "j", "k", "l", "f", "u", "d", "gg", "G", "0", "$", "i"])
-api.unmapAllExcept(["i", "gg", "G"], /.*youtube.com\/watch.*/)
+api.unmapAllExcept(["i", "gg", "G"], /.*youtube.com\/.*/)  // /.*youtube.com\/watch.*/ requires reloading video pages because surfingkeys is bad
 settings.richHintsForKeystroke = 0;
 settings.lurkingPattern = new RegExp([
   '.*monkeytype\\.com.*',
@@ -11,7 +11,8 @@ settings.lurkingPattern = new RegExp([
   '.*web\\.whatsapp\\.com.*',
   '.*hackerrank\\.com.*',
   '.*humanbenchmark.com\\/tests\\/typing',
-  '.*app.*ironcalc.com.*'
+  '.*app.*ironcalc.com.*',
+  '.*excalidraw.com.*'	
 ].join('|'), 'i');
 
 light_theme = `
