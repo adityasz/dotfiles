@@ -1,15 +1,17 @@
 local M = {}
 
 M.set_color_scheme = function()
-    local function execute_command(cmd)
-        local handle = io.popen(cmd)
-        local result = handle:read("*a")
-        handle:close()
-        return result:gsub("^%s*(.-)%s*$", "%1")
+    if not os.execute("command -v gsettings > /dev/null 2>&1") then
+        vim.opt.background = "light"
+        vim.cmd("colorscheme light")
+        require("lualine").setup({options = {theme = require("config.themes.lualine.light")}})
+        return "light"
     end
 
-    local gnome_scheme = execute_command("gsettings get org.gnome.desktop.interface color-scheme")
-
+    local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme")
+    local result = handle:read("*a")
+    handle:close()
+    local gnome_scheme = result:gsub("^%s*(.-)%s*$", "%1")
     if gnome_scheme == "'prefer-dark'" and vim.g.colors_name ~= "dark" then
         vim.opt.background = "dark"
         vim.cmd("colorscheme dark")
