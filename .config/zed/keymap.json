@@ -2,25 +2,58 @@
 // Default keymap: `zed: open default keymap` command
 [
   {
-    "context": "Workspace",
     "bindings": {
-      "alt-shift-p": "command_palette::Toggle",
-      "alt-w": "pane::CloseActiveItem",
       "alt-o": "workspace::Open",
-      "alt-e": "workspace::ToggleLeftDock",
-      "alt-shift-a": "assistant::ToggleFocus",
+      "alt-w": "pane::CloseActiveItem",
+      "alt-shift-t": "pane::ReopenClosedItem",
+      "alt-shift-p": "command_palette::Toggle",
+      "alt-shift-e": "workspace::ToggleLeftDock",
+      "alt-shift-a": "workspace::ToggleRightDock",
+      "alt-e": "project_panel::ToggleFocus",
+      "alt-0": "git_panel::ToggleFocus",
       "alt-=": "zed::IncreaseBufferFontSize",
       "alt-+": "zed::IncreaseBufferFontSize",
       "alt--": "zed::DecreaseBufferFontSize",
-      "alt-0": "zed::ResetBufferFontSize",
       "alt-,": "zed::OpenSettings",
-      "alt-k  alt-m": "zed::OpenKeymap",
+      "ctrl-~": "workspace::ToggleBottomDock",
+      "ctrl-shift-`": "workspace::ToggleBottomDock",
+      "ctrl-`": "terminal_panel::ToggleFocus",
+      "alt-a": "assistant::ToggleFocus",
+      "alt-t": "workspace::NewFile",
+      "alt-backspace": "editor::DeleteToPreviousWordStart",
       "alt-shift-x": "zed::Extensions",
-      "alt-q": "zed::Quit",
       "shift shift": "project_symbols::Toggle"
-      // they break file renaming/creation in the file tree on the left
-      // "k": "menu::SelectPrev",
-      // "j": "menu::SelectNext"
+    }
+  },
+  // not_editing is not true in EmptyPane. Bug?
+  {
+    "context": "EmptyPane || not_editing",
+    "bindings": {
+      "space space": "file_finder::Toggle"
+    }
+  },
+  // This is sketchy, but this is the only way I could find to make alt-a work
+  // reliably everywhere.
+  // Minutes wasted count: 5
+  {
+    "context": "mode == single_line || mode == auto_height",
+    "bindings": {
+      "alt-a": "editor::SelectAll"
+    }
+  },
+  {
+    "context": "editing",
+    "bindings": {
+      "alt-a": "editor::SelectAll"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space r": "project_panel::Rename",
+      "space n": "project_panel::NewFile",
+      "space d": "project_panel::NewDirectory",
+      "d": "project_panel::Delete"
     }
   },
   {
@@ -28,30 +61,29 @@
     "bindings": {
       "alt-c": "editor::Copy",
       "alt-v": "editor::Paste",
-      "alt-backspace": "editor::DeleteToPreviousWordStart",
-      "alt-shift-f": "editor::FormatSelections"
-    }
-  },
-  {
-    "context": "Editor && mode == full",
-    "bindings": {
+      "alt-shift-f": "editor::FormatSelections",
       "alt->": "assistant::QuoteSelection",
-      "alt-<": "assistant::InsertIntoEditor",
-      "alt-a": "workspace::ToggleRightDock",
-      "ctrl-`": "workspace::ToggleBottomDock",
-      "alt-shift-e": "pane::RevealInProjectPanel"
+      "alt-<": "assistant::InsertIntoEditor"
     }
   },
   {
     "context": "Terminal",
     "bindings": {
+      "ctrl-`": "terminal_panel::ToggleFocus",
+      "ctrl-~": "workspace::ToggleBottomDock",
+      "ctrl-shift-`": "workspace::ToggleBottomDock",
       "alt-backspace": ["terminal::SendKeystroke", "ctrl-w"],
+      "alt-t": "workspace::NewTerminal",
       "alt-c": "terminal::Copy",
       "alt-v": "terminal::Paste",
       "alt-h": "pane::SplitLeft",
       "alt-l": "pane::SplitRight",
       "alt-j": "pane::SplitDown",
       "alt-k": "pane::SplitUp",
+      "alt-shift-h": "workspace::SwapPaneLeft",
+      "alt-shift-l": "workspace::SwapPaneRight",
+      "alt-shift-j": "workspace::SwapPaneDown",
+      "alt-shift-k": "workspace::SwapPaneUp",
       "alt-p": "terminal::ToggleViMode",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
@@ -60,32 +92,8 @@
     }
   },
   {
-    "context": "Markdown",
-    "bindings": {
-      "alt-c": "markdown::Copy"
-    }
-  },
-  {
-    "context": "AssistantPanel",
-    "bindings": {
-      "alt-k c": "assistant::CopyCode",
-      "alt-g": "search::SelectNextMatch",
-      "alt-shift-m": "assistant::ToggleModelSelector",
-      "alt-k h": "assistant::DeployHistory",
-      "alt-k l": "assistant::DeployPromptLibrary"
-    }
-  },
-  {
-    "context": "PromptLibrary",
-    "bindings": {
-      "alt-n": "prompt_library::NewPrompt",
-      "alt-shift-s": "prompt_library::ToggleDefaultPrompt"
-    }
-  },
-  {
     "context": "vim_mode == normal",
     "bindings": {
-      // "f3": ["workspace::SendKeystrokes", ":nohlsearch"],
       "j": ["vim::Down", { "display_lines": true }],
       "k": ["vim::Up", { "display_lines": true }],
       "Y": ["workspace::SendKeystrokes", "y $"],
@@ -94,7 +102,9 @@
       "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
       "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
       "space space": "file_finder::Toggle",
+      "space t": "tab_switcher::Toggle",
       "space s": "outline::Toggle",
+      "space f": "workspace::NewSearch", // hopefully live grep lands soon
       "space l": "task::Spawn",
       "space r": "editor::Rename",
       "space e": "editor::GoToDiagnostic",
@@ -107,6 +117,27 @@
     "bindings": {
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
+    }
+  },
+  {
+    "context": "Markdown",
+    "bindings": {
+      "alt-c": "markdown::Copy"
+    }
+  },
+  {
+    "context": "AssistantPanel",
+    "bindings": {
+      "alt-k c": "assistant::CopyCode",
+      "alt-shift-m": "assistant::ToggleModelSelector",
+      "alt-k h": "assistant::DeployHistory"
+    }
+  },
+  {
+    "context": "PromptLibrary",
+    "bindings": {
+      "alt-n": "prompt_library::NewPrompt",
+      "alt-shift-s": "prompt_library::ToggleDefaultPrompt"
     }
   }
 ]

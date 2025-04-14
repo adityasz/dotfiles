@@ -1,12 +1,9 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
-  "features": {
-    "edit_prediction_provider": "none"
-  },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
-  "buffer_font_weight": 500,
+  "buffer_font_weight": 600,
   "ui_font_size": 18,
   "ui_font_family": "Inter",
   "ui_font_weight": 500,
@@ -22,7 +19,10 @@
   "theme": {
     "mode": "system",
     "dark": "VSCode Dark Modern",
-    "light": "Github Light"
+    "light": "Nice Light Theme"
+  },
+  "collaboration_panel": {
+    "button": false
   },
   "vim_mode": true,
   "vim": {
@@ -30,9 +30,16 @@
     "toggle_relative_line_numbers": true
   },
   "base_keymap": "VSCode",
+  "features": {
+    "edit_prediction_provider": "none"
+  },
   "terminal": {
+    "font_weight": 600,
     "shell": {
       "program": "zsh"
+    },
+    "toolbar": {
+      "breadcrumbs": false
     }
   },
   "toolbar": {
@@ -44,13 +51,10 @@
       "enabled": false
     }
   },
-  // "show_inline_completions": true,
-  // "features": {
-    // "inline_completion_provider": "none"
-  // },
   "languages": {
     "Typst": {
-      "show_edit_predictions": false
+      "show_edit_predictions": false,
+      "language_servers": ["tinymist"]
     },
     "JSON": {
       "tab_size": 2,
@@ -66,7 +70,21 @@
     },
     "Python": {
       "tab_size": 4,
-      "hard_tabs": false
+      "hard_tabs": false,
+      "language_servers": ["pyright", "ruff"],
+      "formatter": [
+        {
+          "code_actions": {
+            "source.fixAll.ruff": true, // Fix all auto-fixable lint violations
+            "source.organizeImports.ruff": true // Organize imports
+          }
+        },
+        {
+          "language_server": {
+            "name": "ruff"
+          }
+        }
+      ]
     },
     "JavaScript": {
       "tab_size": 4,
@@ -79,17 +97,15 @@
       ]
   },
   "lsp": {
+    "pyright": {
+      "python": {
+        "pythonPath": ".venv/bin/python"
+      }
+    },
     "mojo": {
       "settings": {
         "lsp_path": "/home/aditya/.local/share/modular/bin/mojo-lsp-server",
         "args": ["--log=verbose"]
-      }
-    },
-    "tinymist": {
-      "initialization_options": {
-        "exportPdf": "onSave",
-        "outputPath": "$root/$name",
-        "rootPath": "/home/aditya/Notes/"
       }
     }
   },
@@ -103,5 +119,5 @@
   "telemetry": {
     "diagnostics": false,
     "metrics": false
-  },
+  }
 }
