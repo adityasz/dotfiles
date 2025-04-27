@@ -1,77 +1,89 @@
 // Docs: https://zed.dev/docs/key-bindings
 // Default keymap: `zed: open default keymap` command
+//
+// Missing actions:
+// 1. {assistant_panel,project_panel,git_panel}::TogglePanel
+//    Toggle a panel without focusing it. alt-shift-{a,e,0}.
+// 2. workspace::CloseActivePane
+//    Close the current pane. q.
+
 [
   {
     "bindings": {
-      "alt-o": "workspace::Open",
-      "alt-w": "pane::CloseActiveItem",
-      "alt-shift-t": "pane::ReopenClosedItem",
-      "alt-shift-p": "command_palette::Toggle",
-      "alt-shift-e": "workspace::ToggleLeftDock",
-      "alt-shift-a": "workspace::ToggleRightDock",
-      "alt-e": "project_panel::ToggleFocus",
-      "alt-0": "git_panel::ToggleFocus",
       "alt-=": "zed::IncreaseBufferFontSize",
       "alt-+": "zed::IncreaseBufferFontSize",
       "alt--": "zed::DecreaseBufferFontSize",
       "alt-,": "zed::OpenSettings",
-      "ctrl-~": "workspace::ToggleBottomDock",
-      "ctrl-shift-`": "workspace::ToggleBottomDock",
-      "ctrl-`": "terminal_panel::ToggleFocus",
-      "alt-a": "assistant::ToggleFocus",
-      "alt-t": "workspace::NewFile",
-      "alt-backspace": "editor::DeleteToPreviousWordStart",
       "alt-shift-x": "zed::Extensions",
-      "shift shift": "project_symbols::Toggle"
+      "shift shift": "project_symbols::Toggle",
+      "alt-shift-p": "command_palette::Toggle",
+      "alt-o": "workspace::Open",
+      "alt-w": "pane::CloseActiveItem",
+      "alt-t": "workspace::NewFile",
+      "alt-shift-t": "pane::ReopenClosedItem",
+      "alt-h": "workspace::ToggleLeftDock",
+      "alt-l": "workspace::ToggleRightDock",
+      "alt-j": "workspace::ToggleBottomDock",
+      "alt-0": "git_panel::ToggleFocus",
+      "alt-a": "assistant::ToggleFocus",
+      "alt-e": "project_panel::ToggleFocus",
+      "alt-shift-0": ["workspace::SendKeystrokes", "alt-0 alt-0"], // workaround; can open, can't toggle
+      "alt-shift-a": ["workspace::SendKeystrokes", "alt-a ctrl-h"],
+      "alt-shift-e": ["workspace::SendKeystrokes", "alt-e ctrl-l"],
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-`": "workspace::ToggleBottomDock"
     }
   },
-  // not_editing is not true in EmptyPane. Bug?
   {
-    "context": "EmptyPane || not_editing",
+    "context": "mode == single_line", // bug; (Picker || Menu) not true in Agent history search box
     "bindings": {
-      "space space": "file_finder::Toggle"
-    }
-  },
-  // This is sketchy, but this is the only way I could find to make alt-a work
-  // reliably everywhere.
-  // Minutes wasted count: 5
-  {
-    "context": "mode == single_line || mode == auto_height",
-    "bindings": {
-      "alt-a": "editor::SelectAll"
+      "up": "menu::SelectPrevious",
+      "down": "menu::SelectNext"
     }
   },
   {
-    "context": "editing",
+    "context": "Editor && vim_mode != normal",
     "bindings": {
-      "alt-a": "editor::SelectAll"
+      "alt-a": "editor::SelectAll",
+      "alt-c": "editor::Copy",
+      "alt-v": "editor::Paste",
+      "alt-x": "editor::Cut",
+      "alt-backspace": "editor::DeleteToPreviousWordStart"
     }
   },
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
       "space r": "project_panel::Rename",
+      "f2": "project_panel::Rename",
       "space n": "project_panel::NewFile",
+      "alt-n": "project_panel::NewFile",
       "space d": "project_panel::NewDirectory",
       "d": "project_panel::Delete"
     }
   },
   {
-    "context": "Editor",
+      "context": "(ProjectPanel || GitPanel) && not_editing",
+      "bindings": {
+        "q": "workspace::ToggleLeftDock" // workaround for the absence of "workspace::CloseActivePane"
+      }
+  },
+  {
+    "context": "vim_mode == normal || not_editing || EmptyPane", // bug; not_editing should be true in EmptyPane
     "bindings": {
-      "alt-c": "editor::Copy",
-      "alt-v": "editor::Paste",
-      "alt-shift-f": "editor::FormatSelections",
-      "alt->": "assistant::QuoteSelection",
-      "alt-<": "assistant::InsertIntoEditor"
+      "space space": "file_finder::Toggle",
+      "space t": "tab_switcher::Toggle",
+      "space f": ["task::Spawn", {"task_name": "File Finder", "reveal_target": "center"}], // hopefully live grep lands soon
+      "space h": "workspace::NewSearch",
+      "space l": "task::Spawn"
     }
   },
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-`": "terminal_panel::ToggleFocus",
-      "ctrl-~": "workspace::ToggleBottomDock",
-      "ctrl-shift-`": "workspace::ToggleBottomDock",
       "alt-backspace": ["terminal::SendKeystroke", "ctrl-w"],
       "alt-t": "workspace::NewTerminal",
       "alt-c": "terminal::Copy",
@@ -84,11 +96,7 @@
       "alt-shift-l": "workspace::SwapPaneRight",
       "alt-shift-j": "workspace::SwapPaneDown",
       "alt-shift-k": "workspace::SwapPaneUp",
-      "alt-p": "terminal::ToggleViMode",
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight"
+      "alt-p": "terminal::ToggleViMode"
     }
   },
   {
@@ -97,23 +105,18 @@
       "j": ["vim::Down", { "display_lines": true }],
       "k": ["vim::Up", { "display_lines": true }],
       "Y": ["workspace::SendKeystrokes", "y $"],
-      "ctrl-h": ["workspace::SendKeystrokes", "ctrl-w h"],
-      "ctrl-j": ["workspace::SendKeystrokes", "ctrl-w j"],
-      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-w k"],
-      "ctrl-l": ["workspace::SendKeystrokes", "ctrl-w l"],
-      "space space": "file_finder::Toggle",
-      "space t": "tab_switcher::Toggle",
+      "alt-c": "editor::Copy",
       "space s": "outline::Toggle",
-      "space f": "workspace::NewSearch", // hopefully live grep lands soon
-      "space l": "task::Spawn",
       "space r": "editor::Rename",
-      "space e": "editor::GoToDiagnostic",
       "] e": "editor::GoToDiagnostic",
-      "[ e": "editor::GoToPreviousDiagnostic"
+      "[ e": "editor::GoToPreviousDiagnostic",
+      "alt-shift-f": "editor::FormatSelections",
+      "alt->": "assistant::QuoteSelection",
+      "alt-;": "editor::AcceptEditPrediction"
     }
   },
   {
-    "context": "VimControl && !menu",
+    "context": "VimControl && !menu", // bug; I should be able to put these in vim_mode == normal
     "bindings": {
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
@@ -126,18 +129,13 @@
     }
   },
   {
-    "context": "AssistantPanel",
+    "context": "AgentPanel",
     "bindings": {
+      "alt-n": "agent::NewThread",
       "alt-k c": "assistant::CopyCode",
       "alt-shift-m": "assistant::ToggleModelSelector",
-      "alt-k h": "assistant::DeployHistory"
-    }
-  },
-  {
-    "context": "PromptLibrary",
-    "bindings": {
-      "alt-n": "prompt_library::NewPrompt",
-      "alt-shift-s": "prompt_library::ToggleDefaultPrompt"
+      "alt-k h": "assistant::DeployHistory",
+      "alt-<": "assistant::InsertIntoEditor"
     }
   }
 ]
