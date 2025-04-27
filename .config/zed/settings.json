@@ -3,7 +3,11 @@
 {
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
-  "buffer_font_weight": 600,
+  "buffer_font_weight": 500,
+  "buffer_font_features": {
+    "liga": true,
+    "calt": true
+  },
   "ui_font_size": 18,
   "ui_font_family": "Inter",
   "ui_font_weight": 500,
@@ -11,14 +15,9 @@
   "soft_wrap": "editor_width",
   "format_on_save": "off",
   "current_line_highlight": "none",
-  "buffer_font_features": {
-    "liga": true,
-    "calt": true,
-    "dlig": true
-  },
   "theme": {
     "mode": "system",
-    "dark": "VSCode Dark Modern",
+    "dark": "One Dark",
     "light": "Nice Light Theme"
   },
   "collaboration_panel": {
@@ -31,7 +30,10 @@
   },
   "base_keymap": "VSCode",
   "features": {
-    "edit_prediction_provider": "none"
+    "edit_prediction_provider": "zed"
+  },
+  "edit_predictions": {
+    "mode": "subtle"
   },
   "terminal": {
     "font_weight": 600,
@@ -43,8 +45,12 @@
     }
   },
   "toolbar": {
-    "breadcrumbs": false,
+    "breadcrumbs": true,
     "quick_actions": false
+  },
+  "vertical_scroll_margin": 3, // 0 leads to bugs in git diffs, search panel hides lines on the top, etc.; zt does not serve its purpose with values other than 0
+  "tab_bar": {
+    "show": true
   },
   "git": {
     "inline_blame": {
@@ -52,16 +58,8 @@
     }
   },
   "languages": {
-    "Typst": {
-      "show_edit_predictions": false,
-      "language_servers": ["tinymist"]
-    },
-    "JSON": {
-      "tab_size": 2,
-      "hard_tabs": false
-    },
     "C": {
-      "tab_size": 8,
+      "tab_size": 4,
       "hard_tabs": true
     },
     "C++": {
@@ -86,15 +84,34 @@
         }
       ]
     },
+    "Typst": {
+      "tab_size": 2,
+      "hard_tabs": false,
+      "language_servers": ["tinymist"]
+    },
+    "JSON": {
+      "tab_size": 4,
+      "hard_tabs": true
+    },
+    "HTML": {
+      "tab_size": 4,
+      "hard_tabs": true
+    },
+    "CSS": {
+      "tab_size": 4,
+      "hard_tabs": true
+    },
     "JavaScript": {
+      "tab_size": 4,
+      "hard_tabs": true
+    },
+    "TypeScript": {
       "tab_size": 4,
       "hard_tabs": true
     }
   },
   "file_types": {
-      "CMake": [
-        "CMakeLists.txt"
-      ]
+    "CMake": ["CMakeLists.txt"]
   },
   "lsp": {
     "pyright": {
@@ -107,12 +124,18 @@
         "lsp_path": "/home/aditya/.local/share/modular/bin/mojo-lsp-server",
         "args": ["--log=verbose"]
       }
+    },
+    "tinymist": {
+      "settings": {
+        "rootPath": "."
+      }
     }
   },
   "assistant": {
+    "default_profile": "ask",
     "default_model": {
       "provider": "google",
-      "model": "gemini-2.5-pro-exp-03-25"
+      "model": "gemini-2.5-flash-preview-04-17"
     },
     "version": "2"
   },
