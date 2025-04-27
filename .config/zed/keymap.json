@@ -34,7 +34,11 @@
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-`": "workspace::ToggleBottomDock"
+      "ctrl-`": "workspace::ToggleBottomDock",
+      "alt-shift-h": "workspace::SwapPaneLeft",
+      "alt-shift-j": "workspace::SwapPaneDown",
+      "alt-shift-k": "workspace::SwapPaneUp",
+      "alt-shift-l": "workspace::SwapPaneRight"
     }
   },
   {
@@ -51,6 +55,8 @@
       "alt-c": "editor::Copy",
       "alt-v": "editor::Paste",
       "alt-x": "editor::Cut",
+      "alt-z": "editor::Undo",
+      "alt-y": "editor::Redo",
       "alt-backspace": "editor::DeleteToPreviousWordStart"
     }
   },
@@ -132,10 +138,38 @@
     "context": "AgentPanel",
     "bindings": {
       "alt-n": "agent::NewThread",
-      "alt-k c": "assistant::CopyCode",
       "alt-shift-m": "assistant::ToggleModelSelector",
-      "alt-k h": "assistant::DeployHistory",
       "alt-<": "assistant::InsertIntoEditor"
+    }
+  },
+  {
+    "context": "MessageEditor > Editor",
+    "bindings": {
+      "enter": "editor::Newline",
+      "alt-enter": "agent::Chat",
+      "ctrl-enter": "agent::Chat"
+    }
+  },
+  {
+    "context": "CommitEditor > Editor",
+    "bindings": {
+      "enter": "editor::Newline",
+      "shift-escape": "git::ExpandCommitEditor"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList",
+    "bindings": {
+      "alt-shift-y": "git::ToggleStaged",
+      // bug: git::StageAndNext does not work in GitPanel:
+      "ctrl-alt-shift-y": "git::ToggleStaged",
+      "alt-y": ["workspace::SendKeystrokes", "ctrl-alt-shift-y j"]
+    }
+  },
+  {
+    "context": "Editor && !agent_diff",
+    "bindings": {
+      "alt-shift-y": "git::ToggleStaged"
     }
   }
 ]
