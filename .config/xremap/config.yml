@@ -58,7 +58,7 @@ keymap:
             dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
             sioyek,
-            Cursor,
+            # Cursor,
             qemu-system-x86_64,
             mpv]
     remap:
@@ -200,10 +200,10 @@ keymap:
       alt_l-shift-y: C-shift-y
       alt_l-shift-z: C-shift-z
 
-  - name: comfy keymap for stupid apps that allow only a few keybinds to be changed
-    exact_match: true
-    application:
-      only: Cursor
-    remap:
-      alt_L-p: C-p
-      alt_L-shift-p: C-shift-p
+  # - name: comfy keymap for stupid apps that allow only a few keybinds to be changed
+  #   exact_match: true
+  #   application:
+  #     only: Cursor
+  #   remap:
+  #     alt_L-p: C-p
+  #     alt_L-shift-p: C-shift-p
