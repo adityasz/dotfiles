@@ -1,6 +1,15 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "agent": {
+    "stream_edits": true,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-3-7-sonnet"
+    },
+    "default_profile": "ask",
+    "version": "2"
+  },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
   "buffer_font_weight": 500,
@@ -48,7 +57,7 @@
     "breadcrumbs": true,
     "quick_actions": false
   },
-  "vertical_scroll_margin": 3, // 0 leads to bugs in git diffs, search panel hides lines on the top, etc.; zt does not serve its purpose with values other than 0
+  "vertical_scroll_margin": 3, // 0 leads to bugs in git diffs (multibuffers), search panel hides lines on the top, etc.; zt does not serve its purpose with values other than 0
   "tab_bar": {
     "show": true
   },
@@ -56,6 +65,9 @@
     "inline_blame": {
       "enabled": false
     }
+  },
+  "git_panel": {
+    "sort_by_path": true
   },
   "languages": {
     "C": {
@@ -131,13 +143,10 @@
       }
     }
   },
-  "assistant": {
-    "default_profile": "ask",
-    "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-flash-preview-04-17"
-    },
-    "version": "2"
+  "jupyter": {
+    "kernel_selections": {
+      "python": "assignment"
+    }
   },
   "telemetry": {
     "diagnostics": false,

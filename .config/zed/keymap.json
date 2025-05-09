@@ -18,9 +18,11 @@
       "shift shift": "project_symbols::Toggle",
       "alt-shift-p": "command_palette::Toggle",
       "alt-o": "workspace::Open",
-      "alt-w": "pane::CloseActiveItem",
       "alt-t": "workspace::NewFile",
       "alt-shift-t": "pane::ReopenClosedItem",
+      "alt-w": "pane::CloseActiveItem",
+      "alt-[": "pane::ActivatePreviousItem",
+      "alt-]": "pane::ActivateNextItem",
       "alt-h": "workspace::ToggleLeftDock",
       "alt-l": "workspace::ToggleRightDock",
       "alt-j": "workspace::ToggleBottomDock",
@@ -38,11 +40,12 @@
       "alt-shift-h": "workspace::SwapPaneLeft",
       "alt-shift-j": "workspace::SwapPaneDown",
       "alt-shift-k": "workspace::SwapPaneUp",
-      "alt-shift-l": "workspace::SwapPaneRight"
+      "alt-shift-l": "workspace::SwapPaneRight",
+      "alt-enter": "menu::SecondaryConfirm"
     }
   },
   {
-    "context": "mode == single_line", // bug; (Picker || Menu) not true in Agent history search box
+    "context": "mode == single_line", // bug? (Picker || Menu) not true in Agent history search box
     "bindings": {
       "up": "menu::SelectPrevious",
       "down": "menu::SelectNext"
@@ -68,7 +71,9 @@
       "space n": "project_panel::NewFile",
       "alt-n": "project_panel::NewFile",
       "space d": "project_panel::NewDirectory",
-      "d": "project_panel::Delete"
+      "d": "project_panel::Delete",
+      "alt-c": "project_panel::Copy",
+      "alt-v": "project_panel::Paste"
     }
   },
   {
@@ -78,13 +83,14 @@
       }
   },
   {
-    "context": "vim_mode == normal || not_editing || EmptyPane", // bug; not_editing should be true in EmptyPane
+    "context": "vim_mode == normal || not_editing || EmptyPane", // why is not_editing not true in EmptyPane?
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space t": "tab_switcher::Toggle",
+      "space t": "tab_switcher::ToggleAll",
       "space f": ["task::Spawn", {"task_name": "File Finder", "reveal_target": "center"}], // hopefully live grep lands soon
       "space h": "workspace::NewSearch",
-      "space l": "task::Spawn"
+      "space l": "task::Spawn",
+      "ctrl-c": "repl::Interrupt"
     }
   },
   {
@@ -106,7 +112,19 @@
     }
   },
   {
-    "context": "vim_mode == normal",
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "alt-;": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    "context": "Editor && edit_prediction_conflict",
+    "bindings": {
+      "alt-;": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
     "bindings": {
       "j": ["vim::Down", { "display_lines": true }],
       "k": ["vim::Up", { "display_lines": true }],
@@ -118,12 +136,6 @@
       "[ e": "editor::GoToPreviousDiagnostic",
       "alt-shift-f": "editor::FormatSelections",
       "alt->": "assistant::QuoteSelection",
-      "alt-;": "editor::AcceptEditPrediction"
-    }
-  },
-  {
-    "context": "VimControl && !menu", // bug; I should be able to put these in vim_mode == normal
-    "bindings": {
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
     }
@@ -138,23 +150,45 @@
     "context": "AgentPanel",
     "bindings": {
       "alt-n": "agent::NewThread",
+      "alt-t": "agent::NewThread",
       "alt-shift-m": "assistant::ToggleModelSelector",
-      "alt-<": "assistant::InsertIntoEditor"
+      "alt-<": "assistant::InsertIntoEditor",
+      "alt-left": "pane::GoBack"
     }
   },
   {
-    "context": "MessageEditor > Editor",
+    "context": "(MessageEditor > Editor) || (EditMessageEditor > Editor)",
     "bindings": {
       "enter": "editor::Newline",
       "alt-enter": "agent::Chat",
-      "ctrl-enter": "agent::Chat"
+      "ctrl-enter": "agent::Chat",
+      "alt-h": "agent::OpenHistory",
+      "alt-r": "agent::RemoveAllContext",
+      "alt-n": "agent::NewThread",
+      "alt-t": "agent::NewThread"
     }
   },
   {
-    "context": "CommitEditor > Editor",
+    "context": "EditMessageEditor > Editor",
+    "bindings": {
+      "alt-enter": "menu::Confirm",
+      "ctrl-enter": "menu::Confirm"
+    }
+  },
+  {
+    "context": "AgentPanel > ThreadHistory > Editor",
+    "bindings": {
+      "delete": "agent::RemoveSelectedThread"
+    }
+  },
+  {
+    "context": "(CommitEditor > Editor) || (GitCommit > Editor) || (GitPanel > Editor)",
     "bindings": {
       "enter": "editor::Newline",
-      "shift-escape": "git::ExpandCommitEditor"
+      "shift-escape": "git::ExpandCommitEditor",
+      "alt-;": "git::GenerateCommitMessage",
+      "alt-shift-enter": "git::Amend",
+      "alt-enter": "git::Commit"
     }
   },
   {
@@ -162,8 +196,8 @@
     "bindings": {
       "alt-shift-y": "git::ToggleStaged",
       // bug: git::StageAndNext does not work in GitPanel:
-      "ctrl-alt-shift-y": "git::ToggleStaged",
-      "alt-y": ["workspace::SendKeystrokes", "ctrl-alt-shift-y j"]
+      "ctrl-alt-shift-f23": "git::ToggleStaged",
+      "alt-y": ["workspace::SendKeystrokes", "ctrl-alt-shift-f23 j"]
     }
   },
   {
