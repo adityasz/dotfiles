@@ -12,6 +12,7 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt BEEP
 setopt AUTO_CD
 setopt PROMPT_SUBST
+setopt INTERACTIVE_COMMENTS
 
 unsetopt LIST_BEEP
 
