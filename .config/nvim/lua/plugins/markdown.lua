@@ -1,8 +1,8 @@
 return {
-    {
-        "MeanderingProgrammer/render-markdown.nvim",
-        ft = { "codecompanion" }
-    },
+    -- {
+    --     "MeanderingProgrammer/render-markdown.nvim",
+    --     ft = { "codecompanion" }
+    -- },
     {
         'preservim/vim-markdown',
         config = function()

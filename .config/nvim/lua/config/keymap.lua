@@ -4,6 +4,12 @@ local map = vim.keymap.set
 map({'n', 'v', 'i', 'o'}, '<F1>', '<Esc>', opts)
 map('n', '<F2>', ':set relativenumber!<CR>', opts)
 map('n', '<F3>', ':noh<CR>', opts)
+map({'n', 'v'}, '<M-u>', '<C-u>', opts)
+map({'n', 'v'}, '<M-d>', '<C-d>', opts)
+map({'n', 'v'}, '<M-f>', '<C-f>', opts)
+map({'n', 'v'}, '<M-b>', '<C-b>', opts)
+map('n', '<M-o>', '<C-o>', opts)
+map('n', '<M-i>', '<C-i>', opts)
 
 -- map({'n', 'v'}, 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, silent = true, expr = true })
 -- map({'n', 'v'}, 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, silent = true, expr = true })
@@ -23,8 +29,8 @@ map('v', '<C-c>', '"+y', opts)
 map('n', '<leader>r', ':IncRename ', opts)
 map('n', '<leader>e', ':lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '<leader>z', ':ZenMode<CR>', opts)
-map('n', '[e', ':lua vim.diagnostic.goto_prev()<CR>', opts)
-map('n', ']e', ':lua vim.diagnostic.goto_next()<CR>', opts)
+map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
+map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
 -- I no longer use Neotree as it conflicts with Oil.nvim.
 -- map('n', '<M-e>', ':Neotree toggle<CR> ', opts)
 

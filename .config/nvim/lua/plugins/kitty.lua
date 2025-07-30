@@ -34,10 +34,10 @@ return {
         'knubie/vim-kitty-navigator',
         config = function()
             vim.g.kitty_navigator_no_mappings = 1
-            -- vim.keymap.set('n', '{Left-Mapping}', '<cmd>KittyNavigateLeft<cr>', { silent = true })
-            -- vim.keymap.set('n', '{Down-Mapping}', '<cmd>KittyNavigateDown<cr>', { silent = true })
-            -- vim.keymap.set('n', '{Up-Mapping}', '<cmd>KittyNavigateUp<cr>', { silent = true })
-            -- vim.keymap.set('n', '{Right-Mapping}', '<cmd>KittyNavigateRight<cr>', { silent = true })
+            vim.keymap.set('n', '<M-h>', '<cmd>KittyNavigateLeft<cr>',  { silent = true })
+            vim.keymap.set('n', '<M-j>', '<cmd>KittyNavigateDown<cr>',  { silent = true })
+            vim.keymap.set('n', '<M-k>', '<cmd>KittyNavigateUp<cr>',    { silent = true })
+            vim.keymap.set('n', '<M-l>', '<cmd>KittyNavigateRight<cr>', { silent = true })
         end
     }
 }

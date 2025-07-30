@@ -55,6 +55,13 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"himalaya-email-listing", "mail"},
+    callback = function()
+        vim.opt.cmdheight = 1
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     pattern = "sh",
     callback = function()
         vim.opt.tabstop = 4

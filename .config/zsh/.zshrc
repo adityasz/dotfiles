@@ -5,7 +5,6 @@ HISTORY_IGNORE='([bf]g *|..|cd|cd ..|pwd|exit|l[ls]|l[ls]#( *)#|clear|nvim|histo
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
-setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
@@ -45,7 +44,7 @@ function ..() {
 prompt='%B%n%b%B@%b%B%m%b%B:%b%B%(5~|%-1~/…/%3~|%4~)%b$(git_branch_name)$ '
 
 source $HOME/.profile
-source $ZDOTDIR/aliases
+source $ZDOTDIR/.zsh_aliases
 
 zstyle ':zim:zmodule' use 'degit'
 zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME:-${HOME}/.cache}/zsh/zcompdump"
@@ -60,3 +59,7 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} 
 fi
 zmodload -F zsh/terminfo +p:terminfo
 source ${ZIM_HOME}/init.zsh
+
+source ${ZDOTDIR:-${HOME}}/tv_stuff
+
+. "$HOME/.local/share/../bin/env"

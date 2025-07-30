@@ -55,9 +55,11 @@ keymap:
             jetbrains-rustrover,
             jetbrains-dataspell,
             dev.zed.Zed,
+            dev.zed.Zed-Dev,
             dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
             sioyek,
+            virt-manager,
             # Cursor,
             qemu-system-x86_64,
             mpv]

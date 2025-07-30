@@ -9,10 +9,18 @@ nnoremap <Leader>l gt
 nnoremap <Leader>h gT
 
 map Y y$
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
+nnoremap <M-u> <C-u>
+nnoremap <M-d> <C-d>
+nnoremap <M-f> <C-f>
+nnoremap <M-b> <C-b>
+nnoremap <M-o> <C-o>
+nnoremap <M-i> <C-i>
+nnoremap <M-[> gT
+nnoremap <M-]> gt
 
 nnoremap <F1> <Esc>
 inoremap <F1> <Esc>
@@ -55,11 +63,11 @@ map <Leader>f  <Action>(FindInPath)
 map <Leader>e  <Action>(ShowErrorDescription)
 map [e         <Action>(GotoPreviousError)
 map ]e         <Action>(GotoNextError)
+map <F7>       <Action>(ToggleLineBreakpoint)
+map <F8>       <Action>(StepOver)
+map <F9>       <Action>(StepInto)
+map <F10>      <Action>(StepOut)
 map <F11>      <Action>(ToggleFullScreen)
-map <F8>       <Action>(ToggleLineBreakpoint)
-map <F9>       <Action>(StepOver)
-map <F10>      <Action>(StepInto)
-map <S-F10>    <Action>(StepOut)
 map <Leader>s  <Action>(FileStructurePopup)
 " map <Leader>c  <Action>(CallHierarchyPopupMenu) " Doesn't work right now
 map <Leader>l  <Action>(ChooseRunConfiguration)

@@ -18,30 +18,38 @@
       "shift shift": "project_symbols::Toggle",
       "alt-shift-p": "command_palette::Toggle",
       "alt-o": "workspace::Open",
-      "alt-t": "workspace::NewFile",
       "alt-shift-t": "pane::ReopenClosedItem",
       "alt-w": "pane::CloseActiveItem",
       "alt-[": "pane::ActivatePreviousItem",
       "alt-]": "pane::ActivateNextItem",
-      "alt-h": "workspace::ToggleLeftDock",
-      "alt-l": "workspace::ToggleRightDock",
-      "alt-j": "workspace::ToggleBottomDock",
+      "ctrl-h": "workspace::ToggleLeftDock",
+      "ctrl-l": "workspace::ToggleRightDock",
+      "ctrl-j": "workspace::ToggleBottomDock",
       "alt-0": "git_panel::ToggleFocus",
-      "alt-a": "assistant::ToggleFocus",
+      "alt-a": "agent::ToggleFocus",
       "alt-e": "project_panel::ToggleFocus",
+      "alt-s": "outline_panel::ToggleFocus",
+      "ctrl-p": "outline_panel::ToggleActiveEditorPin",
       "alt-shift-0": ["workspace::SendKeystrokes", "alt-0 alt-0"], // workaround; can open, can't toggle
-      "alt-shift-a": ["workspace::SendKeystrokes", "alt-a ctrl-h"],
-      "alt-shift-e": ["workspace::SendKeystrokes", "alt-e ctrl-l"],
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-`": "workspace::ToggleBottomDock",
+      "alt-shift-a": ["workspace::SendKeystrokes", "alt-a alt-h"],
+      "alt-shift-e": ["workspace::SendKeystrokes", "alt-e alt-l"],
+      "alt-h": "workspace::ActivatePaneLeft",
+      "alt-j": "workspace::ActivatePaneDown",
+      "alt-k": "workspace::ActivatePaneUp",
+      "alt-l": "workspace::ActivatePaneRight",
+      "ctrl-`": "terminal_panel::ToggleFocus",
       "alt-shift-h": "workspace::SwapPaneLeft",
       "alt-shift-j": "workspace::SwapPaneDown",
       "alt-shift-k": "workspace::SwapPaneUp",
       "alt-shift-l": "workspace::SwapPaneRight",
-      "alt-enter": "menu::SecondaryConfirm"
+      "alt-enter": "menu::SecondaryConfirm",
+      "f4": "debugger::Start",
+      "shift-f4": "debugger::Restart",
+      "f5": "debugger::Continue",
+      "shift-f5": "debugger::Stop",
+      "f8": "debugger::StepOver",
+      "f9": "debugger::StepInto",
+      "f10": "debugger::StepOut"
     }
   },
   {
@@ -72,6 +80,7 @@
       "alt-n": "project_panel::NewFile",
       "space d": "project_panel::NewDirectory",
       "d": "project_panel::Delete",
+      "alt-x": "project_panel::Cut",
       "alt-c": "project_panel::Copy",
       "alt-v": "project_panel::Paste"
     }
@@ -90,6 +99,7 @@
       "space f": ["task::Spawn", {"task_name": "File Finder", "reveal_target": "center"}], // hopefully live grep lands soon
       "space h": "workspace::NewSearch",
       "space l": "task::Spawn",
+      "alt-enter": "repl::Run",
       "ctrl-c": "repl::Interrupt"
     }
   },
@@ -100,15 +110,29 @@
       "alt-t": "workspace::NewTerminal",
       "alt-c": "terminal::Copy",
       "alt-v": "terminal::Paste",
-      "alt-h": "pane::SplitLeft",
-      "alt-l": "pane::SplitRight",
-      "alt-j": "pane::SplitDown",
-      "alt-k": "pane::SplitUp",
+      "ctrl-h": "pane::SplitLeft",
+      "ctrl-l": "pane::SplitRight",
+      "ctrl-j": "pane::SplitDown",
+      "ctrl-k": "pane::SplitUp",
       "alt-shift-h": "workspace::SwapPaneLeft",
       "alt-shift-l": "workspace::SwapPaneRight",
       "alt-shift-j": "workspace::SwapPaneDown",
       "alt-shift-k": "workspace::SwapPaneUp",
-      "alt-p": "terminal::ToggleViMode"
+      "alt-p": "terminal::ToggleViMode",
+      "alt-u": "terminal::ScrollPageUp",
+      "alt-d": "terminal::ScrollPageDown"
+    }
+  },
+  {
+    "context": "Terminal && vi_mode",
+    "bindings": {
+      "/": "buffer_search::Deploy"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "f7": "editor::ToggleBreakpoint"
     }
   },
   {
@@ -124,18 +148,30 @@
     }
   },
   {
+    "context": "(Editor && mode == full) || (ContextEditor > Editor)",
+    "bindings": {
+      "alt->": "assistant::QuoteSelection"
+    }
+  },
+  {
     "context": "VimControl && !menu",
     "bindings": {
       "j": ["vim::Down", { "display_lines": true }],
       "k": ["vim::Up", { "display_lines": true }],
       "Y": ["workspace::SendKeystrokes", "y $"],
+      "alt-o": "pane::GoBack",
+      "alt-i": "pane::GoForward",
+      "alt-b": "vim::PageUp",
+      "alt-f": "vim::PageDown",
+      "alt-u": "vim::ScrollUp",
+      "alt-d": "vim::ScrollDown",
       "alt-c": "editor::Copy",
       "space s": "outline::Toggle",
       "space r": "editor::Rename",
-      "] e": "editor::GoToDiagnostic",
-      "[ e": "editor::GoToPreviousDiagnostic",
+      "space e": "editor::GoToDiagnostic",
+      // "[ e": "editor::GoToPreviousDiagnostic", // bug (introduced in some update): Zed waits for a while after `ci[`
+      // "] e": "editor::GoToDiagnostic",
       "alt-shift-f": "editor::FormatSelections",
-      "alt->": "assistant::QuoteSelection",
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
     }
@@ -151,21 +187,23 @@
     "bindings": {
       "alt-n": "agent::NewThread",
       "alt-t": "agent::NewThread",
-      "alt-shift-m": "assistant::ToggleModelSelector",
+      "alt-shift-m": "agent::ToggleModelSelector",
       "alt-<": "assistant::InsertIntoEditor",
-      "alt-left": "pane::GoBack"
+      "alt-left": "pane::GoBack",
+      "shift-escape": "agent::ExpandMessageEditor"
     }
   },
   {
-    "context": "(MessageEditor > Editor) || (EditMessageEditor > Editor)",
+    "context": "(MessageEditor > Editor) || (EditMessageEditor > Editor) || (AgentPanel > ContextEditor)",
     "bindings": {
       "enter": "editor::Newline",
       "alt-enter": "agent::Chat",
       "ctrl-enter": "agent::Chat",
-      "alt-h": "agent::OpenHistory",
+      "alt-k": "agent::OpenHistory",
       "alt-r": "agent::RemoveAllContext",
-      "alt-n": "agent::NewThread",
-      "alt-t": "agent::NewThread"
+      "alt-n": "agent::NewTextThread",
+      "alt-t": "agent::NewThread",
+      "shift-escape": "agent::ExpandMessageEditor"
     }
   },
   {
@@ -187,14 +225,16 @@
       "enter": "editor::Newline",
       "shift-escape": "git::ExpandCommitEditor",
       "alt-;": "git::GenerateCommitMessage",
+      "alt-enter": "git::Commit",
       "alt-shift-enter": "git::Amend",
-      "alt-enter": "git::Commit"
+      "alt-k": ["workspace::SendKeystrokes", "alt-0 alt-0"] // workaround for going from commit editor to changes list
     }
   },
   {
     "context": "GitPanel && ChangesList",
     "bindings": {
       "alt-shift-y": "git::ToggleStaged",
+      "alt-j": ["workspace::SendKeystrokes", "tab"], // workaround for going from changes list to commit editor
       // bug: git::StageAndNext does not work in GitPanel:
       "ctrl-alt-shift-f23": "git::ToggleStaged",
       "alt-y": ["workspace::SendKeystrokes", "ctrl-alt-shift-f23 j"]
@@ -204,6 +244,15 @@
     "context": "Editor && !agent_diff",
     "bindings": {
       "alt-shift-y": "git::ToggleStaged"
+    }
+  },
+  {
+    "context": "DebugPanel",
+    "bindings": {
+      "h": "variable_list::CollapseSelectedEntry",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious",
+      "l": "variable_list::ExpandSelectedEntry"
     }
   }
 ]

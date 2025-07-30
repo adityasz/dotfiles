@@ -1,9 +1,11 @@
 backend: Gtk4Agg
 
+font.size: 10.0
 font.family: serif
-font.serif: CMU Serif, MLMRoman10, Computer Modern Roman, DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
-font.sans-serif: CMU Sans Serif, Computer Modern Sans Serif, SF Pro Text, DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
+font.serif: CMU Serif, MLMRoman10, CMU Serif, Computer Modern Roman, DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
+font.sans-serif: CMU Sans Serif, MLMSans10, Computer Modern Sans Serif, SF Pro Text, DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
 font.monospace: JetBrains Mono, SF Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Computer Modern Typewriter, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
+
 
 text.usetex: True
 text.latex.preamble: \usepackage{amsmath, amssymb, upgreek, bbm, mathrsfs, dsfont, amsthm, amsfonts, booktabs}

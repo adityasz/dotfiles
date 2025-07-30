@@ -1,0 +1,27 @@
+background = ffffff
+foreground = 000000
+gtk-titlebar = false
+bold-is-bright = true
+
+font-size = 14
+
+font-variation = wght=400
+
+keybind = alt+backspace=text:\x17
+keybind = alt+c=copy_to_clipboard
+keybind = alt+v=paste_from_clipboard
+keybind = alt+minus=decrease_font_size:1
+keybind = alt+equal=increase_font_size:1
+keybind = f10=toggle_window_decorations
+keybind = f11=toggle_fullscreen
+keybind = alt+shift+,=reload_config
+keybind = alt+,=open_config
+
+keybind = alt+t=new_tab
+keybind = alt+shift+n=new_window
+keybind = alt+h=new_split:left
+keybind = alt+j=new_split:down
+keybind = alt+k=new_split:up
+keybind = alt+l=new_split:right
+
+keybind = ctrl+`=previous_tab

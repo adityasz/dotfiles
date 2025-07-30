@@ -1,14 +1,14 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "resize_all_panels_in_dock": ["left"],
   "agent": {
     "stream_edits": true,
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-3-7-sonnet"
+      "provider": "google",
+      "model": "gemini-2.5-pro"
     },
     "default_profile": "ask",
-    "version": "2"
   },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
@@ -20,14 +20,23 @@
   "ui_font_size": 18,
   "ui_font_family": "Inter",
   "ui_font_weight": 500,
+  "agent_font_size": 20,
   "ensure_final_newline_on_save": true,
   "soft_wrap": "editor_width",
   "format_on_save": "off",
   "current_line_highlight": "none",
   "theme": {
     "mode": "system",
-    "dark": "One Dark",
+    "dark": "VSCode Dark Modern",
     "light": "Nice Light Theme"
+  },
+  "search": {
+    "case_sensitive": true,
+    "regex": true
+  },
+  "hide_mouse": "on_typing_and_movement",
+  "project_panel": {
+    "hide_root": true
   },
   "collaboration_panel": {
     "button": false
@@ -69,6 +78,12 @@
   "git_panel": {
     "sort_by_path": true
   },
+  "outline_panel": {
+    "indent_size": 20
+  },
+  "minimap": {
+    "show": "never"
+  },
   "languages": {
     "C": {
       "tab_size": 4,
@@ -81,7 +96,8 @@
     "Python": {
       "tab_size": 4,
       "hard_tabs": false,
-      "language_servers": ["pyright", "ruff"],
+      "language_servers": ["ruff", "basedpyright", "!ty", "!pyright", "!pylsp", "..."],
+      "auto_indent_on_paste": false,
       "formatter": [
         {
           "code_actions": {
@@ -133,7 +149,7 @@
     },
     "mojo": {
       "settings": {
-        "lsp_path": "/home/aditya/.local/share/modular/bin/mojo-lsp-server",
+        // "lsp_path": ".magic/envs/default/bin/mojo-lsp-server",
         "args": ["--log=verbose"]
       }
     },
@@ -145,11 +161,11 @@
   },
   "jupyter": {
     "kernel_selections": {
-      "python": "assignment"
+      "python": "vkernel"
     }
   },
   "telemetry": {
-    "diagnostics": false,
-    "metrics": false
+    "diagnostics": true,
+    "metrics": true
   }
 }
