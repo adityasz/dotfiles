@@ -61,5 +61,3 @@ zmodload -F zsh/terminfo +p:terminfo
 source ${ZIM_HOME}/init.zsh
 
 source ${ZDOTDIR:-${HOME}}/tv_stuff
-
-. "$HOME/.local/share/../bin/env"

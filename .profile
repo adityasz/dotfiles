@@ -34,5 +34,3 @@ if command -v secret-tool &> /dev/null; then
 fi
 
 export GPG_TTY=$(tty)
-
-. "$HOME/.local/share/../bin/env"
