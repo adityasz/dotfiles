@@ -10,14 +10,14 @@ vim.lsp.config("tinymist", {
     on_init = function(client)
         local config = client.config
     end,
-    on_new_config = function(new_config, new_root_dir)
-        local fname = vim.api.nvim_buf_get_name(0)
-        new_config.settings = new_config.settings or {}
-        new_config.settings.tinymist = new_config.settings.tinymist or {}
-        local root = utils.get_project_root(fname)
-        new_config.settings.tinymist.rootPath = root
-    end,
-    root_dir = utils.get_project_root
+    -- on_new_config = function(new_config, new_root_dir)
+    --     local fname = vim.api.nvim_buf_get_name(0)
+    --     new_config.settings = new_config.settings or {}
+    --     new_config.settings.tinymist = new_config.settings.tinymist or {}
+    --     local root = utils.get_project_root(fname)
+    --     new_config.settings.tinymist.rootPath = root
+    -- end,
+    -- root_dir = utils.get_project_root
 })
 
 vim.lsp.config("lua_ls", {
@@ -58,24 +58,16 @@ vim.lsp.config("basedpyright", {
     settings = {
         basedpyright = {
             analysis = {
-                diagnosticSeverityOverrides = {
-                    reportAny = false,                   -- is this rule a joke?
-                    reportExplicitAny = false,           -- is this rule a joke?
-                    deprecateTypingAliases = false,      -- this rule is incorrect as Union and Optional are not deprecated; `Optional[int]` is objectively better than `int | None`
-                    reportUnknownMemberType = false,     -- because `v = []; v.append(1)` is perfectly fine and requires no annotations (Rust: `let mut v = Vec::new(); v.push(1);`)
-                    reportUnknownVariableType = false,   -- because pyright is too dumb to infer types sometimes
-                    reportUnknownArgumentType = false,   -- to pass variables where pyright can't infer types
-                    reportUnknownLambdaType = false,     -- to pass variables where pyright can't infer types
-                    reportUnknownParameterType = false,  -- to accept `*args`, `**kwargs`
-                    reportMissingParameterType = false,  -- to accept `*args`, `**kwargs`
-                    reportMissingTypeArgument = false,   -- some libraries have stupid undocumented internal base classes that no one cares about
-                    reportUnusedCallResult = false,      -- for marimo
-                    reportPrivateUsage = false,          -- python does not enforce public/private; if someone types a `_`, they know what they are doing
-                    reportImportCycles = false,          -- python does not have forward declarations
-                    reportUnannotatedClassAttribute = false,
-                    reportImplicitStringConcatenation = false,
-                    reportUnusedParameter = "hint",
-                }
+                typeCheckingMode = "standard",
+                reportConstantRedefinition = true,
+                reportDeprecated = true,
+                reportDuplicateImport = true,
+                reportIgnoreCommentWithoutRule = true,
+                reportMatchNotExhaustive = true,
+                reportUnnecessaryCast = true,
+                reportUnnecessaryComparison = true,
+                reportUnnecessaryContains = true,
+                reportUnnecessaryIsInstance = true,
             }
         }
     }
@@ -85,6 +77,8 @@ local server_binaries = {
     bashls = "bash-language-server",
     clangd = "clangd",
     basedpyright = "basedpyright-langserver",
+    -- ty = "ty",
+    ruff = "ruff",
     texlab = "texlab",
     racket_langserver = "racket-langserver",
     mojo = "mojo-lsp-server",

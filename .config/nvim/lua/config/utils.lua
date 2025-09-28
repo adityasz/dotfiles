@@ -34,7 +34,7 @@ end
 -- credits: jdhao/nvim-config
 function utils.may_create_dir(dir)
     if vim.bo.filetype == "oil" then
-        is_oil_buffer = true
+        return
     end
 
     local res = vim.fn.isdirectory(dir)

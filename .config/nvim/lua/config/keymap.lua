@@ -76,8 +76,9 @@ map('n', '<leader>w', ":Telescope lsp_workspace_symbols<CR>", opts)
 
 -- While both of the following are terrible, Telescope's built-in command at
 -- least doesn't miss stuff.
-map('n', '<leader>s', ":Telescope lsp_document_symbols<CR>", opts)
+-- map('n', '<leader>s', ":Telescope lsp_document_symbols<CR>", opts)
 -- map('n', '<leader>s', ":Telescope aerial<CR>", opts)
+map('n', '<leader>s', ":AerialOpen<CR>", opts)
 
 map({ "n", "x" }, "<leader>h", function() require("ssr").open() end) -- ssr is useful in Typst, but it can cause crashes
 
