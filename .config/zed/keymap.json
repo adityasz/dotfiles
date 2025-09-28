@@ -37,7 +37,7 @@
       "alt-j": "workspace::ActivatePaneDown",
       "alt-k": "workspace::ActivatePaneUp",
       "alt-l": "workspace::ActivatePaneRight",
-      "ctrl-`": "terminal_panel::ToggleFocus",
+      "ctrl-`": "terminal_panel::Toggle",
       "alt-shift-h": "workspace::SwapPaneLeft",
       "alt-shift-j": "workspace::SwapPaneDown",
       "alt-shift-k": "workspace::SwapPaneUp",
@@ -82,7 +82,8 @@
       "d": "project_panel::Delete",
       "alt-x": "project_panel::Cut",
       "alt-c": "project_panel::Copy",
-      "alt-v": "project_panel::Paste"
+      "alt-v": "project_panel::Paste",
+      "alt-shift-enter": "workspace::OpenWithSystem"
     }
   },
   {
@@ -150,7 +151,7 @@
   {
     "context": "(Editor && mode == full) || (ContextEditor > Editor)",
     "bindings": {
-      "alt->": "assistant::QuoteSelection"
+      "alt->": "agent::QuoteSelection"
     }
   },
   {
@@ -247,7 +248,7 @@
     }
   },
   {
-    "context": "DebugPanel",
+    "context": "DebugPanel && !Editor",
     "bindings": {
       "h": "variable_list::CollapseSelectedEntry",
       "j": "menu::SelectNext",

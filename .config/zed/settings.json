@@ -8,7 +8,7 @@
       "provider": "google",
       "model": "gemini-2.5-pro"
     },
-    "default_profile": "ask",
+    "default_profile": "minimal"
   },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
@@ -17,6 +17,7 @@
     "liga": true,
     "calt": true
   },
+  "max_tabs": 10,
   "ui_font_size": 18,
   "ui_font_family": "Inter",
   "ui_font_weight": 500,
@@ -35,23 +36,23 @@
     "regex": true
   },
   "hide_mouse": "on_typing_and_movement",
-  "project_panel": {
-    "hide_root": true
-  },
   "collaboration_panel": {
     "button": false
   },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank", // No way to copy to system clipboard if this is set to never
-    "toggle_relative_line_numbers": true
+    "toggle_relative_line_numbers": true // false
   },
   "base_keymap": "VSCode",
   "features": {
-    "edit_prediction_provider": "zed"
+    "edit_prediction_provider": "none"
   },
   "edit_predictions": {
     "mode": "subtle"
+  },
+  "preview_tabs": {
+    "enable_preview_from_code_navigation": true
   },
   "terminal": {
     "font_weight": 600,
@@ -66,9 +67,9 @@
     "breadcrumbs": true,
     "quick_actions": false
   },
-  "vertical_scroll_margin": 3, // 0 leads to bugs in git diffs (multibuffers), search panel hides lines on the top, etc.; zt does not serve its purpose with values other than 0
+  "vertical_scroll_margin": 0, // default: 3; 0 leads to bugs in git diffs (multibuffers), search panel hides lines on the top, etc.; zt does not serve its purpose with values other than 0
   "tab_bar": {
-    "show": true
+    "show": false
   },
   "git": {
     "inline_blame": {
@@ -96,7 +97,7 @@
     "Python": {
       "tab_size": 4,
       "hard_tabs": false,
-      "language_servers": ["ruff", "basedpyright", "!ty", "!pyright", "!pylsp", "..."],
+      "language_servers": ["ruff", "basedpyright", "!ty", "..."],
       "auto_indent_on_paste": false,
       "formatter": [
         {
@@ -142,11 +143,6 @@
     "CMake": ["CMakeLists.txt"]
   },
   "lsp": {
-    "pyright": {
-      "python": {
-        "pythonPath": ".venv/bin/python"
-      }
-    },
     "mojo": {
       "settings": {
         // "lsp_path": ".magic/envs/default/bin/mojo-lsp-server",
@@ -159,11 +155,11 @@
       }
     }
   },
-  "jupyter": {
-    "kernel_selections": {
-      "python": "vkernel"
-    }
-  },
+  // "jupyter": {
+  //   "kernel_selections": {
+  //     "python": "vkernel"
+  //   }
+  // },
   "telemetry": {
     "diagnostics": true,
     "metrics": true
