@@ -2,7 +2,7 @@
 Name=Sioyek
 Type=Application
 Icon=/home/aditya/.local/share/icons/sioyek.png
-Exec=/home/aditya/.local/bin/sioyek-wrapper
+Exec=/home/aditya/.local/bin/sioyek
 # /usr/local/sioyek/sioyek
 Terminal=false
 StartupWMClass=sioyek

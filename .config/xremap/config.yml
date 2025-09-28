@@ -14,6 +14,7 @@ virtual_modifiers:
 keymap:
   - name: right alt layer
     remap:
+      kp5: down
       fn-1: f1
       fn-2: f2
       fn-3: f3
@@ -58,7 +59,7 @@ keymap:
             dev.zed.Zed-Dev,
             dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
-            sioyek,
+            # sioyek, # sioyek has ctrl-v hardcoded for paste in search bar
             virt-manager,
             # Cursor,
             qemu-system-x86_64,
