@@ -1,0 +1,4 @@
+mojo() {
+  export LD_LIBRARY_PATH="${XDG_DATA_HOME:-$HOME/.local/share}/modular/missing-libs:${LD_LIBRARY_PATH}"
+  command mojo "$@"
+}
