@@ -30,8 +30,8 @@
         "editor.active_line_number": "#1f2328ff",
         "editor.active_wrap_guide": "#d1d9e0b3",
         "editor.background": "#ffffffff",
-        "editor.document_highlight.read_background": "#0969da4d",
-        "editor.document_highlight.write_background": "#0969da33",
+        "editor.document_highlight.read_background": "#0969da22", // "#0969da4d"
+        "editor.document_highlight.write_background": "#0969da22", // "#0969da33",
         "editor.foreground": "#1f2328ff",
         "editor.gutter.background": "#ffffffff",
         "editor.highlighted_line.background": "#818b981f",
@@ -68,7 +68,7 @@
         "ignored": "#59636eff",
         "ignored.background": "#eff2f5ff",
         "ignored.border": "#818b981a",
-        "info": "#9a6700ff",
+        "info": "#aaaaaa", // "#9a6700ff",
         "info.background": "#f6f8faff",
         "info.border": "#d1d9e0b3",
         "link_text.hover": "#0969daff",
@@ -100,7 +100,7 @@
         "terminal.ansi.black": "#000000",
         "terminal.ansi.bright_black": "#888888",
         "terminal.ansi.dim_black": "#000000",
-        "terminal.ansi.blue": "#0969daff",
+        "terminal.ansi.blue": "#0d73cc", // "#0969daff"
         "terminal.ansi.bright_blue": "#218bffff",
         "terminal.ansi.dim_blue": "#0969daff",
         "terminal.ansi.cyan": "#1b7c83ff",
@@ -112,8 +112,8 @@
         "terminal.ansi.magenta": "#cb1ed1",
         "terminal.ansi.bright_magenta": "#a475f9ff",
         "terminal.ansi.dim_magenta": "#8250dfff",
-        "terminal.ansi.red": "#cf222eff",
-        "terminal.ansi.bright_red": "#a40e26ff",
+        "terminal.ansi.red": "#cc0403", // "#cf222eff"
+        "terminal.ansi.bright_red":  "#cc0403", // "#a40e26ff"
         "terminal.ansi.dim_red": "#cf222eff",
         "terminal.ansi.white": "#59636eff",
         "terminal.ansi.bright_white": "#818b98ff",
@@ -138,7 +138,7 @@
         "version_control.added": "#00ff00", // "#d0ffd0ff",
         "version_control.modified": "#7da8e7", // "#e7effaff",
         "version_control.deleted": "#ff0000", // "#ffe0e0ff",
-        "warning": "#f8af24", // "#9a6700ff",
+        "warning": "#bbbbbb", // #f8af24 // "#9a6700ff",
         "warning.background": "#f6f8faff",
         "warning.border": "#d1d9e0b3",
         "players": [
