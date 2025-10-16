@@ -1,5 +1,3 @@
-backend: Gtk4Agg
-
 font.size: 10.0
 font.family: serif
 font.serif: CMU Serif, MLMRoman10, CMU Serif, Computer Modern Roman, DejaVu Serif, Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
