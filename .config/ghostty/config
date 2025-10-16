@@ -1,6 +1,7 @@
 background = ffffff
 foreground = 000000
 gtk-titlebar = false
+gtk-tabs-location = bottom
 bold-is-bright = true
 
 font-size = 14
