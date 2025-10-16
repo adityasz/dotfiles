@@ -1,10 +1,12 @@
 [Desktop Entry]
 Name=Sioyek
+Keywords=pdf;viewer;reader;research;
+Categories=Viewer;
 Type=Application
 Icon=/home/aditya/.local/share/icons/sioyek.png
-Exec=/home/aditya/.local/bin/sioyek
-# /usr/local/sioyek/sioyek
+TryExec=/home/aditya/.local/bin/sioyek
+Exec=/home/aditya/.local/bin/sioyek %f
 Terminal=false
 StartupWMClass=sioyek
 StartupNotify=true
-MimeType=application/pdf;application/x-pdf;application/x-bzpdf;application/x-gzpdf
+MimeType=application/pdf;application/x-pdf;application/x-bzpdf;application/x-gzpdf;
