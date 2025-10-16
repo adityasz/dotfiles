@@ -17,4 +17,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.textwidth = 0
 
+vim.opt.mouse = ""
+
 require("config.utils").set_color_scheme()
