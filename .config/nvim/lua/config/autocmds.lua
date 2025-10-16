@@ -206,3 +206,35 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set({'n', 'v', 'i'}, '<leader>s', ':Telescope aerial<CR>', {noremap = true, silent = true})
     end
 })
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+    pattern = "*.py",
+    callback = function()
+        -- find the PEP 723 script marker in the first three lines
+        local lines = vim.api.nvim_buf_get_lines(0, 0, 3, false)
+        for _, line in ipairs(lines) do
+            if line == "# /// script" then
+                -- Set up a one-time autocmd to detect when basedpyright attaches
+                vim.api.nvim_create_autocmd("LspAttach", {
+                    callback = function(args)
+                        local client = vim.lsp.get_client_by_id(args.data.client_id)
+                        if client and client.name == "basedpyright" then
+                            vim.lsp.stop_client(client.id)
+                            local bufpath = vim.api.nvim_buf_get_name(0)
+                            if not vim.fn.executable("uv") then
+                                return
+                            end
+                            local python_path = vim.trim(vim.fn.system(string.format("uv python find --script %s", vim.fn.shellescape(bufpath))))
+                            client.config.settings.python = client.config.settings.python or {}
+                            client.config.settings.python.pythonPath = python_path
+                            vim.lsp.start(client.config)
+                            return true  -- remove this autocmd after first trigger
+                        end
+                    end,
+                    once = false,  -- handle removal manually to filter by client name
+                })
+                break
+            end
+        end
+    end,
+})
