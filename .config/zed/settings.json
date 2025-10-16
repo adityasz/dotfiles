@@ -1,18 +1,24 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "auto_indent_on_paste": false,
+  "agent_buffer_font_size": 16.0,
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": false
+  },
   "resize_all_panels_in_dock": ["left"],
   "agent": {
     "stream_edits": true,
     "default_model": {
-      "provider": "google",
-      "model": "gemini-2.5-pro"
+      "provider": "copilot_chat",
+      "model": "gpt-5"
     },
-    "default_profile": "minimal"
+    "default_profile": "ask"
   },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
-  "buffer_font_weight": 500,
+  "buffer_font_weight": 300,
   "buffer_font_features": {
     "liga": true,
     "calt": true
@@ -20,15 +26,15 @@
   "max_tabs": 10,
   "ui_font_size": 18,
   "ui_font_family": "Inter",
-  "ui_font_weight": 500,
-  "agent_font_size": 20,
+  "ui_font_weight": 400,
+  "agent_ui_font_size": 18.0,
   "ensure_final_newline_on_save": true,
   "soft_wrap": "editor_width",
   "format_on_save": "off",
   "current_line_highlight": "none",
   "theme": {
     "mode": "system",
-    "dark": "VSCode Dark Modern",
+    "dark": "One Dark",
     "light": "Nice Light Theme"
   },
   "search": {
@@ -55,7 +61,7 @@
     "enable_preview_from_code_navigation": true
   },
   "terminal": {
-    "font_weight": 600,
+    "font_weight": 300,
     "shell": {
       "program": "zsh"
     },
@@ -95,17 +101,18 @@
       "hard_tabs": true
     },
     "Python": {
+      "indent_guides": {
+        "background_coloring": "disabled",
+        "coloring": "fixed"
+      },
+      "show_wrap_guides": true,
       "tab_size": 4,
       "hard_tabs": false,
       "language_servers": ["ruff", "basedpyright", "!ty", "..."],
       "auto_indent_on_paste": false,
+      "wrap_guides": [80, 99],
       "formatter": [
-        {
-          "code_actions": {
-            "source.fixAll.ruff": true, // Fix all auto-fixable lint violations
-            "source.organizeImports.ruff": true // Organize imports
-          }
-        },
+        { "code_action": "source.fixAll.ruff" },
         {
           "language_server": {
             "name": "ruff"

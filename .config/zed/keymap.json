@@ -3,9 +3,10 @@
 //
 // Missing actions:
 // 1. {assistant_panel,project_panel,git_panel}::TogglePanel
-//    Toggle a panel without focusing it. alt-shift-{a,e,0}.
+//    Toggle a panel without focusing it.
+//    (Never needed it, so removed the workaround.)
 // 2. workspace::CloseActivePane
-//    Close the current pane. q.
+//    Close the current pane. q. Fixed in my fork.
 
 [
   {
@@ -30,9 +31,6 @@
       "alt-e": "project_panel::ToggleFocus",
       "alt-s": "outline_panel::ToggleFocus",
       "ctrl-p": "outline_panel::ToggleActiveEditorPin",
-      "alt-shift-0": ["workspace::SendKeystrokes", "alt-0 alt-0"], // workaround; can open, can't toggle
-      "alt-shift-a": ["workspace::SendKeystrokes", "alt-a alt-h"],
-      "alt-shift-e": ["workspace::SendKeystrokes", "alt-e alt-l"],
       "alt-h": "workspace::ActivatePaneLeft",
       "alt-j": "workspace::ActivatePaneDown",
       "alt-k": "workspace::ActivatePaneUp",
@@ -43,13 +41,27 @@
       "alt-shift-k": "workspace::SwapPaneUp",
       "alt-shift-l": "workspace::SwapPaneRight",
       "alt-enter": "menu::SecondaryConfirm",
-      "f4": "debugger::Start",
-      "shift-f4": "debugger::Restart",
-      "f5": "debugger::Continue",
-      "shift-f5": "debugger::Stop",
+      "alt-tab": "tab_switcher::Toggle",
+      "alt-shift-tab": ["tab_switcher::Toggle", { "select_last": true }],
+      // these do not work when put in "debugger_stopped" context
       "f8": "debugger::StepOver",
       "f9": "debugger::StepInto",
       "f10": "debugger::StepOut"
+    }
+  },
+  {
+    "context": "Workspace && !debugger_stopped",
+    "bindings": {
+      "f5": "editor::SpawnNearestTask",
+      "ctrl-f5": "debugger::Start"
+    }
+  },
+  {
+    "context": "Workspace && debugger_stopped",
+    "bindings": {
+      "ctrl-f5": "debugger::Stop",
+      "ctrl-shift-f5": "debugger::Restart",
+      "f5": "debugger::Continue"
     }
   },
   {
@@ -83,7 +95,15 @@
       "alt-x": "project_panel::Cut",
       "alt-c": "project_panel::Copy",
       "alt-v": "project_panel::Paste",
-      "alt-shift-enter": "workspace::OpenWithSystem"
+      "alt-shift-enter": "workspace::OpenWithSystem",
+      "alt-u": "project_panel::ScrollUp",
+      "alt-d": "project_panel::ScrollDown"
+    }
+  },
+  {
+    "context": "TabSwitcher",
+    "bindings": {
+      "alt-w": "tab_switcher::CloseSelectedItem"
     }
   },
   {
@@ -169,9 +189,7 @@
       "alt-c": "editor::Copy",
       "space s": "outline::Toggle",
       "space r": "editor::Rename",
-      "space e": "editor::GoToDiagnostic",
-      // "[ e": "editor::GoToPreviousDiagnostic", // bug (introduced in some update): Zed waits for a while after `ci[`
-      // "] e": "editor::GoToDiagnostic",
+      "space d": "editor::GoToDiagnostic",
       "alt-shift-f": "editor::FormatSelections",
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
@@ -221,6 +239,12 @@
     }
   },
   {
+    "context": "ContextEditor > Editor",
+    "bindings": {
+      "alt-enter": "assistant::Assist"
+    }
+  },
+  {
     "context": "(CommitEditor > Editor) || (GitCommit > Editor) || (GitPanel > Editor)",
     "bindings": {
       "enter": "editor::Newline",
@@ -228,17 +252,15 @@
       "alt-;": "git::GenerateCommitMessage",
       "alt-enter": "git::Commit",
       "alt-shift-enter": "git::Amend",
-      "alt-k": ["workspace::SendKeystrokes", "alt-0 alt-0"] // workaround for going from commit editor to changes list
+      "alt-k": "git_panel::FocusChanges" // workaround for going from commit editor to changes list
     }
   },
   {
     "context": "GitPanel && ChangesList",
     "bindings": {
       "alt-shift-y": "git::ToggleStaged",
-      "alt-j": ["workspace::SendKeystrokes", "tab"], // workaround for going from changes list to commit editor
-      // bug: git::StageAndNext does not work in GitPanel:
-      "ctrl-alt-shift-f23": "git::ToggleStaged",
-      "alt-y": ["workspace::SendKeystrokes", "ctrl-alt-shift-f23 j"]
+      "alt-j": "git_panel::FocusEditor", // workaround for going from changes list to commit editor
+      "alt-y": ["action::Sequence", ["git::ToggleStaged", "menu::SelectNext"]] // workaround for git::StageAndNext not working in GitPanel
     }
   },
   {
@@ -253,7 +275,11 @@
       "h": "variable_list::CollapseSelectedEntry",
       "j": "menu::SelectNext",
       "k": "menu::SelectPrevious",
-      "l": "variable_list::ExpandSelectedEntry"
+      "l": "variable_list::ExpandSelectedEntry",
+    }
+  },
+  {
+    "bindings": {
     }
   }
 ]
