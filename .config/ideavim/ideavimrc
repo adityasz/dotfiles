@@ -60,9 +60,9 @@ if has('ide')
     endif
 endif
 map <Leader>f  <Action>(FindInPath)
-map <Leader>e  <Action>(ShowErrorDescription)
-map [e         <Action>(GotoPreviousError)
-map ]e         <Action>(GotoNextError)
+map <Leader>d  <Action>(ShowErrorDescription)
+map [d         <Action>(GotoPreviousError)
+map ]d         <Action>(GotoNextError)
 map <F7>       <Action>(ToggleLineBreakpoint)
 map <F8>       <Action>(StepOver)
 map <F9>       <Action>(StepInto)
@@ -72,7 +72,7 @@ map <Leader>s  <Action>(FileStructurePopup)
 " map <Leader>c  <Action>(CallHierarchyPopupMenu) " Doesn't work right now
 map <Leader>l  <Action>(ChooseRunConfiguration)
 map <Leader>n  <Action>(NewFile)
-map <Leader>d  <Action>(NewDir)
+" map <Leader>d  <Action>(NewDir)
 map <Leader>h  <Action>(ReplaceInPath)
 " map <S-CR>     <Action>(JupyterNotebookRunCellInsertBelowCommandModeAction)
 

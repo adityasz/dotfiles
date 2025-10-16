@@ -27,7 +27,7 @@ map({'n', 'v'}, 'g0', '0', opts)
 
 map('v', '<C-c>', '"+y', opts)
 map('n', '<leader>r', ':IncRename ', opts)
-map('n', '<leader>e', ':lua vim.diagnostic.open_float()<CR>', opts)
+map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '<leader>z', ':ZenMode<CR>', opts)
 map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
