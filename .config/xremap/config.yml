@@ -59,11 +59,13 @@ keymap:
             dev.zed.Zed-Dev,
             dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
-            # sioyek, # sioyek has ctrl-v hardcoded for paste in search bar
             virt-manager,
-            # Cursor,
             qemu-system-x86_64,
-            mpv]
+            ghostty,
+            mpv,
+            # sioyek, # sioyek has ctrl-v hardcoded for paste in search bar
+            # Cursor, # Cursor does not allow remapping non-editor shortcuts
+            ]
     remap:
       alt_L-a: C-a
       alt_L-b: C-b
@@ -141,6 +143,7 @@ keymap:
       ctrl_L-v: C-alt-v
       ctrl_L-g: C-alt-g
       ctrl_L-u: C-alt-u
+      alt_L-tab: C-tab
       alt_L-a: C-a
       alt_L-b: C-b
       alt_L-c: C-c
@@ -202,11 +205,3 @@ keymap:
       alt_l-shift-x: C-shift-x
       alt_l-shift-y: C-shift-y
       alt_l-shift-z: C-shift-z
-
-  # - name: comfy keymap for stupid apps that allow only a few keybinds to be changed
-  #   exact_match: true
-  #   application:
-  #     only: Cursor
-  #   remap:
-  #     alt_L-p: C-p
-  #     alt_L-shift-p: C-shift-p
