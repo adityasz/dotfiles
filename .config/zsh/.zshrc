@@ -76,6 +76,7 @@ fi
 export PATH="$PATH:/usr/local/cuda/bin"
 export PATH="$PATH:$BUN_INSTALL/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
+export PATH="$PATH:$GOBIN"
 export PATH="$PATH:$PIXI_HOME/bin"
 export PATH="$PATH:$XDG_DATA_HOME/JetBrains/Toolbox/scripts"
 

@@ -1,0 +1,114 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: Inter, FontAwesome, Helvetica, sans-serif;
+    font-size: 14px;
+	min-height: 0;
+	padding: 0;
+}
+
+#waybar {
+    background-color: transparent;
+	margin: 0;
+	border: none;
+    color: #000000;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+	margin-top: 10px;
+	background-color: rgba(255, 255, 255, 0.7);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+	padding: 2px;
+}
+
+.modules-left {
+	margin-left: 10px;
+}
+
+.modules-right {
+	margin-right: 10px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd,
+#window,
+#workspaces {
+	padding: 2px 5px;
+}
+
+#workspaces {
+	padding: 2px;
+}
+
+#window {
+	padding: 2px 10px;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#power-profiles-daemon.performance {
+    background-color: #f53c3c;
+    color: #ffffff;
+}
+
+#power-profiles-daemon.balanced {
+    background-color: #2980b9;
+    color: #ffffff;
+}
+
+#power-profiles-daemon.power-saver {
+    background-color: #2ecc71;
+    color: #000000;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
