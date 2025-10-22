@@ -7,7 +7,6 @@
 }
 
 #waybar {
-    /* background-color: transparent; */
     background-color: rgba(255, 255, 255, 0.7);
 	margin: 0;
 	border: none;
@@ -50,6 +49,10 @@
 	padding: 2px 5px;
 }
 
+#pulseaudio, #backlight, #battery, #custom-power {
+	font-size: 20px;
+}
+
 #workspaces {
 	padding: 2px;
 }
@@ -74,21 +77,6 @@
     animation-timing-function: steps(12);
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
-
-#power-profiles-daemon.performance {
-    background-color: #f53c3c;
-    color: #ffffff;
-}
-
-#power-profiles-daemon.balanced {
-    background-color: #2980b9;
-    color: #ffffff;
-}
-
-#power-profiles-daemon.power-saver {
-    background-color: #2ecc71;
-    color: #000000;
 }
 
 label:focus {
