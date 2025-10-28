@@ -10,14 +10,17 @@
     ],
 
     "modules-right": [
-        "mpd",
+        // "mpd",       // not configured yet
         "tray",
         "idle_inhibitor",
         "network#ethernet",
         "network#wifi",
-        "bluetooth",
-        "pulseaudio",
+        // "bluetooth", // use blueman in tray instead
+        "pulseaudio#source",
+        "pulseaudio#output",
+        "pulseaudio/slider",
         "backlight",
+        "backlight/slider",
         "battery",
         "power-profiles-daemon",
         "custom/power",
@@ -30,6 +33,7 @@
 
 	"hyprland/workspaces": {
 		"format": "{icon}",
+        "show-special": true,
 		"persistent-workspaces": {
 			"*": 7
 		},
@@ -44,9 +48,8 @@
     /// ===------------------------------------------------------------------===
 
     "hyprland/window": {
-		"icon": false, // FIXME: Can't use true. When the plugin can't get an icon, it makes the
-		               // bar smaller. So bar resizes when changing focus. Extremely idiotic.
-	    "icon-size": 24,
+		"icon": true,  // FIXME: Doesn't have icon when desktop file contains absolute path
+	    "icon-size": 20,
         "format": "{}",
         "rewrite": {
             "(.*) — Zen Browser": "$1"
@@ -120,17 +123,21 @@
     "backlight": {
         "interval": 1000,  // this anyways updates when using brightness keys (which is what I do), so no need to poll
         "format": "{icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "format-icons": ["", "", "", "", "", "", "", ""], // FIXME:  is wrong in the waybar font
         "tooltip-format": "{percent}%"
     },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {format_source}",
-        "format-bluetooth": "{icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+    "pulseaudio#source": {
+        "format": "{format_source}",
         "format-source": "",
         "format-source-muted": "",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "pavucontrol"
+    },
+    "pulseaudio#output": {
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -140,21 +147,22 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol",
-        "tooltip-format": "{volume}%"
+        "tooltip-format": "{volume}%",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
     },
     "network#wifi": {
         "interface": "wlp*",
-        "format-wifi": "{essid}",
-        "tooltip-format-wifi": "{signaldBm} dBm | {frequency} GHz | {ifname}: {ipaddr}/{cidr}",
+        "format-wifi": "",
+        "tooltip-format-wifi": "{essid} | {signaldBm} dBm | {frequency} GHz | {ifname}: {ipaddr}/{cidr}",
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "network#ethernet": {
         "interface": "enp*",
-        "format-ethernet": "Ethernet",
-        "tooltip-format-ethernet": "{ipaddr}/{cidr} | {ifname} via {gwaddr}",
+        "format-ethernet": "",
+        "tooltip-format-ethernet": "{ipaddr}/{cidr} | {ifname}",
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
@@ -168,63 +176,5 @@
     },
     "tray": {
         "spacing": 10
-    },
-
-    /// ===------------------------------------------------------------------===
-    /// NEVER SEEN THESE
-    /// ===------------------------------------------------------------------===
-
-	"bluetooth": {
-        // "controller": "controller1", // specify the alias of the controller if there are more than 1 on the system
-        // "format": "󰂯 {status}",
-        // format-* handles every state, so default format is not necessary.
-        "format-on": "󰂯",
-        "format-off": "󰂲",
-        "format-disabled": "", // an empty format will hide the module
-        "format-connected": "󰂱 {num_connections}",
-        // "tooltip-format": "{controller_alias}\t{controller_address}",
-        // "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-        "tooltip-format-connected": "{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
-    },
-
-    "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
     }
 }
