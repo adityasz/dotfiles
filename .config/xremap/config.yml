@@ -46,6 +46,7 @@ keymap:
     exact_match: true
     application:
       not: [kitty,
+            aquamarine,
             zen,
             zen-twilight,
             zen-beta,

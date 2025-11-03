@@ -1,0 +1,155 @@
+[global]
+    follow = keyboard
+
+    ### Geometry ###
+    width = 300
+    height = (0, 300)
+    origin = top-right
+    offset = (10, 10) # WHICH GENIUS DECIDED A DEFAULT OF (10, 50)?!
+    notification_limit = 20
+
+    ### Progress bar ###
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 0
+    progress_bar_corners = all
+    icon_corner_radius = 15
+    icon_corners = all
+    indicate_hidden = yes
+    transparency = 50
+    padding = 8
+    horizontal_padding = 8
+    text_icon_padding = 0
+    frame_width = 1
+    gap_size = 10
+    sort = yes
+    # Don't remove messages, if the user is idle (no mouse or keyboard input)
+    # for longer than idle_threshold seconds.
+    # Set to 0 to disable.
+    # A client can set the 'transient' hint to bypass this. See the rules
+    # section for how to disable this if necessary
+    # idle_threshold = 120
+
+    ### Text ###
+    font = Inter 11
+    line_height = 0
+    markup = full
+    # The format of the message.  Possible variables are:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %c  category
+    #   %S  stack_tag
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    #   %n  progress value if set without any extra characters
+    #   %%  literal %
+    format = "<b>%s</b> <small>%a</small>\n%b"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = yes
+
+    ### Icons ###
+    enable_recursive_icon_lookup = true
+    icon_theme = "Adwaita, breeze"
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 128
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+    ### History ###
+    sticky_history = yes
+    history_length = 20
+
+    ### Misc/Advanced ###
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    corner_radius = 15
+    corners = all
+    ignore_dbusclose = false
+
+    ### Wayland ###
+    # Uncomment this if you want to let notifications appear under fullscreen
+    # applications (default: overlay)
+    # layer = top
+    force_xwayland = false
+
+    ### Legacy
+
+    # Use the Xinerama extension instead of RandR for multi-monitor support.
+    # This setting is provided for compatibility with older nVidia drivers that
+    # do not support RandR and using it on systems that support RandR is highly
+    # discouraged.
+    #
+    # By enabling this setting dunst will not be able to detect when a monitor
+    # is connected or disconnected which might break follow mode if the screen
+    # layout changes.
+    force_xinerama = false
+
+    ### mouse
+
+    # Defines list of actions for each mouse event
+    # Possible values are:
+    # * none: Don't do anything.
+    # * do_action: Invoke the action determined by the action_name rule. If there is no
+    #              such action, open the context menu.
+    # * open_url: If the notification has exactly one url, open it. If there are multiple
+    #             ones, open the context menu.
+    # * close_current: Close current notification.
+    # * remove_current: Remove current notification from history.
+    # * close_all: Close all notifications.
+    # * context: Open context menu for the notification.
+    # * context_all: Open context menu for all notifications.
+    # These values can be strung together for each mouse event, and
+    # will be executed in sequence.
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+# Experimental features that may or may not work correctly. Do not expect them
+# to have a consistent behaviour across releases.
+[experimental]
+    # Calculate the dpi to use on a per-monitor basis.
+    # If this setting is enabled the Xft.dpi value will be ignored and instead
+    # dunst will attempt to calculate an appropriate dpi value for each monitor
+    # using the resolution and physical size. This might be useful in setups
+    # where there are multiple screens with very different dpi values.
+    per_monitor_dpi = false
+
+
+[urgency_low]
+    # IMPORTANT: colors have to be defined in quotation marks.
+    # Otherwise the "#" and following would be interpreted as a comment.
+    background = "#ffffffaa"
+    foreground = "#000000"
+    frame_color = "#80808088"
+    timeout = 10
+    default_icon = dialog-information
+
+[urgency_normal]
+    background = "#ffffffaa"
+    foreground = "#000000"
+    frame_color = "#80808088"
+    timeout = 10
+    override_pause_level = 30
+    default_icon = dialog-information
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#80808088"
+    timeout = 0
+    override_pause_level = 60
+    default_icon = dialog-warning

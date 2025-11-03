@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Inter, "Font Awesome 6 Free";
+    font-family: Inter, "Font Awesome 7 Free";
     font-size: 16px;
 	min-height: 0;
 	padding: 0;
@@ -54,6 +54,10 @@
 	font-size: 14px;
 }
 
+#custom-power {
+	font-size: 14px;
+}
+
 #workspaces {
 	padding-left: 0;
 	padding-top: 8px;
@@ -78,13 +82,14 @@
 }
 
 #backlight-slider, #pulseaudio-slider {
+	margin-left: 5px;
 	padding-left: 5px;
 	padding-right: 10px;
 }
 
 #backlight-slider slider, #pulseaudio-slider slider {
-    min-height: 0px;
-    min-width: 0px;
+    min-height: 15px;
+    min-width: 15px;
     opacity: 0;
     background-image: none;
     border: 1px solid rgba(128, 128, 128, 0.5);
