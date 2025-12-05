@@ -41,12 +41,17 @@
       "alt-shift-k": "workspace::SwapPaneUp",
       "alt-shift-l": "workspace::SwapPaneRight",
       "alt-enter": "menu::SecondaryConfirm",
-      "alt-tab": "tab_switcher::Toggle",
-      "alt-shift-tab": ["tab_switcher::Toggle", { "select_last": true }],
       // these do not work when put in "debugger_stopped" context
       "f8": "debugger::StepOver",
       "f9": "debugger::StepInto",
       "f10": "debugger::StepOut"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-tab": "tab_switcher::Toggle",
+      "alt-shift-tab": ["tab_switcher::Toggle", { "select_last": true }],
     }
   },
   {
@@ -103,6 +108,11 @@
   {
     "context": "TabSwitcher",
     "bindings": {
+      "alt-shift-tab": "menu::SelectPrevious",
+      "alt-up": "menu::SelectPrevious",
+      "alt-k": "menu::SelectPrevious", // FIXME: does not work
+      "alt-down": "menu::SelectNext",
+      "alt-j": "menu::SelectNext", // FIXME: does not work
       "alt-w": "tab_switcher::CloseSelectedItem"
     }
   },
