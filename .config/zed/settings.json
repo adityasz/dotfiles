@@ -1,27 +1,41 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "inlay_hints": {
+    "show_value_hints": true,
+  },
+  "lsp_document_colors": "border",
+  "indent_guides": {
+    "coloring": "indent_aware",
+  },
+  "unnecessary_code_fade": 0.5,
+  "cursor_blink": false,
+  "auto_update": false,
+  "sticky_scroll": {
+    "enabled": true,
+  },
+  "autosave": "on_focus_change",
+  "show_edit_predictions": false,
   "auto_indent_on_paste": false,
   "agent_buffer_font_size": 16.0,
   "title_bar": {
     "show_menus": false,
-    "show_branch_icon": false
+    "show_branch_icon": false,
   },
   "resize_all_panels_in_dock": ["left"],
   "agent": {
-    "stream_edits": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5"
+      "model": "gpt-5",
     },
-    "default_profile": "ask"
+    "default_profile": "ask",
   },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
   "buffer_font_weight": 300,
   "buffer_font_features": {
     "liga": true,
-    "calt": true
+    "calt": true,
   },
   "max_tabs": 10,
   "ui_font_size": 18,
@@ -32,143 +46,150 @@
   "soft_wrap": "editor_width",
   "format_on_save": "off",
   "current_line_highlight": "none",
-  "theme": {
-    "mode": "system",
-    "dark": "One Dark",
-    "light": "Nice Light Theme"
-  },
   "search": {
     "case_sensitive": true,
-    "regex": true
+    "regex": true,
   },
   "hide_mouse": "on_typing_and_movement",
   "collaboration_panel": {
-    "button": false
+    "button": false,
   },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank", // No way to copy to system clipboard if this is set to never
-    "toggle_relative_line_numbers": true // false
+    "toggle_relative_line_numbers": true,
   },
   "base_keymap": "VSCode",
-  "features": {
-    "edit_prediction_provider": "none"
-  },
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "preview_tabs": {
-    "enable_preview_from_code_navigation": true
+    "enable_keep_preview_on_code_navigation": true,
   },
   "terminal": {
+    "dock": "bottom",
     "font_weight": 300,
     "shell": {
-      "program": "zsh"
+      "program": "zsh",
     },
     "toolbar": {
-      "breadcrumbs": false
-    }
+      "breadcrumbs": false,
+    },
   },
   "toolbar": {
     "breadcrumbs": true,
-    "quick_actions": false
+    "quick_actions": false,
   },
-  "vertical_scroll_margin": 0, // default: 3; 0 leads to bugs in git diffs (multibuffers), search panel hides lines on the top, etc.; zt does not serve its purpose with values other than 0
+  // 0 leads to bugs in git diffs (multibuffers), search panel hides lines on
+  // the top, etc.; zt does not serve its purpose with values other than 0
+  "vertical_scroll_margin": 0,
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "git_panel": {
-    "sort_by_path": true
+    "tree_view": true,
+    "sort_by_path": true,
   },
   "outline_panel": {
-    "indent_size": 20
+    "indent_size": 20,
   },
   "minimap": {
-    "show": "never"
+    "show": "never",
   },
   "languages": {
     "C": {
       "tab_size": 4,
-      "hard_tabs": true
+      "hard_tabs": true,
     },
     "C++": {
       "tab_size": 4,
-      "hard_tabs": true
+      "hard_tabs": true,
     },
     "Python": {
       "indent_guides": {
         "background_coloring": "disabled",
-        "coloring": "fixed"
+        "coloring": "fixed",
       },
       "show_wrap_guides": true,
       "tab_size": 4,
+      "language_servers": ["ty", "!basedpyright", "..."],
       "hard_tabs": false,
-      "language_servers": ["ruff", "basedpyright", "!ty", "..."],
       "auto_indent_on_paste": false,
       "wrap_guides": [80, 99],
       "formatter": [
         { "code_action": "source.fixAll.ruff" },
         {
           "language_server": {
-            "name": "ruff"
-          }
-        }
-      ]
-    },
-    "Typst": {
-      "tab_size": 2,
-      "hard_tabs": false,
-      "language_servers": ["tinymist"]
+            "name": "ruff",
+          },
+        },
+      ],
     },
     "JSON": {
       "tab_size": 4,
-      "hard_tabs": true
+      "hard_tabs": true,
     },
     "HTML": {
       "tab_size": 4,
-      "hard_tabs": true
+      "hard_tabs": true,
     },
     "CSS": {
       "tab_size": 4,
-      "hard_tabs": true
+      "hard_tabs": true,
     },
     "JavaScript": {
       "tab_size": 4,
-      "hard_tabs": true
+      "hard_tabs": true,
     },
     "TypeScript": {
       "tab_size": 4,
-      "hard_tabs": true
-    }
+      "hard_tabs": true,
+    },
   },
   "file_types": {
-    "CMake": ["CMakeLists.txt"]
+    "CMake": ["CMakeLists.txt"],
   },
   "lsp": {
-    "mojo": {
-      "settings": {
-        // "lsp_path": ".magic/envs/default/bin/mojo-lsp-server",
-        "args": ["--log=verbose"]
-      }
+    "clangd": {
+      "binary": {
+        "path": "/usr/bin/clangd",
+        "arguments": ["--experimental-modules-support"],
+      },
     },
     "tinymist": {
       "settings": {
-        "rootPath": "."
-      }
-    }
+        "rootPath": ".",
+      },
+    },
+    "ty": {
+      "settings": {
+        "experimental": {
+          "rename": true,
+        },
+      },
+    },
   },
-  // "jupyter": {
-  //   "kernel_selections": {
-  //     "python": "vkernel"
-  //   }
-  // },
   "telemetry": {
-    "diagnostics": true,
-    "metrics": true
-  }
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "icon_theme": "JetBrains New UI Icons (Light)",
+  "theme": {
+    "mode": "system",
+    "light": "JetBrains Light",
+    "dark": "JetBrains Dark",
+  },
+  "theme_overrides": {
+    "JetBrains Light": {
+      "editor.highlighted_line.background": "#f0f0f0",
+      "warning": "#bbbbbb",
+      "warning.background": "#f6f8fa",
+      "warning.border": "#d1d9e0b3",
+    },
+  },
 }

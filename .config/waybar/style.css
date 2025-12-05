@@ -1,16 +1,23 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Inter, "Font Awesome 7 Free";
-    font-size: 16px;
+	/* `otf-font-awesome` is required to be installed for icons */
+	font-family: Inter, "Font Awesome 7 Free";
+	font-size: 16px;
 	min-height: 0;
 	padding: 0;
 }
 
 #waybar {
-    background-color: rgba(255, 255, 255, 0.8);
+	/* background-color: rgba(255, 255, 255, 0.90); */
+	/* margin: 0; */
+	/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+	/* color: #000000; */
+	background-color: rgba(255, 255, 255, 0.00);
 	margin: 0;
-	border: none;
-    color: #000000;
+	color: #ffffff;
+}
+
+#waybar.bottom {
+	box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .modules-left,
@@ -65,6 +72,7 @@
 }
 
 #workspaces label {
+	color: #ffffff;
 	font-size: 10px;
 }
 
@@ -82,63 +90,62 @@
 }
 
 #backlight-slider, #pulseaudio-slider {
-	margin-left: 5px;
+	margin-left: 0px;
 	padding-left: 5px;
 	padding-right: 10px;
 }
-
 #backlight-slider slider, #pulseaudio-slider slider {
-    min-height: 15px;
-    min-width: 15px;
-    opacity: 0;
-    background-image: none;
-    border: 1px solid rgba(128, 128, 128, 0.5);
-    box-shadow: none;
+	min-height: 15px;
+	min-width: 15px;
+	opacity: 0;
+	background-image: none;
+	border: 1px solid rgba(128, 128, 128, 0.5);
+	box-shadow: none;
 }
 #backlight-slider trough, #pulseaudio-slider trough {
-    min-height: 10px;
-    min-width: 80px;
-    border-radius: 5px;
-    background-color: black;
+	min-height: 10px;
+	min-width: 80px;
+	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.31);
 }
 #backlight-slider highlight, #pulseaudio-slider highlight {
-    border-radius: 5px;
-    background-color: white;
+	border-radius: 5px;
+	background-color: white;
 	border: 1px solid rgba(128, 128, 128, 0.5);
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+	to {
+		background-color: #ffffff;
+		/* color: #000000; */
+	}
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+	background-color: #f53c3c;
+	color: #ffffff;
+	animation-name: blink;
+	animation-duration: 0.5s;
+	animation-timing-function: steps(12);
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
 }
 
 label:focus {
-    background-color: #000000;
+	/* background-color: #000000; */
 }
 
 #custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
+	background-color: #66cc99;
+	color: #2a5c45;
+	min-width: 100px;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+	-gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
+	-gtk-icon-effect: highlight;
 }

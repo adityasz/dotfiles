@@ -25,13 +25,16 @@ map({'n', 'v'}, '0', 'g0', opts)
 map({'n', 'v'}, 'g$', '$', opts)
 map({'n', 'v'}, 'g0', '0', opts)
 
-map('v', '<C-c>', '"+y', opts)
+map('v', '<M-c>', '"+y', opts)
 map('n', '<leader>r', ':IncRename ', opts)
 map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opts)
-map('n', '<leader>z', ':ZenMode<CR>', opts)
 map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
--- I no longer use Neotree as it conflicts with Oil.nvim.
+
+-- I no longer use Neotree as it conflicts with Oil.nvim and I do not want to
+-- spend the time to look up how to know if the current buffer is a directory
+-- and how to disable Neotree in that case
+--
 -- map('n', '<M-e>', ':Neotree toggle<CR> ', opts)
 
 -- Telescope buffers
@@ -74,13 +77,15 @@ map('n', '<leader> ', function()
 map('n', '<leader>f', ":Telescope live_grep<CR>", opts)
 map('n', '<leader>w', ":Telescope lsp_workspace_symbols<CR>", opts)
 
--- While both of the following are terrible, Telescope's built-in command at
--- least doesn't miss stuff.
+-- Everything is terrible. Will take a long time for me to build something,
+-- will use JetBrains/Zed instead.
+--
 -- map('n', '<leader>s', ":Telescope lsp_document_symbols<CR>", opts)
 -- map('n', '<leader>s', ":Telescope aerial<CR>", opts)
 map('n', '<leader>s', ":AerialOpen<CR>", opts)
 
-map({ "n", "x" }, "<leader>h", function() require("ssr").open() end) -- ssr is useful in Typst, but it can cause crashes
+-- Structural search and replace is useful in Typst, but it can cause crashes
+map({ "n", "x" }, "<leader>h", function() require("ssr").open() end)
 
 -- Handled by the kitty plugin
 -- map('n', '<C-j>', ':wincmd j<CR>', opts)

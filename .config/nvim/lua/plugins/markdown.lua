@@ -1,11 +1,8 @@
 return {
-    -- {
-    --     "MeanderingProgrammer/render-markdown.nvim",
-    --     ft = { "codecompanion" }
-    -- },
     {
         'preservim/vim-markdown',
-        config = function()
+        ft = { "markdown" },
+        init = function()
             vim.g.vim_markdown_folding_disabled = 1
             vim.g.vim_markdown_math = 1
             vim.g.vim_markdown_strikethrough = 1

@@ -1,3 +1,4 @@
 return {
-    'mechatroner/rainbow_csv'
+    "mechatroner/rainbow_csv",
+    ft = { "csv", "tsv" },
 }

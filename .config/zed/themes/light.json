@@ -7,7 +7,8 @@
       "name": "Nice Light Theme",
       "appearance": "light",
       "style": {
-        "background": "#ffffffff",
+        "background.appearance": "transparent",
+        "background": "#ffffff",
         "border": "#d1d9e0ff",
         "border.disabled": "#818b981a",
         "border.focused": "#0969daff",
@@ -139,7 +140,7 @@
         "version_control.modified": "#7da8e7",
         "version_control.deleted": "#ff0000",
         "warning": "#bbbbbb",
-        "warning.background": "#f6f8faff",
+        "warning.background": "#f6f8fa",
         "warning.border": "#d1d9e0b3",
         "players": [
           {

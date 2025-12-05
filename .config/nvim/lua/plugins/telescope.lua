@@ -1,23 +1,23 @@
 return {
-    "nvim-telescope/telescope.nvim", tag = "0.1.8",
+    "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         -- The following function is adapted from
         -- https://www.reddit.com/r/neovim/comments/10asvod/comment/j472wib/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-        require("telescope.pickers.layout_strategies").vertical_merged = function(picker, max_columns, max_lines, layout_config)
-            local layout = require("telescope.pickers.layout_strategies").vertical(picker, max_columns, max_lines, layout_config)
-            layout.prompt.borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
-            layout.results.borderchars = { '─', '│', '─', '│', '├', '┤', '┘', '└'}
+        local layouts = require("telescope.pickers.layout_strategies")
+        layouts.vertical_merged = function(picker, max_columns, max_lines, layout_config)
+            local layout = layouts.vertical(picker, max_columns, max_lines, layout_config)
+            layout.prompt.borderchars  = { '─','│','─','│','┌','┐','┘','└' }
+            layout.results.borderchars = { '─','│','─','│','├','┤','┘','└' }
             layout.results.line = layout.results.line - 1
-            layout.results.height = layout.results.height -- + 1
             if picker.previewer and layout.preview then
-                layout.results.borderchars = { '─', '│', '─', '│', '├', '┤', '┤', '├' }
-                layout.preview.borderchars = { '─', '│', '─', '│', '├', '┤', '┘', '└' }
+                layout.results.borderchars = { '─','│','─','│','├','┤','┤','├' }
+                layout.preview.borderchars = { '─','│','─','│','├','┤','┘','└' }
                 layout.preview.line = layout.preview.line - 2
-                layout.preview.height = layout.preview.height -- + 1
             end
             return layout
         end
+
         require("telescope").setup({
             defaults = {
                 results_title = "",
@@ -61,39 +61,8 @@ return {
                     show_line = true,
                     layout_config = {height = 30}
                 },
-                lsp_document_symbols = {
-                    ignore_symbols = {"parameter", "variable"},
-                    previewer = false,
-                    symbol_width = 0,
-                    symbol_type_width = 10,
-                    show_line = true,
-                    layout_config = {
-                        height = 30,
-                        width = function()
-                            return math.min(math.floor(0.8 * vim.o.columns), 80)
-                        end,
-                    }
-                },
-                lsp_workspace_symbols = {
-                    ignore_symbols = {"parameter", "variable"},
-                    previewer = false,
-                    symbol_width = 0,
-                    symbol_type_width = 10,
-                    show_line = true,
-                    layout_config = {
-                        height = 30,
-                        width = function()
-                            return math.min(math.floor(0.8 * vim.o.columns), 100)
-                        end,
-                    }
-                }
+                -- the lsp related pickers are terrible, so no config for them
             },
-            extensions = {
-                aerial = {
-                    show_columns = "lines",
-                    previewer = false,
-                }
-            }
         })
     end
 }

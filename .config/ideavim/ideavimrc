@@ -3,6 +3,9 @@ set ideajoin ideaput
 set textobj-indent " https://youtrack.jetbrains.com/issue/VIM-1151
 set NERDTree
 
+let g:NERDTreeMapCloseDir = "h"
+let g:NERDTreeMapActivateNode = "l"
+
 nnoremap <F3>      :noh<CR>
 nnoremap <SPACE>   <Nop>
 nnoremap <Leader>l gt
@@ -15,6 +18,8 @@ nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
 nnoremap <M-u> <C-u>
 nnoremap <M-d> <C-d>
+vnoremap <M-u> <C-u>
+vnoremap <M-d> <C-d>
 nnoremap <M-f> <C-f>
 nnoremap <M-b> <C-b>
 nnoremap <M-o> <C-o>
@@ -61,6 +66,8 @@ if has('ide')
 endif
 map <Leader>f  <Action>(FindInPath)
 map <Leader>d  <Action>(ShowErrorDescription)
+map [c         <Action>(VcsShowPrevChangeMarker)
+map ]c         <Action>(VcsShowNextChangeMarker)
 map [d         <Action>(GotoPreviousError)
 map ]d         <Action>(GotoNextError)
 map <F7>       <Action>(ToggleLineBreakpoint)

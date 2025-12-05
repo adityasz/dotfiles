@@ -1,6 +1,7 @@
 return {
     'kaarmu/typst.vim',
-    config = function()
+    ft = { "typst" },
+    init = function()
         vim.g.typst_embedded_languages = {'c', 'cpp', 'python', 'mojo'}
     end
 }

@@ -41,35 +41,41 @@
       "alt-shift-k": "workspace::SwapPaneUp",
       "alt-shift-l": "workspace::SwapPaneRight",
       "alt-enter": "menu::SecondaryConfirm",
-      "alt-tab": "tab_switcher::Toggle",
-      "alt-shift-tab": ["tab_switcher::Toggle", { "select_last": true }],
       // these do not work when put in "debugger_stopped" context
       "f8": "debugger::StepOver",
       "f9": "debugger::StepInto",
-      "f10": "debugger::StepOut"
-    }
+      "f10": "debugger::StepOut",
+      "shift-f5": "debugger::Restart",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-tab": "tab_switcher::Toggle",
+      "alt-shift-tab": ["tab_switcher::Toggle", { "select_last": true }],
+    },
   },
   {
     "context": "Workspace && !debugger_stopped",
     "bindings": {
       "f5": "editor::SpawnNearestTask",
-      "ctrl-f5": "debugger::Start"
-    }
+      "ctrl-f5": "debugger::Start",
+    },
   },
   {
     "context": "Workspace && debugger_stopped",
     "bindings": {
       "ctrl-f5": "debugger::Stop",
-      "ctrl-shift-f5": "debugger::Restart",
-      "f5": "debugger::Continue"
-    }
+      "shift-f5": "debugger::Restart",
+      "f5": "debugger::Continue",
+    },
   },
   {
     "context": "mode == single_line", // bug? (Picker || Menu) not true in Agent history search box
     "bindings": {
       "up": "menu::SelectPrevious",
-      "down": "menu::SelectNext"
-    }
+      "down": "menu::SelectNext",
+    },
   },
   {
     "context": "Editor && vim_mode != normal",
@@ -80,12 +86,13 @@
       "alt-x": "editor::Cut",
       "alt-z": "editor::Undo",
       "alt-y": "editor::Redo",
-      "alt-backspace": "editor::DeleteToPreviousWordStart"
-    }
+      "alt-backspace": "editor::DeleteToPreviousWordStart",
+    },
   },
   {
     "context": "ProjectPanel && not_editing",
     "bindings": {
+      "alt-e": "workspace::ToggleLeftDock",
       "space r": "project_panel::Rename",
       "f2": "project_panel::Rename",
       "space n": "project_panel::NewFile",
@@ -97,32 +104,40 @@
       "alt-v": "project_panel::Paste",
       "alt-shift-enter": "workspace::OpenWithSystem",
       "alt-u": "project_panel::ScrollUp",
-      "alt-d": "project_panel::ScrollDown"
-    }
+      "alt-d": "project_panel::ScrollDown",
+    },
   },
   {
     "context": "TabSwitcher",
     "bindings": {
-      "alt-w": "tab_switcher::CloseSelectedItem"
-    }
+      "alt-shift-tab": "menu::SelectPrevious",
+      "alt-up": "menu::SelectPrevious",
+      "alt-k": "menu::SelectPrevious", // FIXME: does not work
+      "alt-down": "menu::SelectNext",
+      "alt-j": "menu::SelectNext", // FIXME: does not work
+      "alt-w": "tab_switcher::CloseSelectedItem",
+    },
   },
   {
-      "context": "(ProjectPanel || GitPanel) && not_editing",
-      "bindings": {
-        "q": "workspace::ToggleLeftDock" // workaround for the absence of "workspace::CloseActivePane"
-      }
+    "context": "(ProjectPanel || GitPanel) && not_editing",
+    "bindings": {
+      "q": "workspace::ToggleLeftDock", // workaround for the absence of "workspace::CloseActivePane"
+    },
   },
   {
     "context": "vim_mode == normal || not_editing || EmptyPane", // why is not_editing not true in EmptyPane?
     "bindings": {
       "space space": "file_finder::Toggle",
       "space t": "tab_switcher::ToggleAll",
-      "space f": ["task::Spawn", {"task_name": "File Finder", "reveal_target": "center"}], // hopefully live grep lands soon
+      "space f": [
+        "task::Spawn",
+        { "task_name": "File Finder", "reveal_target": "center" },
+      ], // hopefully live grep lands soon
       "space h": "workspace::NewSearch",
       "space l": "task::Spawn",
       "alt-enter": "repl::Run",
-      "ctrl-c": "repl::Interrupt"
-    }
+      "ctrl-c": "repl::Interrupt",
+    },
   },
   {
     "context": "Terminal",
@@ -131,48 +146,48 @@
       "alt-t": "workspace::NewTerminal",
       "alt-c": "terminal::Copy",
       "alt-v": "terminal::Paste",
-      "ctrl-h": "pane::SplitLeft",
-      "ctrl-l": "pane::SplitRight",
-      "ctrl-j": "pane::SplitDown",
-      "ctrl-k": "pane::SplitUp",
+      "ctrl-alt-h": "pane::SplitLeft",
+      "ctrl-alt-l": "pane::SplitRight",
+      "ctrl-alt-j": "pane::SplitDown",
+      "ctrl-alt-k": "pane::SplitUp",
       "alt-shift-h": "workspace::SwapPaneLeft",
       "alt-shift-l": "workspace::SwapPaneRight",
       "alt-shift-j": "workspace::SwapPaneDown",
       "alt-shift-k": "workspace::SwapPaneUp",
       "alt-p": "terminal::ToggleViMode",
       "alt-u": "terminal::ScrollPageUp",
-      "alt-d": "terminal::ScrollPageDown"
-    }
+      "alt-d": "terminal::ScrollPageDown",
+    },
   },
   {
     "context": "Terminal && vi_mode",
     "bindings": {
-      "/": "buffer_search::Deploy"
-    }
+      "/": "buffer_search::Deploy",
+    },
   },
   {
     "context": "Editor",
     "bindings": {
-      "f7": "editor::ToggleBreakpoint"
-    }
+      "f7": "editor::ToggleBreakpoint",
+    },
   },
   {
     "context": "Editor && edit_prediction",
     "bindings": {
-      "alt-;": "editor::AcceptEditPrediction"
-    }
+      "alt-;": "editor::AcceptEditPrediction",
+    },
   },
   {
     "context": "Editor && edit_prediction_conflict",
     "bindings": {
-      "alt-;": "editor::AcceptEditPrediction"
-    }
+      "alt-;": "editor::AcceptEditPrediction",
+    },
   },
   {
     "context": "(Editor && mode == full) || (ContextEditor > Editor)",
     "bindings": {
-      "alt->": "agent::QuoteSelection"
-    }
+      "alt->": "agent::AddSelectionToThread",
+    },
   },
   {
     "context": "VimControl && !menu",
@@ -192,14 +207,14 @@
       "space d": "editor::GoToDiagnostic",
       "alt-shift-f": "editor::FormatSelections",
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
-      "ctrl-.": ["editor::SelectNext", { "replace_newest": false }]
-    }
+      "ctrl-.": ["editor::SelectNext", { "replace_newest": false }],
+    },
   },
   {
     "context": "Markdown",
     "bindings": {
-      "alt-c": "markdown::Copy"
-    }
+      "alt-c": "markdown::Copy",
+    },
   },
   {
     "context": "AgentPanel",
@@ -209,8 +224,8 @@
       "alt-shift-m": "agent::ToggleModelSelector",
       "alt-<": "assistant::InsertIntoEditor",
       "alt-left": "pane::GoBack",
-      "shift-escape": "agent::ExpandMessageEditor"
-    }
+      "shift-escape": "agent::ExpandMessageEditor",
+    },
   },
   {
     "context": "(MessageEditor > Editor) || (EditMessageEditor > Editor) || (AgentPanel > ContextEditor)",
@@ -219,55 +234,61 @@
       "alt-enter": "agent::Chat",
       "ctrl-enter": "agent::Chat",
       "alt-k": "agent::OpenHistory",
-      "alt-r": "agent::RemoveAllContext",
       "alt-n": "agent::NewTextThread",
       "alt-t": "agent::NewThread",
-      "shift-escape": "agent::ExpandMessageEditor"
-    }
+      "shift-escape": "agent::ExpandMessageEditor",
+    },
   },
   {
     "context": "EditMessageEditor > Editor",
     "bindings": {
       "alt-enter": "menu::Confirm",
-      "ctrl-enter": "menu::Confirm"
-    }
+      "ctrl-enter": "menu::Confirm",
+    },
   },
   {
     "context": "AgentPanel > ThreadHistory > Editor",
     "bindings": {
-      "delete": "agent::RemoveSelectedThread"
-    }
+      "delete": "agent::RemoveSelectedThread",
+    },
   },
   {
     "context": "ContextEditor > Editor",
     "bindings": {
-      "alt-enter": "assistant::Assist"
-    }
+      "alt-enter": "assistant::Assist",
+    },
   },
   {
     "context": "(CommitEditor > Editor) || (GitCommit > Editor) || (GitPanel > Editor)",
     "bindings": {
+      "alt-0": "workspace::ToggleLeftDock",
       "enter": "editor::Newline",
       "shift-escape": "git::ExpandCommitEditor",
       "alt-;": "git::GenerateCommitMessage",
       "alt-enter": "git::Commit",
       "alt-shift-enter": "git::Amend",
-      "alt-k": "git_panel::FocusChanges" // workaround for going from commit editor to changes list
-    }
+      "alt-k": "git_panel::FocusChanges", // workaround for going from commit editor to changes list
+    },
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "alt-0": "workspace::ToggleLeftDock",
+    },
   },
   {
     "context": "GitPanel && ChangesList",
     "bindings": {
       "alt-shift-y": "git::ToggleStaged",
       "alt-j": "git_panel::FocusEditor", // workaround for going from changes list to commit editor
-      "alt-y": ["action::Sequence", ["git::ToggleStaged", "menu::SelectNext"]] // workaround for git::StageAndNext not working in GitPanel
-    }
+      "alt-y": ["action::Sequence", ["git::ToggleStaged", "menu::SelectNext"]], // workaround for git::StageAndNext not working in GitPanel
+    },
   },
   {
     "context": "Editor && !agent_diff",
     "bindings": {
-      "alt-shift-y": "git::ToggleStaged"
-    }
+      "alt-shift-y": "git::ToggleStaged",
+    },
   },
   {
     "context": "DebugPanel && !Editor",
@@ -276,10 +297,6 @@
       "j": "menu::SelectNext",
       "k": "menu::SelectPrevious",
       "l": "variable_list::ExpandSelectedEntry",
-    }
+    },
   },
-  {
-    "bindings": {
-    }
-  }
 ]

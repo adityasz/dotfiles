@@ -1,6 +1,7 @@
 alias venv="source .venv/bin/activate"
 alias man='MANPAGER="nvim +Man!" man'
 alias icat='kitten icat'
+alias fd='fd --hyperlink'
 alias rg='rg --hyperlink-format=kitty'
 alias adb='HOME="$XDG_DATA_HOME/android" adb'
 alias wolfram='/opt/Wolfram/Mathematica/12.1/Executables/wolfram'

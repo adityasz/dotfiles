@@ -1,8 +1,7 @@
 return {
     'lervag/vimtex',
-    lazy = false,         -- we don't want to lazy load VimTeX
-    -- tag = "v2.15",     -- uncomment to pin to a specific release
-    config = function()
+    ft = { "tex", "plaintex", "latex" },
+    init = function()
         vim.g.vimtex_compiler_latexmk = {
             aux_dir = '.aux',
             options = {

@@ -19,4 +19,5 @@ vim.opt.textwidth = 0
 
 vim.opt.mouse = ""
 
-require("config.utils").set_color_scheme()
+vim.opt.background = "light"
+vim.cmd("colorscheme light")

@@ -37,11 +37,6 @@ keymap:
       fn-slash: pagedown
       fn-tab: alt-tab
 
-  - name: disable stupid linux touchpads
-    remap:
-      nextsong:
-        launch: ["/home/aditya/.local/bin/toggle-touchpad-clicks"]
-
   - name: comfy keymap
     exact_match: true
     application:
@@ -144,7 +139,6 @@ keymap:
       ctrl_L-v: C-alt-v
       ctrl_L-g: C-alt-g
       ctrl_L-u: C-alt-u
-      alt_L-tab: C-tab
       alt_L-a: C-a
       alt_L-b: C-b
       alt_L-c: C-c
