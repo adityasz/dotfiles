@@ -1,16 +1,20 @@
 {
+    "reload_on_style_change": true,
+
     "spacing": 4, // Gaps between modules (4px)
 
     "modules-left": [
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "hyprland/window#name"
     ],
 
     "modules-center": [
-        "hyprland/window"
+        "hyprland/window#title"
     ],
 
     "modules-right": [
         // "mpd",       // not configured yet
+        "memory",
         "tray",
         "idle_inhibitor",
         "network#ethernet",
@@ -24,7 +28,7 @@
         "backlight",
         "backlight/slider",
         "clock",
-        "custom/power"
+        "custom/notification"
     ],
 
     /// ===------------------------------------------------------------------===
@@ -33,24 +37,33 @@
 
 	"hyprland/workspaces": {
 		"format": "{icon}",
-        "show-special": true,
+        "show-special": false,
 		"persistent-workspaces": {
-			"*": 7
+			"eDP-1": [1, 2]
 		},
 		"format-icons": {
-			"active": "",
+			"active": "", 
 			"default": ""
 		}
 	},
+
+    "hyprland/window#name": {
+		"icon": false,
+	    "icon-size": 20,
+        "format": "{appName}",
+        "rewrite": {
+            "(.*) — Zen Browser": "$1"
+        }
+    },
 
     /// ===------------------------------------------------------------------===
     /// CENTER
     /// ===------------------------------------------------------------------===
 
-    "hyprland/window": {
-		"icon": true,  // FIXME: Doesn't have icon when desktop file contains absolute path
+    "hyprland/window#title": {
+		"icon": false,
 	    "icon-size": 20,
-        "format": "{}",
+        "format": "{title}",
         "rewrite": {
             "(.*) — Zen Browser": "$1"
         }
@@ -60,8 +73,29 @@
     /// RIGHT (right to left)
     /// ===------------------------------------------------------------------===
 
+    "custom/notification": {
+        "tooltip": true,
+        "format": "<span size='18pt'>{icon}</span>",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂜",
+            "dnd-notification": "󰂠",
+            "dnd-none": "󰪓",
+            "inhibited-notification": "󰂛",
+            "inhibited-none": "󰪑",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰪑"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+
     "clock": {
-		"format": "{:%a %b %e %H:%M}",
+		"format": "{:%a %b %d %H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>\n<span>{tz_list}</span>",
         "calendar": {
             "mode": "year",
@@ -83,18 +117,6 @@
             "Asia/Kolkata"
         ]
     },
-    "custom/power": {
-        "format" : "⏻",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
-    },
     "power-profiles-daemon": {
       "format": "{icon}",
       "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -108,7 +130,7 @@
     },
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 70,
             "warning": 30,
             "critical": 15
         },
@@ -176,5 +198,10 @@
     },
     "tray": {
         "spacing": 10
+    },
+    "memory": {
+        "interval": 10,
+        "format": "{avail} GiB",
+        "tooltip-format": "Swap: {swapUsed} GiB / {swapTotal} GiB | RAM: {used} GiB / {total} GiB"
     }
 }

@@ -30,13 +30,22 @@ function precmd() {
     vcs_info
 }
 
+# the escape code has to be emitted in preexec and not precmd; don't care about why
+# Credits: https://tanutaran.medium.com/tmux-jump-between-prompt-output-with-osc-133-shell-integration-standard-84241b2defb5
+function preexec() {
+    if [[ -n "$TMUX" ]]; then
+        echo -n "\\x1b]133;A\\x1b\\"
+    fi # kitty has its own code at the end
+}
+
 # Type `.. 3` in place of `cd ../../../` and so on.
 function ..() {
     cd -- "$(repeat ${1:-1} printf '../')"
 }
 
 # TODO: Check if this speeds things up or not.
-# TODO: Move compilation dump to `$XDG_CACHE_HOME/zsh`.
+# TODO: Move compilation dump to `$XDG_CACHE_HOME/zsh`
+#       (does not seem to be as simple as changing the path below)
 # Credits: https://news.ycombinator.com/user?id=bongobingo1
 # https://news.ycombinator.com/item?id=40128826
 compinit
@@ -62,15 +71,15 @@ prompt='%B%n%b%B@%b%B%m%b%B:%b%B%(5~|%-1~/…/%3~|%4~)%b${vcs_info_msg_0_}$ '
 # This can be uncommented when `~/.config/environment.d/all.conf` is changed
 # (environment variables modified).
 # if [[ -f ~/.config/environment.d/all.conf ]]; then
-# 	while IFS= read -r line; do
-# 		if [[ ! $line =~ ^[[:space:]]*# && -n $line ]]; then
-# 			eval "export $line"
-# 		fi
-# 	done < ~/.config/environment.d/all.conf
+#   while IFS= read -r line; do
+#       if [[ ! $line =~ ^[[:space:]]*# && -n $line ]]; then
+#           eval "export $line"
+#       fi
+#   done < ~/.config/environment.d/all.conf
 # fi
 
 if ! [[ "$PATH" =~ $HOME/.local/bin: ]]; then
-	PATH="$HOME/.local/bin:$PATH"
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 export PATH="$PATH:/usr/local/cuda/bin"
@@ -89,10 +98,15 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export GPG_TTY=$(tty)
 
 # TODO: Check if zsh follows symlinks when checking if `.zwc` is newer.
-# NOTE: Startup time is low enough that it probably does not matter. Seeing how
-#       zsh works is not worth it. zsh is not micro-optimized. .zshrc should
-#       also not be micro-optimized: zsh does not deserve it.
+#       (i.e., does zsh compile sourced files also or not)
 source $ZDOTDIR/.zsh_aliases
 source $ZDOTDIR/plugins/zsh-autosuggestions.zsh
 source $ZDOTDIR/plugins/zsh-syntax-highlighting.zsh
 source $ZDOTDIR/plugins/zsh-vi-mode.zsh
+
+if test -n "$KITTY_INSTALLATION_DIR"; then
+    export KITTY_SHELL_INTEGRATION="enabled"
+    autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+    kitty-integration
+    unfunction kitty-integration
+fi

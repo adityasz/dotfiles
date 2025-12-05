@@ -12,13 +12,13 @@ vim.api.nvim_create_autocmd("FocusGained", {
         local gnome_scheme = result:gsub("^%s*(.-)%s*$", "%1")
         local fg = ''
         if gnome_scheme == "'prefer-dark'" then
-            fg_ = '#555555'
+            fg = '#555555'
         else
-            fg_ = '#bbbbbb'
+            fg = '#bbbbbb'
         end
 
         vim.api.nvim_set_hl(0, 'CopilotSuggestion', {
-            fg = fg_,
+            fg = fg,
             ctermfg = 8,
             force = true
         })
@@ -110,7 +110,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.softtabstop = 2
         vim.opt.shiftwidth = 2
         vim.opt.textwidth = 80
-        vim.opt.expandtab = true -- Until TeX has a good formatter, use spaces for indentation.
+        vim.opt.expandtab = true -- Until TeX has a good formatter (which will never happen), use spaces for indentation
         vim.opt.spell = true
     end
 })
@@ -207,6 +207,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*.ixx",
+    callback = function()
+        vim.bo.filetype = "cpp"
+    end,
+})
+
 vim.api.nvim_create_autocmd("BufReadPost", {
     pattern = "*.py",
     callback = function()
@@ -235,6 +242,28 @@ vim.api.nvim_create_autocmd("BufReadPost", {
                 })
                 break
             end
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
+    group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
+    callback = function()
+        if vim.api.nvim_ui_send then
+            vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
+        else
+            io.stdout:write("\x1b]1337;SetUserVar=in_editor=MQo\007")
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+    group = vim.api.nvim_create_augroup("KittyUnsetVarVimLeave", { clear = true }),
+    callback = function()
+        if vim.api.nvim_ui_send then
+            vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQo\007")
+        else
+            io.stdout:write("\x1b]1337;SetUserVar=in_editor\007")
         end
     end,
 })

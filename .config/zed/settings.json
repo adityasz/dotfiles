@@ -1,6 +1,26 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "ssh_connections": [
+    {
+      "host": "elk.cse.iitb.ac.in",
+      "username": "adityas",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/run/user/22809/dspn"
+          ]
+        }
+      ]
+    }
+  ],
+  "auto_update": false,
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "autosave": "on_focus_change",
+  "show_edit_predictions": false,
   "auto_indent_on_paste": false,
   "agent_buffer_font_size": 16.0,
   "title_bar": {
@@ -9,7 +29,6 @@
   },
   "resize_all_panels_in_dock": ["left"],
   "agent": {
-    "stream_edits": true,
     "default_model": {
       "provider": "copilot_chat",
       "model": "gpt-5"
@@ -48,12 +67,9 @@
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank", // No way to copy to system clipboard if this is set to never
-    "toggle_relative_line_numbers": true // false
+    "toggle_relative_line_numbers": true
   },
   "base_keymap": "VSCode",
-  "features": {
-    "edit_prediction_provider": "none"
-  },
   "edit_predictions": {
     "mode": "subtle"
   },
@@ -107,8 +123,8 @@
       },
       "show_wrap_guides": true,
       "tab_size": 4,
+      "language_servers": ["basedpyright", "!ty", "..."],
       "hard_tabs": false,
-      "language_servers": ["ruff", "basedpyright", "!ty", "..."],
       "auto_indent_on_paste": false,
       "wrap_guides": [80, 99],
       "formatter": [
@@ -120,11 +136,11 @@
         }
       ]
     },
-    "Typst": {
-      "tab_size": 2,
-      "hard_tabs": false,
-      "language_servers": ["tinymist"]
-    },
+    // "Typst": {
+    //   "tab_size": 2,
+    //   "hard_tabs": false,
+    //   "language_servers": ["tinymist"]
+    // },
     "JSON": {
       "tab_size": 4,
       "hard_tabs": true
@@ -150,6 +166,12 @@
     "CMake": ["CMakeLists.txt"]
   },
   "lsp": {
+    "clangd": {
+      "binary": {
+        "path": "/usr/bin/clangd",
+        "arguments": ["--experimental-modules-support"]
+      }
+    },
     "mojo": {
       "settings": {
         // "lsp_path": ".magic/envs/default/bin/mojo-lsp-server",

@@ -25,7 +25,7 @@ map({'n', 'v'}, '0', 'g0', opts)
 map({'n', 'v'}, 'g$', '$', opts)
 map({'n', 'v'}, 'g0', '0', opts)
 
-map('v', '<C-c>', '"+y', opts)
+map('v', '<M-c>', '"+y', opts)
 map('n', '<leader>r', ':IncRename ', opts)
 map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '<leader>z', ':ZenMode<CR>', opts)

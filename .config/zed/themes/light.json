@@ -7,6 +7,7 @@
       "name": "Nice Light Theme",
       "appearance": "light",
       "style": {
+        "background.appearance": "transparent",
         "background": "#ffffffff",
         "border": "#d1d9e0ff",
         "border.disabled": "#818b981a",
