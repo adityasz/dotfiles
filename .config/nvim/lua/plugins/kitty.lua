@@ -20,6 +20,9 @@ return {
                 callbacks = {
                     after_ready = function()
                         vim.opt.wrap = true
+                        -- Credits (or in case the solution is stupid, negative credit): Claude Sonnet 4.5.
+                        vim.keymap.set('n', '$', 'g_', { buffer = true })
+                        vim.keymap.set('v', '$', 'g_', { buffer = true })
                     end,
                 }
             }

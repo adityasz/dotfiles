@@ -90,7 +90,7 @@ export PATH="$PATH:$BUN_INSTALL/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$XDG_DATA_HOME/JetBrains/Toolbox/scripts"
 
-export CDPATH="$HOME/IITB/year-4/autumn"
+export CDPATH="$HOME/IITB/year-4/spring"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PROMPT_DIRTRIM=3

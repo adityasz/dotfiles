@@ -1,11 +1,6 @@
-" <<< theme-switcher <<<
-set background=light
-colorscheme light
-" ======================
-" set background=dark
-" colorscheme dark
-" >>> theme-switcher >>>
-
+" I have moved over to neovim. My vim config rot so I got some Gemini to
+" generate it using my neovim config. Some stuff in this file may therefore be
+" extremely stupid, and I would never know since I rarely need vanilla vim.
 " ==============================================================================
 
 set runtimepath^=$XDG_CONFIG_HOME/vim
@@ -27,8 +22,13 @@ if !has('nvim') | set viminfofile=$XDG_STATE_HOME/vim/viminfo | endif
 
 " ==============================================================================
 
-set nu mouse=a tabstop=8 noexpandtab shiftwidth=8 textwidth=0 linebreak ai
-set relativenumber smarttab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set mouse=
+set relativenumber
+set smarttab
 set formatoptions+=cro shortmess-=S termguicolors updatetime=100 tw=0
 " (an asterisk in the beginning of each line of a multi-line comment in c)
 " note the +, I want the opposite behavior of:
@@ -36,11 +36,6 @@ set formatoptions+=cro shortmess-=S termguicolors updatetime=100 tw=0
 
 " let $PAGER=''
 runtime! ftplugin/man.vim
-
-" Fixing typos on the fly (credit: Gilles Castel)
-" setlocal spell
-set spelllang=en_us
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 nnoremap <F2> :set relativenumber!<CR>
 nnoremap <F3> :noh<CR>
@@ -50,26 +45,30 @@ nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
 
-nnoremap <F1> <Esc>
-inoremap <F1> <Esc>
-onoremap <F1> <Esc>
-vnoremap <F1> <Esc>
-xnoremap <F1> <Esc>
-lnoremap <F1> <Esc>
-snoremap <F1> <Esc>
+nnoremap <M-u> <C-u>
+vnoremap <M-u> <C-u>
+nnoremap <M-d> <C-d>
+vnoremap <M-d> <C-d>
+nnoremap <M-f> <C-f>
+vnoremap <M-f> <C-f>
+nnoremap <M-b> <C-b>
+vnoremap <M-b> <C-b>
+nnoremap <M-o> <C-o>
+nnoremap <M-i> <C-i>
 
 map Y y$
 
-nnoremap j gj
-nnoremap k gk
+nnoremap <expr> j v:count == 0 ? 'gj' : "m'" . v:count . 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : "m'" . v:count . 'k'
+vnoremap <expr> j v:count == 0 ? 'gj' : "m'" . v:count . 'j'
+vnoremap <expr> k v:count == 0 ? 'gk' : "m'" . v:count . 'k'
+
 nnoremap $ g$
 nnoremap 0 g0
 nnoremap gj j
 nnoremap gk k
 nnoremap g$ $
 nnoremap g0 0
-vnoremap j gj
-vnoremap k gk
 vnoremap $ g$
 vnoremap 0 g0
 vnoremap gj j
@@ -81,159 +80,43 @@ vnoremap g0 0
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
-vnoremap <C-c> "+y
+vnoremap <M-c> "+y
 
 tmap <C-h> <C-W><C-h>
 tmap <C-l> <C-W><C-l>
 tmap <C-j> <C-W><C-j>
 tmap <C-k> <C-W><C-k>
 
-" From https://vi.stackexchange.com/a/10666:
-autocmd filetype c      nnoremap <buffer> <F5> :w <bar> !clear; gcc -O3 -Wall % -o %:r<CR>
-autocmd filetype cpp    nnoremap <buffer> <F5> :w <bar> !clear; g++ -std=c++23 -O3 -Wall % -o %:r<CR>
-autocmd filetype python nnoremap <buffer> <F5> :w <bar> !clear; python %<CR>
-autocmd filetype c      nnoremap <buffer> <C-F5> :w <bar> !clear; gcc -Wall -ggdb3 % -o %:r<CR>
-autocmd filetype cpp    nnoremap <buffer> <C-F5> :w <bar> !clear; g++ -std=c++23 -Wall % -g3 -ggdb3 -o %:r<CR>
+augroup FT_Configs
+    autocmd!
+    autocmd FileType lex,c,asm,make setlocal tabstop=8 shiftwidth=8 textwidth=80 noexpandtab nolinebreak nospell
+    autocmd FileType sh setlocal tabstop=4 shiftwidth=4 textwidth=80 noexpandtab nolinebreak nospell
+    autocmd FileType cpp,cuda setlocal tabstop=4 shiftwidth=4 textwidth=99 noexpandtab nolinebreak nospell
+    autocmd FileType html,css,xml,json,javascript setlocal textwidth=99 noexpandtab nolinebreak
+    autocmd FileType python,lua setlocal textwidth=99 nolinebreak nospell
+    autocmd FileType tex setlocal tabstop=2 softtabstop=2 shiftwidth=2 textwidth=80 expandtab spell
+    autocmd FileType markdown setlocal textwidth=80 linebreak spell
+    autocmd FileType scheme,racket,haskell setlocal tabstop=2 softtabstop=2 shiftwidth=2 textwidth=80
+    autocmd FileType rst setlocal tabstop=8 shiftwidth=8 textwidth=80 noexpandtab linebreak spell
+    autocmd FileType txt,typst setlocal spell
+    autocmd BufRead,BufNewFile *.ixx set filetype=cpp
+augroup END
 
-autocmd Filetype c          setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
-autocmd Filetype cuda       setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
-autocmd Filetype cpp        setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
-autocmd Filetype asm        setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 nolinebreak nospell
-autocmd Filetype python     setlocal tabstop=4 shiftwidth=4 softtabstop=4 nolinebreak nospell
-autocmd Filetype html       setlocal expandtab textwidth=80 nospell
-autocmd Filetype rst        setlocal tabstop=8 noexpandtab textwidth=72 nospell
-autocmd Filetype css        setlocal expandtab textwidth=80 nospell
-autocmd Filetype xml        setlocal textwidth=80 nospell
-autocmd Filetype json       setlocal nolinebreak nospell
-autocmd Filetype tex        setlocal expandtab linebreak spell textwidth=80 tabstop=4 softtabstop=4
-autocmd Filetype make       setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
-autocmd Filetype arduino    setlocal noexpandtab tabstop=8 shiftwidth=8 softtabstop=8 textwidth=80 nolinebreak nospell
-autocmd Filetype haskell    setlocal tabstop=4 shiftwidth=4 softtabstop=4 nolinebreak nospell
-autocmd Filetype javascript setlocal textwidth=80 nospell
+function! s:SetKittyVar(val)
+    let l:cmd = "\x1b]1337;SetUserVar=in_editor=" . a:val . "\x07"
+    if has('gui_running')
+        return
+    endif
+    let l:out = &t_te . l:cmd
+    call writefile([l:cmd], "/dev/stdout", "b")
+endfunction
 
-" if has("autocmd")
-"   augroup templates
-"     autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp | $d
-"   augroup END
-" endif
-
-" m and T to hide GVim menu and toolbar:
-" set guifont=JetBrains\ Mono\ 16 guioptions-=m guioptions-=T
-set guifont=JetBrains\ Mono\ 14
-" r to hide GVim scrollbar:
-" set guioptions-=r
+augroup KittyVar
+    autocmd!
+    " MQo is base64 for '1'
+    autocmd VimEnter,VimResume * call s:SetKittyVar("MQo")
+    autocmd VimLeave,VimSuspend * call s:SetKittyVar("")
+augroup END
 
 " (no plugins required) debugging inside vim:
 let g:termdebug_wide = 1
-
-" To disable syntax highlighting of errors:
-let g:vim_json_warnings = 0
-
-" vim-plug
-"===============================================================================
-
-call plug#begin()
-
-" Copilot:
-Plug 'github/copilot.vim'
-
-" For LaTeX:
-Plug 'lervag/vimtex'
-	" See :h vimtex_compiler_latexmk
-	let g:vimtex_compiler_latexmk = {
-	    \ 'aux_dir': '.aux',
-	    \ 'options' : [
-	    \   '-pdf',
-	    \   '-shell-escape',
-	    \   '-verbose',
-	    \   '-file-line-error',
-	    \   '-synctex=1',
-	    \   '-interaction=nonstopmode',
-	    \ ],
-	    \}
-
-	filetype plugin indent on
-	syntax enable
-	let g:vimtex_view_method = 'sioyek'
-	let maplocalleader = " "
-	let g:tex_flavor = 'latex'
-	" From https://github.com/lervag/vimtex/issues/513#issuecomment-328444047
-	" (see also ":h g:tex_fast"):
-	let g:tex_fast = ""
-	" This disables highlighting of 'begin' and 'end' tags:
-	let g:vimtex_matchparen_enabled = 0
-	let g:vimtex_quickfix_open_on_warning = 0
-
-" To make LaTeX, VimTeX, Evince work in harmony:
-Plug 'peterbjorgensen/sved'
-
-" For table of contents etc.:
-Plug 'preservim/vim-markdown'
-	let g:vim_markdown_folding_disabled = 1
-
-" Emmet:
-Plug 'mattn/emmet-vim'
-
-" Better python syntax highlighting:
-Plug 'vim-python/python-syntax'
-	let g:python_highlight_all = 1
-
-" Better C++ syntax highlighting:
-Plug 'octol/vim-cpp-enhanced-highlight'
-	" Enable highlighting of member variables, class declarations, POSIX
-	" functions:
-	let g:cpp_class_scope_highlight = 1
-	let g:cpp_member_variable_highlight = 1
-	let g:cpp_class_decl_highlight = 1
-	let g:cpp_posix_standard = 1
-
-Plug 'vim-scripts/TagHighlight'
-
-" Commenting:
-Plug 'tpope/vim-commentary'
-	autocmd FileType cpp,c setlocal commentstring=//\ %s
-
-" Snippets:
-Plug 'sirver/ultisnips'
-	let g:UltiSnipsExpandTrigger = '<Tab>'
-	let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-	let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
-
-" Blueprint support:
-Plug 'https://gitlab.com/gabmus/vim-blueprint'
-
-" Fancy statusline:
-Plug 'itchyny/lightline.vim'
-	set laststatus=2
-	let g:lightline = {
-		  \ 'colorscheme': 'one',
-		  \ 'active': {
-		  \   'right': [ [ 'lineinfo' ],
-		  \              [ 'percent' ],
-		  \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
-		  \ },
-		  \ 'component': {
-		  \   'charvaluehex': '0x%B',
-		  \   'lineinfo': '%l:%-2v'
-		  \ },
-		  \ }
-	function! LightlineFileformat()
-	  return winwidth(0) > 70 ? &fileformat : ''
-	endfunction
-
-	function! LightlineFiletype()
-	  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-	endfunction
-
-" Arduino:
-" Plug 'stevearc/vim-arduino'
-" 	nnoremap <buffer> <leader>aa <cmd>ArduinoAttach<CR>
-" 	nnoremap <buffer> <leader>av <cmd>ArduinoVerify<CR>
-" 	nnoremap <buffer> <leader>au <cmd>ArduinoUpload<CR>
-" 	nnoremap <buffer> <leader>aus <cmd>ArduinoUploadAndSerial<CR>
-" 	nnoremap <buffer> <leader>as <cmd>ArduinoSerial<CR>
-" 	nnoremap <buffer> <leader>ab <cmd>ArduinoChooseBoard<CR>
-" 	nnoremap <buffer> <leader>ap <cmd>ArduinoChooseProgrammer<CR>
-" " let g:arduino_use_slime = 1
-
-call plug#end()

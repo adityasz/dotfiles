@@ -3,6 +3,7 @@
 modmap:
   - name: Global
     remap:
+      pagedown: logoff
       rightalt:
         held: fn
         alone: fn
@@ -59,6 +60,7 @@ keymap:
             qemu-system-x86_64,
             ghostty,
             mpv,
+            neovide,
             # sioyek, # sioyek has ctrl-v hardcoded for paste in search bar
             # Cursor, # Cursor does not allow remapping non-editor shortcuts
             ]

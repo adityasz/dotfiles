@@ -1,3 +1,5 @@
+# Adapted from https://castel.dev/post/lecture-notes-1/
+
 global !p
 def math():
     return vim.eval('vimtex#syntax#in_mathzone()') == '1'
@@ -10,8 +12,12 @@ def env(name):
     return x != '0' and y != '0'
 endglobal
 
+# snippet mk "Math" wA
+# \(${1}\)$2
+# endsnippet
+
 snippet mk "Math" wA
-\(${1}\)$2
+$${1}$$2
 endsnippet
 
 snippet dm "Math" wA

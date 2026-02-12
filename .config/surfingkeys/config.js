@@ -12,7 +12,8 @@ settings.lurkingPattern = new RegExp([
   '.*hackerrank\\.com.*',
   '.*humanbenchmark.com\\/tests\\/typing',
   '.*app.*ironcalc.com.*',
-  '.*excalidraw.com.*'	
+  '.*excalidraw.com.*',
+  '.*www.overleaf.com\\/project\\/.*'
 ].join('|'), 'i');
 
 light_theme = `

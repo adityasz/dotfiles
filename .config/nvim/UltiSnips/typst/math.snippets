@@ -44,31 +44,6 @@ Sum(${1:n}, ${2:0}, ${3:oo}) ${4:f(n)}
 endsnippet
 
 context "math()"
-snippet sr "^2" iA
-^2
-endsnippet
-
-context "math()"
-snippet cb "^3" iA
-^3
-endsnippet
-
-context "math()"
-snippet td "^power" iA
-^($1)$0
-endsnippet
-
-context "math()"
-snippet ^^ "^power" iA
-^($1)$0
-endsnippet
-
-context "math()"
-snippet __ "subscript" iA
-_($1)$0
-endsnippet
-
-context "math()"
 snippet '([A-Za-z])(\d)' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet

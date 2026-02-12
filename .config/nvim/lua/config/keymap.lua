@@ -77,12 +77,13 @@ map('n', '<leader> ', function()
 map('n', '<leader>f', ":Telescope live_grep<CR>", opts)
 map('n', '<leader>w', ":Telescope lsp_workspace_symbols<CR>", opts)
 
--- Everything is terrible. Will take a long time for me to build something,
+-- Everything is terrible. Will take a weekend for me to build something,
 -- will use JetBrains/Zed instead.
 --
 -- map('n', '<leader>s', ":Telescope lsp_document_symbols<CR>", opts)
 -- map('n', '<leader>s', ":Telescope aerial<CR>", opts)
-map('n', '<leader>s', ":AerialOpen<CR>", opts)
+-- map('n', '<leader>s', ":AerialOpen<CR>", opts)
+map('n', '<leader>s', ":Navbuddy<CR>", opts)
 
 -- Structural search and replace is useful in Typst, but it can cause crashes
 map({ "n", "x" }, "<leader>h", function() require("ssr").open() end)

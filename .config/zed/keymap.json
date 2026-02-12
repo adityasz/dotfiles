@@ -125,14 +125,11 @@
     },
   },
   {
-    "context": "vim_mode == normal || not_editing || EmptyPane", // why is not_editing not true in EmptyPane?
+    "context": "vim_mode == normal || not_editing || EmptyPane", // bug: not_editing not true in EmptyPane
     "bindings": {
       "space space": "file_finder::Toggle",
-      "space t": "tab_switcher::ToggleAll",
-      "space f": [
-        "task::Spawn",
-        { "task_name": "File Finder", "reveal_target": "center" },
-      ], // hopefully live grep lands soon
+      "space t": "tab_switcher::OpenInActivePane",
+      "space f": "quick_search::Toggle",
       "space h": "workspace::NewSearch",
       "space l": "task::Spawn",
       "alt-enter": "repl::Run",
@@ -169,6 +166,8 @@
     "context": "Editor",
     "bindings": {
       "f7": "editor::ToggleBreakpoint",
+      "alt-.": "editor::ShowCompletions",
+      "alt-/": "editor::ShowSignatureHelp",
     },
   },
   {
@@ -206,6 +205,7 @@
       "space r": "editor::Rename",
       "space d": "editor::GoToDiagnostic",
       "alt-shift-f": "editor::FormatSelections",
+      "ctrl-6": "pane::AlternateFile",
       "ctrl-,": ["editor::SelectPrevious", { "replace_newest": false }],
       "ctrl-.": ["editor::SelectNext", { "replace_newest": false }],
     },

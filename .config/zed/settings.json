@@ -1,10 +1,17 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "diff_view_style": "split",
+  "semantic_tokens": "combined",
   "inlay_hints": {
-    "show_value_hints": true,
+    "show_background": false,
+    "show_other_hints": false,
+    "show_parameter_hints": false,
+    "show_type_hints": false,
+    "enabled": true,
+    "show_value_hints": false,
   },
-  "lsp_document_colors": "border",
+  "lsp_document_colors": "background",
   "indent_guides": {
     "coloring": "indent_aware",
   },
@@ -12,27 +19,23 @@
   "cursor_blink": false,
   "auto_update": false,
   "sticky_scroll": {
-    "enabled": true,
+    "enabled": false,
   },
   "autosave": "on_focus_change",
   "show_edit_predictions": false,
   "auto_indent_on_paste": false,
   "agent_buffer_font_size": 16.0,
-  "title_bar": {
-    "show_menus": false,
-    "show_branch_icon": false,
-  },
-  "resize_all_panels_in_dock": ["left"],
+  "resize_all_panels_in_dock": [],
   "agent": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5",
+      "model": "claude-opus-4.6",
     },
     "default_profile": "ask",
   },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
-  "buffer_font_weight": 300,
+  "buffer_font_weight": 400,
   "buffer_font_features": {
     "liga": true,
     "calt": true,
@@ -130,6 +133,10 @@
         },
       ],
     },
+    "Typst": {
+      "tab_size": 2,
+      "hard_tabs": false,
+    },
     "JSON": {
       "tab_size": 4,
       "hard_tabs": true,
@@ -180,7 +187,7 @@
   },
   "icon_theme": "JetBrains New UI Icons (Light)",
   "theme": {
-    "mode": "system",
+    "mode": "light",
     "light": "JetBrains Light",
     "dark": "JetBrains Dark",
   },

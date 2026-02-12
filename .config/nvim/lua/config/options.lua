@@ -21,3 +21,6 @@ vim.opt.mouse = ""
 
 vim.opt.background = "light"
 vim.cmd("colorscheme light")
+
+vim.g.neovide_scroll_animation_length = 0.1
+vim.g.neovide_cursor_animation_length = 0
