@@ -137,6 +137,7 @@
   <action id="FindNext">
     <keyboard-shortcut first-keystroke="f3" />
   </action>
+  <action id="FocusEditor" />
   <action id="GoToTab1">
     <keyboard-shortcut first-keystroke="alt 1" />
   </action>
@@ -279,6 +280,7 @@
     <keyboard-shortcut first-keystroke="ctrl w" />
     <keyboard-shortcut first-keystroke="alt back_space" />
   </action>
+  <action id="Terminal.Escape" />
   <action id="Terminal.Find">
     <keyboard-shortcut first-keystroke="alt f" />
   </action>

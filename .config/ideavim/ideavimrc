@@ -56,32 +56,29 @@ if has('ide')
         map <Leader>b  <Action>(Build)
     endif
 
-    if &ide =~? 'dataspell'
-        map <Leader>q  <Action>(Console.Jdbc.Execute)
-    endif
-
-    if &ide =~? 'pycharm'
-        map <Leader>q  <Action>(Console.Jdbc.Execute)
-    endif
 endif
-map <Leader>f  <Action>(FindInPath)
-map <Leader>d  <Action>(ShowErrorDescription)
-map [c         <Action>(VcsShowPrevChangeMarker)
-map ]c         <Action>(VcsShowNextChangeMarker)
-map [d         <Action>(GotoPreviousError)
-map ]d         <Action>(GotoNextError)
-map <F7>       <Action>(ToggleLineBreakpoint)
-map <F8>       <Action>(StepOver)
-map <F9>       <Action>(StepInto)
-map <F10>      <Action>(StepOut)
-map <F11>      <Action>(ToggleFullScreen)
-map <Leader>s  <Action>(FileStructurePopup)
-" map <Leader>c  <Action>(CallHierarchyPopupMenu) " Doesn't work right now
-map <Leader>l  <Action>(ChooseRunConfiguration)
-map <Leader>n  <Action>(NewFile)
-" map <Leader>d  <Action>(NewDir)
-map <Leader>h  <Action>(ReplaceInPath)
-" map <S-CR>     <Action>(JupyterNotebookRunCellInsertBelowCommandModeAction)
+map <Leader><Leader> <Action>(GotoFile)
+map <Leader>s        <Action>(FileStructurePopup)
+map <Leader>f        <Action>(FindInPath)
+map <Leader>d        <Action>(ShowErrorDescription)
+map <Leader>l        <Action>(ChooseRunConfiguration)
+map <Leader>h        <Action>(ReplaceInPath)
+map <Leader>q        <Action>(Console.Jdbc.Execute)
+map ga               <Action>(SelectAllOccurrences)
+map g.               <Action>(ShowIntentionActions)
+map [c               <Action>(VcsShowPrevChangeMarker)
+map ]c               <Action>(VcsShowNextChangeMarker)
+map [d               <Action>(GotoPreviousError)
+map ]d               <Action>(GotoNextError)
+map <F7>             <Action>(ToggleLineBreakpoint)
+map <F8>             <Action>(StepOver)
+map <F9>             <Action>(StepInto)
+map <F10>            <Action>(StepOut)
+map <F11>            <Action>(ToggleFullScreen)
+" map <Leader>c        <Action>(CallHierarchyPopupMenu) " Doesn't work right now
+" map <Leader>n        <Action>(NewFile)
+" map <Leader>d        <Action>(NewDir)
+" map <S-CR>           <Action>(JupyterNotebookRunCellInsertBelowCommandModeAction)
 
 " `gq` reformats code now, think of something else
 " nmap gqq <Action>(com.andrewbrookins.idea.wrap.WrapAction)
