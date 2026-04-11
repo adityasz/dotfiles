@@ -143,6 +143,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "typst",
     callback = function()
+        vim.opt.tabstop = 2
+        vim.opt.softtabstop = 2
+        vim.opt.shiftwidth = 2
         vim.opt.textwidth = 80
         vim.opt.spell = true
     end
