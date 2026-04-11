@@ -15,7 +15,9 @@ gtk-tabs-location = top
 
 foreground     = 000000
 background     = ffffff
-bold-is-bright = true
+theme          = apple-light
+bold-is-bright = false
+# true makes gray color white, useless
 
 font-size      = 14
 font-variation = wght=400
