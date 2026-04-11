@@ -61,18 +61,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "sh",
-    callback = function()
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
-        vim.opt.textwidth = 80
-        vim.opt.expandtab = false
-        vim.opt.linebreak = false
-        vim.opt.spell = false
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
     pattern = {"cpp", "cuda"},
     callback = function()
         vim.opt.tabstop = 4
