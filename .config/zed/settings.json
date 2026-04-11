@@ -1,6 +1,24 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "restore_on_startup": "launchpad",
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    },
+    "cursor": {
+      "favorite_config_option_values": {
+        "mode": [
+          "ask"
+        ]
+      },
+      "type": "registry",
+    },
+  },
+  "word_diff_enabled": true,
   "diff_view_style": "split",
   "semantic_tokens": "combined",
   "inlay_hints": {
@@ -64,6 +82,7 @@
   },
   "base_keymap": "VSCode",
   "edit_predictions": {
+    "provider": "zed",
     "mode": "subtle",
   },
   "preview_tabs": {
@@ -120,7 +139,7 @@
       },
       "show_wrap_guides": true,
       "tab_size": 4,
-      "language_servers": ["ty", "!basedpyright", "..."],
+      "language_servers": ["ty", "!basedpyright", "ruff"],
       "hard_tabs": false,
       "auto_indent_on_paste": false,
       "wrap_guides": [80, 99],
@@ -140,6 +159,10 @@
     "JSON": {
       "tab_size": 4,
       "hard_tabs": true,
+    },
+    "YAML": {
+      "tab_size": 2,
+      "hard_tabs": false,
     },
     "HTML": {
       "tab_size": 4,
@@ -185,11 +208,15 @@
     "diagnostics": false,
     "metrics": false,
   },
-  "icon_theme": "JetBrains New UI Icons (Light)",
+  "icon_theme": {
+    "mode": "light",
+    "light": "JetBrains New UI Icons (Light)",
+    "dark": "JetBrains New UI Icons (Light)",
+  },
   "theme": {
     "mode": "light",
     "light": "JetBrains Light",
-    "dark": "JetBrains Dark",
+    "dark": "One Dark",
   },
   "theme_overrides": {
     "JetBrains Light": {
