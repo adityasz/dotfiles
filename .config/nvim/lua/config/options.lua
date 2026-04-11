@@ -17,6 +17,10 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.textwidth = 0
 
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("state") .. "/undo"
+vim.opt.undolevels = 10000
+
 vim.opt.mouse = ""
 
 vim.opt.background = "light"
