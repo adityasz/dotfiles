@@ -26,5 +26,8 @@ vim.opt.mouse = ""
 vim.opt.background = "light"
 vim.cmd("colorscheme light")
 
+vim.opt.title = true
+vim.opt.titlestring = [[%{fnamemodify(getcwd(),':~')}:%t]]
+
 vim.g.neovide_scroll_animation_length = 0.1
 vim.g.neovide_cursor_animation_length = 0
