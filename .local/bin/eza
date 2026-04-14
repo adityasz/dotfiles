@@ -1,6 +1,6 @@
 #!/bin/sh
 
 if [ -t 1 ]; then
-	eval $(dircolors -b /etc/DIR_COLORS)
+	eval $(dircolors -b)
 fi
 exec /bin/eza --hyperlink --color=auto "$@"
