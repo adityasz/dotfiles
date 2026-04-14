@@ -23,22 +23,24 @@ fpath+=(
     "${ZDOTDIR}"/completions
     "${ZDOTDIR}"/functions
 )
-autoload -Uz compinit vcs_info "${ZDOTDIR}"/functions/*(:t)
+autoload -Uz compinit
+autoload -Uz vcs_info
+autoload -Uz "${ZDOTDIR}"/functions/*(:t)
 
 function precmd() {
-    # set the terminal window title to the current working directory path
+    # Set the terminal window title to the current working directory path
     print -Pn "\e]0;%~\a"
     vcs_info
 }
 
-# the escape code has to be emitted in preexec and not precmd; don't care about why
+# The escape code has to be emitted in preexec and not precmd; don't care about why
 # Credits: https://tanutaran.medium.com/tmux-jump-between-prompt-output-with-osc-133-shell-integration-standard-84241b2defb5
 function preexec() {
     if [[ -n "$TMUX" ]]; then
         echo -n "\\x1b]133;A\\x1b\\"
     fi
     # kitty has its own code at the end. Don't care if they work together or
-    # not; there is no need to use a subset of kitty in kitty
+    # not; I anyways wouldn't use tmux in kitty.
 }
 
 # Type `.. 3` in place of `cd ../../../` and so on.
@@ -46,40 +48,36 @@ function ..() {
     cd -- "$(repeat ${1:-1} printf '../')"
 }
 
-# TODO: Check if this speeds things up or not.
-# TODO: Move compilation dump to `$XDG_CACHE_HOME/zsh`
-#       (does not seem to be as simple as changing the path below)
-# Credits: https://news.ycombinator.com/user?id=bongobingo1
-# https://news.ycombinator.com/item?id=40128826
-compinit
+zcompdump="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}/.zcompdump-${USER:-$(id -un)}-${ZSH_VERSION}"
+compinit -d "$zcompdump"
 {
     # Compile the completion dump to increase startup speed. Run in background.
-    zcompdump="$ZDOTDIR/.zcompdump"
     if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
-        # if zcompdump file exists, and we don't have a compiled version or the
+        # If zcompdump file exists, and we don't have a compiled version or the
         # dump file is newer than the compiled file
         zcompile "$zcompdump"
     fi
 } &!
 
-# TODO: Are these two lines needed?
-# Configure the completion system to cache parsed completion scripts.
-# zstyle ':completion:*' use-cache on
-# zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompdump"
+# Credits: https://thevaluable.dev/zsh-completion-guide-examples/
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$zcompdump"
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zstyle ':vcs_info:git:*' formats ' (%b)'
+prompt='%B%n@%m:%(5~|%-1~/…/%3~|%4~)%b${vcs_info_msg_0_}$ '
 
-prompt='%B%n%b%B@%b%B%m%b%B:%b%B%(5~|%-1~/…/%3~|%4~)%b${vcs_info_msg_0_}$ '
-
-# This can be uncommented when `~/.config/environment.d/all.conf` is changed
-# (environment variables modified).
-# if [[ -f ~/.config/environment.d/all.conf ]]; then
-#   while IFS= read -r line; do
-#       if [[ ! $line =~ ^[[:space:]]*# && -n $line ]]; then
-#           eval "export $line"
-#       fi
-#   done < ~/.config/environment.d/all.conf
-# fi
+if [[ -o login && -f ~/.config/environment.d/all.conf ]]; then
+    while IFS= read -r line; do
+        if [[ ! $line =~ ^[[:space:]]*# && -n $line ]]; then
+            eval "export $line"
+        fi
+    done < ~/.config/environment.d/all.conf
+fi
 
 if ! [[ "$PATH" =~ $HOME/.local/bin: ]]; then
     PATH="$HOME/.local/bin:$PATH"
