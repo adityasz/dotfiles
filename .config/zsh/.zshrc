@@ -118,6 +118,9 @@ function kitty_scrollback_edit_command_line() {
 zle -N kitty_scrollback_edit_command_line
 bindkey '^xi' kitty_scrollback_edit_command_line
 
+if [[ -n "$SSH_CLIENT" && "$TERM" == "xterm-kitty" ]]; then
+    export KITTY_INSTALLATION_DIR=/usr/lib/kitty
+fi
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="enabled"
     autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
