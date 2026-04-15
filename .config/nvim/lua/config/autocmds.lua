@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
     end,
 })
 
--- credits: jdhao/nvim-config
+-- credits: https://github.com/jdhao/nvim-config
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     group = vim.api.nvim_create_augroup("auto_create_dir", {clear = true}),
@@ -53,14 +53,13 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"lex", "c", "asm", "make"},
+    pattern = {"lex", "asm", "make"},
     callback = function()
         vim.opt.tabstop = 8
         vim.opt.shiftwidth = 8
         vim.opt.textwidth = 80
         vim.opt.expandtab = false
         vim.opt.linebreak = false
-        vim.opt.spell = false
     end
 })
 
@@ -72,19 +71,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"cpp", "cuda"},
-    callback = function()
-        vim.opt.tabstop = 4
-        vim.opt.shiftwidth = 4
-        vim.opt.textwidth = 99
-        vim.opt.expandtab = false
-        vim.opt.linebreak = false
-        vim.opt.spell = false
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"html", "css", "xml", "json", "javascript"},
+    pattern = {"c", "cpp", "cuda", "html", "css", "xml", "json", "javascript"},
     callback = function()
         vim.opt.textwidth = 99
         vim.opt.expandtab = false
@@ -97,28 +84,6 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt.textwidth = 99
         vim.opt.linebreak = false
-        vim.opt.spell = false
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex",
-    callback = function()
-        vim.opt.tabstop = 2
-        vim.opt.softtabstop = 2
-        vim.opt.shiftwidth = 2
-        vim.opt.textwidth = 80
-        vim.opt.expandtab = true -- Until TeX has a good formatter (which will never happen), use spaces for indentation
-        vim.opt.spell = true
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "markdown",
-    callback = function()
-        vim.opt.textwidth = 80
-        vim.opt.linebreak = true
-        vim.opt.spell = true
     end
 })
 
@@ -133,26 +98,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "rst",
-    callback = function()
-        vim.opt.tabstop = 8
-        vim.opt.shiftwidth = 8
-        vim.opt.textwidth = 80
-        vim.opt.expandtab = false
-        vim.opt.linebreak = true
-        vim.opt.spell = true
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "txt",
-    callback = function()
-        vim.opt.spell = true
-    end
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "typst",
+    pattern = {"tex", "typst"},
     callback = function()
         vim.opt.tabstop = 2
         vim.opt.softtabstop = 2
@@ -163,9 +109,20 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "man",
+    pattern = {"markdown", "txt"},
     callback = function()
-        -- vim.keymap.set({'n', 'v', 'i'}, '<leader>s', ':AerialOpen<CR>', {noremap = true, silent = true})
-        vim.keymap.set({'n', 'v', 'i'}, '<leader>s', ':Telescope aerial<CR>', {noremap = true, silent = true})
+        vim.opt.textwidth = 80
+        vim.opt.spell = true
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "rst",
+    callback = function()
+        vim.opt.tabstop = 8
+        vim.opt.shiftwidth = 8
+        vim.opt.textwidth = 80
+        vim.opt.expandtab = false
+        vim.opt.spell = true
     end
 })
