@@ -1,1 +1,7 @@
 set editing-mode vi
+
+set keymap vi-insert
+"\C-k": clear-screen
+
+set keymap vi-command
+"\C-k": clear-screen

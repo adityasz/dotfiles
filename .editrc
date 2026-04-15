@@ -1,0 +1,3 @@
+bind -v
+bind "^K" ed-clear-screen
+bind -a "^K" ed-clear-screen

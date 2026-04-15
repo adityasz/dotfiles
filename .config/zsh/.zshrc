@@ -19,6 +19,11 @@ bindkey -v
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 
+function zvm_after_init() {
+    bindkey -M viins "^K" clear-screen
+    bindkey -M vicmd "^K" clear-screen
+}
+
 fpath+=(
     "${ZDOTDIR}"/completions
     "${ZDOTDIR}"/functions
