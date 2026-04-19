@@ -109,6 +109,7 @@ zsh_plugin_dir=/usr/share/zsh/plugins
 for f in "${zsh_plugin_dir}"/**/*.plugin.zsh(N); do
     source "$f"
 done
+source "${zsh_plugin_dir}/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
