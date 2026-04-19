@@ -61,6 +61,7 @@ keymap:
             ghostty,
             mpv,
             neovide,
+            blender,
             # sioyek, # sioyek has ctrl-v hardcoded for paste in search bar
             # Cursor, # Cursor does not allow remapping non-editor shortcuts
             ]
