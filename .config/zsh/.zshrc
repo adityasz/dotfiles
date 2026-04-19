@@ -104,9 +104,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export GPG_TTY=$(tty)
 
 source $ZDOTDIR/.zsh_aliases
-source $ZDOTDIR/plugins/zsh-autosuggestions.zsh
-source $ZDOTDIR/plugins/zsh-syntax-highlighting.zsh
-source $ZDOTDIR/plugins/zsh-vi-mode.zsh
+
+zsh_plugin_dir=/usr/share/zsh/plugins
+for f in "${zsh_plugin_dir}"/**/*.plugin.zsh(N); do
+    source "$f"
+done
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
