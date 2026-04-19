@@ -109,28 +109,8 @@ snippet sq "\sqrt{}" iA
 endsnippet
 
 context "math()"
-snippet sr "^2" iA
-^2
-endsnippet
-
-context "math()"
-snippet cb "^3" iA
-^3
-endsnippet
-
-context "math()"
-snippet td "to the ... power" iA
-^{$1}$0
-endsnippet
-
-context "math()"
 snippet ^^ "superscript" iA
 ^{$1}$0
-endsnippet
-
-context "math()"
-snippet rd "to the ... power" iA
-^{($1)}$0
 endsnippet
 
 context "math()"
@@ -141,10 +121,6 @@ endsnippet
 context "math()"
 snippet ooo "\infty" iA
 \infty
-endsnippet
-
-snippet rij "mrij" i
-(${1:x}_${2:n})_{${3:$2}\\in${4:\\N}}$0
 endsnippet
 
 context "math()"
@@ -168,79 +144,13 @@ snippet =: "define2" iA
 endsnippet
 
 context "math()"
-snippet EE "exists" iA
-\exists
-endsnippet
-
-context "math()"
-snippet AA "forall" iA
-\forall
-endsnippet
-
-context "math()"
-snippet xnn "xn" iA
-x_{n}
-endsnippet
-
-context "math()"
-snippet ynn "yn" iA
-y_{n}
-endsnippet
-
-
-context "math()"
-snippet xii "xi" iA
-x_{i}
-endsnippet
-
-context "math()"
-snippet yii "yi" iA
-y_{i}
-endsnippet
-
-context "math()"
-snippet xjj "xj" iA
-x_{j}
-endsnippet
-
-context "math()"
-snippet yjj "yj" iA
-y_{j}
-endsnippet
-
-context "math()"
-snippet xp1 "x" iA
-x_{n+1}
-endsnippet
-
-context "math()"
-snippet xmm "x" iA
-x_{m}
-endsnippet
-
-context "math()"
-snippet R0+ "R0+" iA
-\\R_0^+
-endsnippet
-
-context "math()"
 snippet mcal "symcal" iA
 \symcal{$1}$0
 endsnippet
 
 context "math()"
-snippet lll "l" iA
-\ell
-endsnippet
-
-context "math()"
 snippet xx "cross" iA
 \times
-endsnippet
-
-priority 100
-snippet ** "cdot" iA
-\cdot
 endsnippet
 
 priority 100
@@ -260,44 +170,16 @@ snippet |> "mapsto" iA
 \mapsto
 endsnippet
 
-context "math()"
-snippet invs "inverse" iA
-^{-1}
-endsnippet
-
 priority 100
 context "math()"
 snippet "\.T" "transpose" riA
 ^\top
 endsnippet
 
-context "math()"
-snippet compl "complement" iA
-^{c}
-endsnippet
-
-priority 100
-context "math()"
-snippet '(?<!\\)(sin|cos|arccot|cot|csc|ln|log|exp|star|perp)' "ln" rwA
-\\`!p snip.rv = match.group(1)`
-endsnippet
-
 priority 300
 context "math()"
-snippet dint "integral" wA
+snippet dint "integral" w
 \int_{${1:-\infty}}^{${2:\infty}} ${3:${VISUAL}} \,\symrm{d}${4:x}$0
-endsnippet
-
-priority 200
-context "math()"
-# snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
-snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|zeta|int)' "ln" rwA
-\\`!p snip.rv = match.group(1)`
-endsnippet
-
-context "math()"
-snippet \\\ "setminus" iA
-\setminus
 endsnippet
 
 context "math()"
@@ -310,60 +192,14 @@ snippet << "<<" iA
 \ll
 endsnippet
 
-
 context "math()"
 snippet ~~ "~" iA
 \sim
 endsnippet
 
 context "math()"
-snippet set "set" wA
-\\{$1\\}$0
-endsnippet
-
-context "math()"
-snippet cc "subset" Ai
-\subset
-endsnippet
-
-context "math()"
-snippet notin "not in " iA
-\not\in
-endsnippet
-
-context "math()"
-snippet inn "in " iA
-\in
-endsnippet
-
-context "math()"
 snippet NN "n" iA
 \N
-endsnippet
-
-context "math()"
-snippet Nn "cap" iA
-\cap
-endsnippet
-
-context "math()"
-snippet UU "cup" iA
-\cup
-endsnippet
-
-context "math()"
-snippet uuu "bigcup" iA
-\bigcup_{${1:i \in ${2: I}}} $0
-endsnippet
-
-context "math()"
-snippet nnn "bigcap" iA
-\bigcap_{${1:i \in ${2: I}}} $0
-endsnippet
-
-context "math()"
-snippet OO "emptyset" iA
-\O
 endsnippet
 
 context "math()"
@@ -397,20 +233,8 @@ snippet <> "hokje" iA
 endsnippet
 
 context "math()"
-snippet '(?<!i)sts' "text subscript" irA
-_\text{$1} $0
-endsnippet
-
-context "math()"
 snippet tt "text" iA
 \text{$1}$0
-endsnippet
-
-context "math()"
-snippet case "cases" wA
-\begin{cases}
-	$1
-\end{cases}
 endsnippet
 
 context "math()"
@@ -426,21 +250,10 @@ snippet bigfun "Big function" iA
 \end{align*}
 endsnippet
 
-context "math()"
-snippet cvec "column vector" iA
-\begin{bmatrix} ${1:x}_${2:1}\\\\ \vdots\\\\ $1_${2:n} \end{bmatrix}
-endsnippet
-
 priority 10
 context "math()"
 snippet "bar" "bar" riA
 \overline{$1}$0
-endsnippet
-
-priority 100
-context "math()"
-snippet "hbar" "hbar" riA
-\hbar
 endsnippet
 
 priority 100
@@ -465,12 +278,6 @@ priority 100
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
-endsnippet
-
-priority 10
-context "math()"
-snippet "hat" "hat" riA
-\hat{$1}$0
 endsnippet
 
 priority 100

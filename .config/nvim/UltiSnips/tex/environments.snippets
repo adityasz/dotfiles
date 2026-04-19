@@ -6,7 +6,7 @@ snippet beg "begin{} / end{}" bA
 \\end{$1}
 endsnippet
 
-snippet table "Table environment" bA
+snippet table "Table environment" b
 \begin{table}[${1:htpb}]
   \centering
   \caption{${2:caption}}
@@ -17,7 +17,7 @@ snippet table "Table environment" bA
 \end{table}
 endsnippet
 
-snippet img "Figure environment for images" bA
+snippet image "Figure environment for images" b
 \begin{figure}[${1:htpb}]
   \centering
   \includegraphics[width=0.8\textwidth]{figures/$2}
@@ -35,7 +35,7 @@ snippet image "Figure environment for images" b
 \end{figure}
 endsnippet
 
-snippet fig "Figure environment for pgf" bA
+snippet figure "Figure environment for pgf" b
 \begin{figure}[${1:htpb}]
   \centering
   \input{figures/$2}
@@ -62,19 +62,7 @@ snippet desc "Description" b
 \end{description}
 endsnippet
 
-snippet description "Description" b
-\begin{description}
-  \item[$1] $0
-\end{description}
-endsnippet
-
 snippet ali "Align" bA
-\begin{align*}
-  ${1:${VISUAL}}
-\end{align*}
-endsnippet
-
-snippet align "Align" b
 \begin{align*}
   ${1:${VISUAL}}
 \end{align*}
