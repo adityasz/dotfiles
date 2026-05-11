@@ -47,9 +47,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 
 vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     pattern = "*.ixx",
-    callback = function()
-        vim.bo.filetype = "cpp"
-    end,
+    callback = function() vim.bo.filetype = "cpp" end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -65,9 +63,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "yacc",
-    callback = function()
-        vim.opt.commentstring = "// %s"
-    end
+    callback = function() vim.opt.commentstring = "// %s" end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -125,4 +121,9 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.expandtab = false
         vim.opt.spell = true
     end
+})
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "VimtexEventViewReverse",
+    callback = function() vim.fn["vimtex#ui#blink"]() end,
 })
