@@ -1,6 +1,10 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "cli_default_open_behavior": "existing_window",
+  "project_panel": {
+    "dock": "left"
+  },
   "restore_on_startup": "launchpad",
   "agent_servers": {
     "gemini": {
@@ -48,6 +52,8 @@
   "agent_buffer_font_size": 16.0,
   "resize_all_panels_in_dock": [],
   "agent": {
+    "sidebar_side": "right",
+    "dock": "right",
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-opus-4.6",
@@ -76,6 +82,7 @@
   },
   "hide_mouse": "on_typing_and_movement",
   "collaboration_panel": {
+    "dock": "left",
     "button": false,
   },
   "vim_mode": true,
@@ -117,10 +124,12 @@
     },
   },
   "git_panel": {
+    "dock": "left",
     "tree_view": true,
     "sort_by_path": true,
   },
   "outline_panel": {
+    "dock": "left",
     "indent_size": 20,
   },
   "minimap": {
@@ -193,6 +202,15 @@
         "path": "/usr/bin/clangd",
         "arguments": ["--experimental-modules-support"],
       },
+    },
+    "texlab": {
+      "settings": {
+        "texlab": {
+          "build": {
+            "onSave": false
+          }
+        }
+      }
     },
     "tinymist": {
       "settings": {
