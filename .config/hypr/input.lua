@@ -1,0 +1,17 @@
+hl.config({
+    cursor = {
+        no_warps = true,
+        no_hardware_cursors = 0
+    },
+    input = {
+        repeat_rate = 40,
+        follow_mouse = 2,
+        special_fallthrough = true,
+        float_switch_override_focus = 0,
+        sensitivity = 0.16182572614107893,
+        touchpad = {
+            natural_scroll = true,
+            scroll_factor = 0.30
+        }
+    }
+})

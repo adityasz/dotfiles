@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function()
+    local cargo_home = os.getenv("CARGO_HOME") or (os.getenv("HOME") .. "/.cargo")
+    hl.exec_cmd(BIN_DIR .. "/runapp -- " .. cargo_home .. "/bin/xremap " .. os.getenv("HOME") .. "/.config/xremap/config.yml")
+    hl.exec_cmd("hyprctl setcursor macOS 26")
+end)
