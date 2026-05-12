@@ -1,12 +1,5 @@
 local main_mod = (DEBUG_CONFIG or VM_CONFIG) and "ALT" or "SUPER"
 
-local function bind_hy3(keys, dispatcher, hy3_dispatcher, opts)
-    local action = DISABLE_PLUGIN_HY3 and dispatcher or hl.dsp.exec_cmd(
-        "hyprctl dispatch hy3:" .. hy3_dispatcher
-    )
-    hl.bind(main_mod .. " + " .. keys, action, opts)
-end
-
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
 -- When stuff hits the fan
@@ -33,32 +26,27 @@ end
 -- TODO: kitty appears to first fork and then move to a different cgroup. This
 -- will avoid latency at launch, so consider writing a Hyprland plugin that does
 -- that (and does systemd comms in a background thread) instead of using runapp.
-local state_dir = os.getenv("XDG_STATE_HOME") or (os.getenv("HOME") .. "/.local/state")
-
-local jetbrains = (function()
-    local ok, t = pcall(dofile, state_dir .. "/hypr/wm/jetbrains.lua")
+local function load_app_from_file(file)
+    local ok, t = pcall(dofile,
+        os.getenv("XDG_STATE_HOME") or (os.getenv("HOME") .. "/.local/state")
+        .. "/hypr/wm/" .. file .. ".lua"
+    )
     return ok and t or nil
-end)()
+end
 
-local ai_thingy = (function()
-    local ok, t = pcall(dofile, state_dir .. "/hypr/wm/ai_thing.lua")
-    return ok and t or nil
-end)()
-
-local prefix = BIN_DIR .. "/runapp -o "
-
+local prefix = BIN_DIR .. "/runapp -o"
 local apps = {
     -- for when I need a keybind-free terminal for tmux's remote session persistence
-    [0] = { class = "com.mitchellh.ghostty", cmd = prefix .. "ghostty" },
+    [0] = { class = "com.mitchellh.ghostty", cmd = "ghostty" },
 
-    [1] = { class = "kitty", cmd = prefix .. "kitty" },
-    [2] = { class = "zen", cmd = prefix .. BIN_DIR .. "/zen" },
-    [3] = { class = "sioyek", cmd = prefix .. BIN_DIR .. "/sioyek" },
-    [4] = { class = "dev.zed.Zed-Dev", cmd = prefix .. BIN_DIR .. "/zed" },
-    [5] = { class = "org.kde.dolphin", cmd = prefix .. "dolphin" },
-    [6] = jetbrains and { class = jetbrains.class, cmd = jetbrains.exec } or nil,
-    [7] = ai_thingy and { class = ai_thingy.class, cmd = ai_thingy.exec } or nil,
-    [8] = { class = "org.gnome.SystemMonitor", cmd = prefix .. "gnome-system-monitor" },
+    [1] = { class = "kitty", cmd = "kitty" },
+    [2] = { class = "zen", cmd = BIN_DIR .. "/zen" },
+    [3] = { class = "sioyek", cmd = BIN_DIR .. "/sioyek" },
+    [4] = { class = "dev.zed.Zed-Dev", cmd = BIN_DIR .. "/zed" },
+    [5] = { class = "org.kde.dolphin", cmd = "dolphin" },
+    [6] = load_app_from_file("jetbrains"),
+    [7] = load_app_from_file("ai_thing"),
+    [8] = { class = "org.gnome.SystemMonitor", cmd = "gnome-system-monitor" },
 }
 
 if not DISABLE_PLUGIN_WM then
@@ -73,7 +61,7 @@ if not DISABLE_PLUGIN_WM then
         end
     end
 
-    hl.config({ plugin = { wm = { apps = wm_apps } } })
+    hl.config({ plugin = { wm = { prefix = prefix, apps = wm_apps } } })
 
     for i = 0, 8 do
         hl.bind(main_mod .. " + " .. i, hl.dsp.exec_cmd("hyprctl dispatch wm:focusorexec " .. i))
@@ -83,7 +71,7 @@ if not DISABLE_PLUGIN_WM then
 else
     for i = 1, 8 do
         if apps[i] then
-            hl.bind(main_mod .. " + " .. i, hl.dsp.exec_cmd(apps[i].cmd))
+            hl.bind(main_mod .. " + " .. i, hl.dsp.exec_cmd(prefix .. " " .. apps[i].cmd))
         end
     end
 end
@@ -91,6 +79,13 @@ end
 if DISABLE_PLUGIN_WM then
     hl.bind(main_mod .. " + tab", hl.dsp.focus({ urgent_or_last = true }))
     hl.bind(main_mod .. " + tab", hl.dsp.window.alter_zorder({ mode = "top" }))
+end
+
+local function bind_hy3(keys, dispatcher, hy3_dispatcher, opts)
+    local action = DISABLE_PLUGIN_HY3 and dispatcher or hl.dsp.exec_cmd(
+        "hyprctl dispatch hy3:" .. hy3_dispatcher
+    )
+    hl.bind(main_mod .. " + " .. keys, action, opts)
 end
 
 -- Switch workspaces
@@ -137,13 +132,75 @@ hl.bind(main_mod .. " + M", hl.dsp.window.alter_zorder({ mode = "bottom" }))
 hl.bind(main_mod .. " + M", hl.dsp.window.cycle_next())
 
 -- Move window
+local function smart_move(direction, force_tile)
+    return function()
+        local w = hl.get_active_window()
+        if not w then return end
+
+        if w.floating then
+            hl.dispatch(hl.dsp.window.float({ action = "disable" }))
+            return
+        end
+
+        if w.fullscreen ~= 0 then
+            hl.dispatch(hl.dsp.window.fullscreen({ action = "unset" }))
+            return
+        end
+
+        if force_tile then
+            hl.dispatch(hl.dsp.window.move({ out_of_group = direction }))
+            return
+        end
+
+        local ws = w.workspace
+        if not ws then return end
+        local windows = ws:get_windows()
+        local has_window = false
+        local x1, y1 = w.at.x, w.at.y
+        local x2, y2 = x1 + w.size.x, y1 + w.size.y
+
+        -- super ugly (and inefficient)
+        -- TODO: Rewrite dwindle tree. Binary trees are extraordinarily stupid for human use.
+        for _, other in ipairs(windows) do
+            if other.address ~= w.address and other.visible and not other.floating and other.fullscreen == 0 then
+                local ox1, oy1 = other.at.x, other.at.y
+                local ox2, oy2 = ox1 + other.size.x, oy1 + other.size.y
+
+                if direction == "l" then
+                    if ox2 <= x1 then has_window = true break end
+                elseif direction == "r" then
+                    if ox1 >= x2 then has_window = true break end
+                elseif direction == "u" then
+                    if oy2 <= y1 then has_window = true break end
+                elseif direction == "d" then
+                    if oy1 >= y2 then has_window = true break end
+                end
+            end
+        end
+
+        if has_window then
+            hl.dispatch(hl.dsp.window.move({ into_or_create_group = direction }))
+        else
+            hl.dispatch(hl.dsp.window.move({ out_of_group = direction }))
+        end
+    end
+end
+
 hl.bind(main_mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-bind_hy3("SHIFT + H", hl.dsp.window.move({ into_or_create_group = "l" }), "movewindow l visible")
-bind_hy3("SHIFT + J", hl.dsp.window.move({ into_or_create_group = "d" }), "movewindow d visible")
-bind_hy3("SHIFT + K", hl.dsp.window.move({ into_or_create_group = "u" }), "movewindow u visible")
-bind_hy3("SHIFT + L", hl.dsp.window.move({ into_or_create_group = "r" }), "movewindow r visible")
+hl.bind(main_mod .. " + SHIFT + H", smart_move("l"))
+hl.bind(main_mod .. " + SHIFT + J", smart_move("d"))
+hl.bind(main_mod .. " + SHIFT + K", smart_move("u"))
+hl.bind(main_mod .. " + SHIFT + L", smart_move("r"))
+hl.bind(main_mod .. " + CTRL + H", smart_move("l", true))
+hl.bind(main_mod .. " + CTRL + J", smart_move("d", true))
+hl.bind(main_mod .. " + CTRL + K", smart_move("u", true))
+hl.bind(main_mod .. " + CTRL + L", smart_move("r", true))
+hl.bind(main_mod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "l" }))
+hl.bind(main_mod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "d" }))
+hl.bind(main_mod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "u" }))
+hl.bind(main_mod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "r" }))
 bind_hy3("S", hl.dsp.window.move({ workspace = "-1", follow = true }), "movetoworkspace -1 follow")
-bind_hy3("D", hl.dsp.window.move({ workspace = "+1",  follow = true }), "movetoworkspace +1 follow")
+bind_hy3("D", hl.dsp.window.move({ workspace = "+1", follow = true }), "movetoworkspace +1 follow")
 for i = 1, 10 do
     bind_hy3("SHIFT + F" .. i, hl.dsp.window.move({ workspace = tostring(i) }), "movetoworkspace " .. i)
 end
