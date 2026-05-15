@@ -34,7 +34,7 @@ local function load_app_from_file(file)
     return ok and t or nil
 end
 
-local prefix = BIN_DIR .. "/runapp -o"
+local prefix = "runapp -o"
 local apps = {
     -- for when I need a keybind-free terminal for tmux's remote session persistence
     [0] = { class = "com.mitchellh.ghostty", cmd = "ghostty" },
