@@ -204,6 +204,7 @@
   <action id="NewScratchFile">
     <keyboard-shortcut first-keystroke="alt t" />
   </action>
+  <action id="NextDiff" />
   <action id="NextProjectWindow" />
   <action id="NextSplitter" />
   <action id="OpenInRightSplit">
@@ -254,14 +255,13 @@
     <keyboard-shortcut first-keystroke="alt comma" />
   </action>
   <action id="StepInto">
-    <keyboard-shortcut first-keystroke="f10" />
+    <keyboard-shortcut first-keystroke="f9" />
   </action>
   <action id="StepOut">
-    <keyboard-shortcut first-keystroke="shift f11" />
-    <keyboard-shortcut first-keystroke="shift f10" />
+    <keyboard-shortcut first-keystroke="f10" />
   </action>
   <action id="StepOver">
-    <keyboard-shortcut first-keystroke="f9" />
+    <keyboard-shortcut first-keystroke="f8" />
   </action>
   <action id="Stop" />
   <action id="Table-selectPreviousRow">
@@ -300,6 +300,9 @@
   <action id="TextEditorWithPreview.Layout.EditorAndPreview" />
   <action id="ToggleFullScreen">
     <keyboard-shortcut first-keystroke="f11" />
+  </action>
+  <action id="ToggleLineBreakpoint">
+    <keyboard-shortcut first-keystroke="f7" />
   </action>
   <action id="ToggleZenMode" />
   <action id="Tree-selectPrevious">
