@@ -57,6 +57,7 @@ keymap:
             dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
             virt-manager,
+            qemu,
             qemu-system-x86_64,
             ghostty,
             mpv,
