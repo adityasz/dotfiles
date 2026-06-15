@@ -5,8 +5,6 @@
 // 1. {assistant_panel,project_panel,git_panel}::TogglePanel
 //    Toggle a panel without focusing it.
 //    (Never needed it, so removed the workaround.)
-// 2. workspace::CloseActivePane
-//    Close the current pane. q. Fixed in my fork.
 
 [
   {
@@ -35,6 +33,7 @@
       "alt-j": "workspace::ActivatePaneDown",
       "alt-k": "workspace::ActivatePaneUp",
       "alt-l": "workspace::ActivatePaneRight",
+      "alt-g": "git_graph::Open",
       "ctrl-`": "terminal_panel::Toggle",
       "alt-shift-h": "workspace::SwapPaneLeft",
       "alt-shift-j": "workspace::SwapPaneDown",
@@ -129,7 +128,7 @@
     "bindings": {
       "space space": "file_finder::Toggle",
       "space t": "tab_switcher::OpenInActivePane",
-      "space f": "quick_search::Toggle",
+      "space f": "text_finder::Toggle",
       "space h": "workspace::NewSearch",
       "space l": "task::Spawn",
       "alt-enter": "repl::Run",
@@ -177,7 +176,7 @@
     },
   },
   {
-    "context": "Editor && edit_prediction_conflict",
+    "context": "Editor && (edit_prediction && (showing_completions || in_leading_whitespace))",
     "bindings": {
       "alt-;": "editor::AcceptEditPrediction",
     },
@@ -222,7 +221,6 @@
       "alt-n": "agent::NewThread",
       "alt-t": "agent::NewThread",
       "alt-shift-m": "agent::ToggleModelSelector",
-      "alt-<": "assistant::InsertIntoEditor",
       "alt-left": "pane::GoBack",
       "shift-escape": "agent::ExpandMessageEditor",
     },
@@ -233,8 +231,6 @@
       "enter": "editor::Newline",
       "alt-enter": "agent::Chat",
       "ctrl-enter": "agent::Chat",
-      "alt-k": "agent::OpenHistory",
-      "alt-n": "agent::NewTextThread",
       "alt-t": "agent::NewThread",
       "shift-escape": "agent::ExpandMessageEditor",
     },
@@ -250,12 +246,6 @@
     "context": "AgentPanel > ThreadHistory > Editor",
     "bindings": {
       "delete": "agent::RemoveSelectedThread",
-    },
-  },
-  {
-    "context": "ContextEditor > Editor",
-    "bindings": {
-      "alt-enter": "assistant::Assist",
     },
   },
   {

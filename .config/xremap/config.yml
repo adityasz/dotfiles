@@ -54,6 +54,7 @@ keymap:
             jetbrains-dataspell,
             dev.zed.Zed,
             dev.zed.Zed-Dev,
+            dev.zed.Zed-Nightly,
             dev.zed.Zed-Preview,
             com.raggesilver.BlackBox,
             virt-manager,

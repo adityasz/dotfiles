@@ -25,7 +25,6 @@ function zvm_after_init() {
 }
 
 fpath+=(
-    "${ZDOTDIR}"/completions
     "${ZDOTDIR}"/functions
 )
 autoload -Uz compinit
@@ -93,7 +92,6 @@ export PATH="$PATH:$BUN_INSTALL/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
 export PATH="$PATH:$XDG_DATA_HOME/JetBrains/Toolbox/scripts"
 
-export CDPATH="$HOME/IITB/year-4/spring"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PROMPT_DIRTRIM=3
@@ -104,9 +102,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export GPG_TTY=$(tty)
 
 source $ZDOTDIR/.zsh_aliases
-source $ZDOTDIR/plugins/zsh-autosuggestions.zsh
-source $ZDOTDIR/plugins/zsh-syntax-highlighting.zsh
-source $ZDOTDIR/plugins/zsh-vi-mode.zsh
+
+zsh_plugin_dir=/usr/share/zsh/plugins
+for f in "${zsh_plugin_dir}"/**/*.plugin.zsh(N); do
+    source "$f"
+done
+source "${zsh_plugin_dir}/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
@@ -118,6 +119,9 @@ function kitty_scrollback_edit_command_line() {
 zle -N kitty_scrollback_edit_command_line
 bindkey '^xi' kitty_scrollback_edit_command_line
 
+if [[ -n "$SSH_CLIENT" && "$TERM" == "xterm-kitty" ]]; then
+    export KITTY_INSTALLATION_DIR=/usr/lib/kitty
+fi
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="enabled"
     autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
