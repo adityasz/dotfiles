@@ -2,7 +2,7 @@
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "inc-rename.nvim": { "branch": "main", "commit": "0074b551a17338ccdcd299bd86687cc651bcb33d" },
   "kitty-scrollback.nvim": { "branch": "main", "commit": "9342a0e0e5556ce0b7f9dc41c4bdd39ae9dc85dd" },
-  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
+  "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
   "mini.icons": { "branch": "main", "commit": "bac6317300e205335df425296570d84322730067" },
   "multicursor.nvim": { "branch": "main", "commit": "704b99f10a72cc05d370cfeb294ff83412a8ab55" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
