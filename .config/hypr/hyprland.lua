@@ -10,14 +10,14 @@ hl.config({ misc = { disable_hyprland_logo = true, disable_splash_rendering = tr
 -- because hyprlandd.lua sources this
 VM_CONFIG = (VM_CONFIG == nil) and false or VM_CONFIG
 DEBUG_CONFIG = (DEBUG_CONFIG == nil) and false or DEBUG_CONFIG
-DISABLE_PLUGIN_WM = (DISABLE_PLUGIN_WM == nil) and false or DISABLE_PLUGIN_WM
+ENABLE_PLUGIN_WM = (ENABLE_PLUGIN_WM == nil) and true or ENABLE_PLUGIN_WM
 
 if not DEBUG_CONFIG then
     require("monitors")
     require("autostart")
-    require("plugins")
 end
 
+require("plugins")
 require("input")
 require("looks")
 require("keymap")
@@ -28,22 +28,20 @@ hl.config({
         layout = "dwindle",
         no_focus_fallback = true,
         resize_on_border = false,
-        allow_tearing = false
+        allow_tearing = false,
     },
-    dwindle = {
-        preserve_split = true
-    },
-    gestures = {
-        workspace_swipe_use_r = true
-    },
+    dwindle = { preserve_split = true },
+    gestures = { workspace_swipe_use_r = true },
+    render = { direct_scanout = 0 },
     misc = {
+        vrr = false, -- broken
         focus_on_activate = false, -- TODO: Show apps that request to be focused in waybar; hide once focused
         mouse_move_enables_dpms = true,
-        key_press_enables_dpms = true
+        key_press_enables_dpms = true,
     },
     debug = {
         disable_logs = not DEBUG_CONFIG,
         damage_blink = false,
-        overlay = false
+        overlay = false,
     }
 })

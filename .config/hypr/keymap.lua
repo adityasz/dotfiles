@@ -19,11 +19,9 @@ local function load_app_from_file(file)
 end
 
 local bin_dir = os.getenv("HOME") .. "/.local/bin/"
-local prefix = "runapp -o"
+local prefix = "runapp -o "
 local apps = {
-    -- for when I need a keybind-free terminal for tmux's remote session persistence
-    [0] = { class = "com.mitchellh.ghostty", cmd = "ghostty" },
-
+    [0] = { class = "com.mitchellh.ghostty", cmd = "ghostty" }, -- for when I need a keybind-free terminal for tmux's remote session persistence
     [1] = { class = "kitty", cmd = "kitty" },
     [2] = { class = "zen", cmd = "zen-browser" },
     [3] = { class = "sioyek", cmd = "sioyek" },
@@ -34,34 +32,30 @@ local apps = {
     [8] = { class = "org.gnome.SystemMonitor", cmd = "gnome-system-monitor" },
 }
 
-if not DISABLE_PLUGIN_WM then
-    local wm_apps
-    if not DEBUG_CONFIG then
-        wm_apps = apps
-    else
+if ENABLE_PLUGIN_WM then
+    if DEBUG_CONFIG then
         local debug_names = { "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel" }
-        wm_apps = {}
         for i, name in ipairs(debug_names) do
-            wm_apps[i] = { class = name, cmd = bin_dir .. "dummy_app " .. name }
+            apps[i] = { class = name, cmd = bin_dir .. "dummy_app " .. name }
         end
     end
 
     for i = 0, 8 do
-        if wm_apps[i] then
-            wm_bind(i, hl.plugin.wm.focus_or_exec(wm_apps[i]))
-            wm_bind("SHIFT + " .. i, hl.plugin.wm.move_or_exec(wm_apps[i]))
-            wm_bind("CTRL + " .. i, hl.dsp.exec_cmd(prefix .. " " .. wm_apps[i].cmd))
+        if apps[i] then
+            wm_bind(i, hl.plugin.wm.focus_or_exec({ class = apps[i].class, cmd = prefix .. apps[i].cmd }))
+            wm_bind("SHIFT + " .. i, hl.plugin.wm.move_or_exec(apps[i]))
+            wm_bind("CTRL + " .. i, hl.dsp.exec_cmd(prefix .. apps[i].cmd))
         end
     end
 else
-    for i = 1, 8 do
+    for i = 0, 8 do
         if apps[i] then
             wm_bind(i, hl.dsp.exec_cmd(prefix .. " " .. apps[i].cmd))
         end
     end
 end
 
-if DISABLE_PLUGIN_WM then
+if not ENABLE_PLUGIN_WM then
     wm_bind("tab", hl.dsp.focus({ urgent_or_last = true }))
     wm_bind("tab", hl.dsp.window.alter_zorder({ mode = "top" }))
 end
@@ -91,22 +85,53 @@ wm_bind("B", hl.dsp.workspace.toggle_special("five"))
 -- Do things to the window
 wm_bind("mouse:274", hl.dsp.window.resize(), { mouse = true })
 wm_bind("W", hl.dsp.window.close())
-wm_bind("T", hl.dsp.window.float({ action = "toggle" }))
+if ENABLE_PLUGIN_WM then
+    wm_bind("T", function()
+        local w = hl.get_active_window()
+        if not w then return end
+        if w.fullscreen ~= 0 then
+            hl.dispatch(hl.plugin.wm.fullscreen("disabled"))
+            hl.dispatch(hl.dsp.window.float({ action = "unset" }))
+            return
+        end
+        hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+    end)
+else
+    wm_bind("T", hl.dsp.window.float({ action = "toggle" }))
+end
 wm_bind("P", hl.dsp.window.pin())
-wm_bind("I", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
-wm_bind("CTRL + I", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 wm_bind("G", hl.dsp.group.toggle())
 wm_bind("SHIFT + T", hl.dsp.layout("togglesplit"))
+if ENABLE_PLUGIN_WM then
+    wm_bind("I", hl.plugin.wm.fullscreen("maximized"))
+    wm_bind("CTRL + I", hl.plugin.wm.fullscreen("fullscreen"))
+else
+    wm_bind("I", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+    wm_bind("CTRL + I", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+end
 
 -- Focus windows
-wm_bind("H", hl.dsp.focus({ direction = "l" }))
-wm_bind("J", hl.dsp.focus({ direction = "d" }))
-wm_bind("K", hl.dsp.focus({ direction = "u" }))
-wm_bind("L", hl.dsp.focus({ direction = "r" }))
+local function shift_focus(direction)
+    local focus_cmd = hl.dsp.focus({ direction = direction })
+    local raise_cmd = hl.dsp.window.alter_zorder({ mode = "top" })
+    return function()
+        hl.dispatch(focus_cmd)
+        local w = hl.get_active_window()
+        if not w or w.floating then return end
+        hl.dispatch(raise_cmd)
+    end
+end
+wm_bind("H", shift_focus("l"))
+wm_bind("J", shift_focus("d"))
+wm_bind("K", shift_focus("u"))
+wm_bind("L", shift_focus("r"))
+
 wm_bind("bracketright", hl.dsp.group.next())
 wm_bind("bracketleft", hl.dsp.group.prev())
-wm_bind("M", hl.dsp.window.alter_zorder({ mode = "bottom" }))
-wm_bind("M", hl.dsp.window.cycle_next())
+wm_bind("M", function()
+    hl.dispatch(hl.dsp.window.alter_zorder({ mode = "bottom" }))
+    hl.dispatch(hl.dsp.window.cycle_next())
+end)
 
 -- Move window
 local function smart_move(direction, force_tile)
@@ -114,15 +139,22 @@ local function smart_move(direction, force_tile)
         local w = hl.get_active_window()
         if not w then return end
 
+        if w.fullscreen ~= 0 then
+            if ENABLE_PLUGIN_WM then
+                hl.dispatch(hl.plugin.wm.fullscreen("disabled"))
+            else
+                hl.dispatch(hl.dsp.window.fullscreen({ action = "unset" }))
+            end
+        end
+
         if w.floating then
             hl.dispatch(hl.dsp.window.float({ action = "disable" }))
             return
         end
 
-        if w.fullscreen ~= 0 then
-            hl.dispatch(hl.dsp.window.fullscreen({ action = "unset" }))
-            return
-        end
+        -- super ugly (and inefficient)
+        -- TODO: Write an i3-like tree. Binary trees are extraordinarily stupid for human use.
+        -- Note: It is faster to write a tree from scratch than it is to fix the (probably vibe-coded) hy3 mess.
 
         if force_tile then
             hl.dispatch(hl.dsp.window.move({ out_of_group = direction }))
@@ -136,8 +168,6 @@ local function smart_move(direction, force_tile)
         local x1, y1 = w.at.x, w.at.y
         local x2, y2 = x1 + w.size.x, y1 + w.size.y
 
-        -- super ugly (and inefficient)
-        -- TODO: Rewrite dwindle tree. Binary trees are extraordinarily stupid for human use.
         for _, other in ipairs(windows) do
             if other.address ~= w.address and other.visible and not other.floating and other.fullscreen == 0 then
                 local ox1, oy1 = other.at.x, other.at.y
@@ -176,8 +206,20 @@ wm_bind("SHIFT + left", hl.dsp.window.swap({ direction = "l" }))
 wm_bind("SHIFT + down", hl.dsp.window.swap({ direction = "d" }))
 wm_bind("SHIFT + up", hl.dsp.window.swap({ direction = "u" }))
 wm_bind("SHIFT + right", hl.dsp.window.swap({ direction = "r" }))
-wm_bind("S", hl.dsp.window.move({ workspace = "-1", follow = true }))
-wm_bind("D", hl.dsp.window.move({ workspace = "+1", follow = true }))
+
+-- Focus and window ordering in Hyprland is retarded.
+-- Even with follow = true, the window can go behind other windows.
+local function move_to_workspace_and_follow(workspace)
+    local move_cmd = hl.dsp.window.move({ workspace = workspace, follow = true })
+    local raise_cmd = hl.dsp.window.alter_zorder({ mode = "top" })
+    return function()
+        hl.dispatch(move_cmd)
+        hl.dispatch(raise_cmd)
+    end
+end
+wm_bind("S", move_to_workspace_and_follow("-1"))
+wm_bind("D", move_to_workspace_and_follow("+1"))
+
 for i = 1, 10 do
     wm_bind("SHIFT + F" .. i, hl.dsp.window.move({ workspace = tostring(i) }))
 end

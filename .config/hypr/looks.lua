@@ -61,6 +61,7 @@ else
         }
     })
 
+    -- from the default hyprlang config from several releases ago with some minor changes for speedup
     hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
     hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
     hl.curve("linear", { type = "bezier", points = { { 0, 0 }, { 1, 1 } } })
@@ -74,7 +75,7 @@ else
     hl.animation({ leaf = "windowsOut", enabled = true, speed = 1.49, bezier = "linear", style = "popin 87%" })
     hl.animation({ leaf = "windowsMove", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
     hl.animation({ leaf = "fade", enabled = true, speed = 3.03, bezier = "quick" })
-    hl.animation({ leaf = "fadeIn", enabled = true, speed = 1.73, bezier = "almostLinear" })
+    hl.animation({ leaf = "fadeIn", enabled = false })
     hl.animation({ leaf = "fadeOut", enabled = true, speed = 1.46, bezier = "almostLinear" })
     hl.animation({ leaf = "layers", enabled = true, speed = 3.81, bezier = "easeOutQuint" })
     hl.animation({ leaf = "layersIn", enabled = true, speed = 4, bezier = "easeOutQuint", style = "fade" })
