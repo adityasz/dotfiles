@@ -64,8 +64,8 @@ keymap:
             mpv,
             neovide,
             blender,
+            code-oss,
             # sioyek, # sioyek has ctrl-v hardcoded for paste in search bar
-            # Cursor, # Cursor does not allow remapping non-editor shortcuts
             ]
     remap:
       alt_L-a: C-a

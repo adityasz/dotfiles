@@ -7,7 +7,7 @@ hl.config({ misc = { disable_hyprland_logo = true, disable_splash_rendering = tr
 --                   THE LINE ABOVE THIS MUST NOT BE REMOVED
 -- -----------------------------------------------------------------------------
 
--- because hyprlandd.lua sources this
+-- because hyprlandd.lua loads this module
 VM_CONFIG = (VM_CONFIG == nil) and false or VM_CONFIG
 DEBUG_CONFIG = (DEBUG_CONFIG == nil) and false or DEBUG_CONFIG
 ENABLE_PLUGIN_WM = (ENABLE_PLUGIN_WM == nil) and true or ENABLE_PLUGIN_WM
@@ -28,11 +28,11 @@ hl.config({
         layout = "dwindle",
         no_focus_fallback = true,
         resize_on_border = false,
-        allow_tearing = false,
+        allow_tearing = true,
     },
     dwindle = { preserve_split = true },
     gestures = { workspace_swipe_use_r = true },
-    render = { direct_scanout = 0 },
+    render = { direct_scanout = 0 }, -- MPV black screen with 1
     misc = {
         vrr = false, -- broken
         focus_on_activate = false, -- TODO: Show apps that request to be focused in waybar; hide once focused

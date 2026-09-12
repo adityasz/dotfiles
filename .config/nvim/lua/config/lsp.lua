@@ -63,8 +63,8 @@ vim.lsp.config("basedpyright", {
 local server_binaries = {
     bashls = "bash-language-server",
     clangd = "clangd",
-    basedpyright = "basedpyright-langserver",
-    -- ty = "ty",
+    -- basedpyright = "basedpyright-langserver",
+    ty = "ty",
     ruff = "ruff",
     texlab = "texlab",
     racket_langserver = "racket-langserver",

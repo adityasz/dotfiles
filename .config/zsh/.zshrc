@@ -24,9 +24,7 @@ function zvm_after_init() {
     bindkey -M vicmd "^K" clear-screen
 }
 
-fpath+=(
-    "${ZDOTDIR}"/functions
-)
+fpath+=("${ZDOTDIR}"/functions)
 autoload -Uz compinit
 autoload -Uz vcs_info
 autoload -Uz "${ZDOTDIR}"/functions/*(:t)
@@ -52,7 +50,9 @@ function ..() {
     cd -- "$(repeat ${1:-1} printf '../')"
 }
 
-zcompdump="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}/.zcompdump-${USER:-$(id -un)}-${ZSH_VERSION}"
+tmpdir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+suffix="${USER:-$(id -un)}-${ZSH_VERSION}"
+zcompdump="${tmpdir}/.zcompdump-${suffix}"
 compinit -d "$zcompdump"
 {
     # Compile the completion dump to increase startup speed. Run in background.
@@ -65,12 +65,14 @@ compinit -d "$zcompdump"
 
 # Credits: https://thevaluable.dev/zsh-completion-guide-examples/
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$zcompdump"
+zstyle ':completion:*' cache-path "${tmpdir}/.zcompcache-${suffix}"
 zstyle ':completion:*' menu select
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+unset tmpdir suffix zcompdump
 
 zstyle ':vcs_info:git:*' formats ' (%b)'
 prompt='%B%n@%m:%(5~|%-1~/…/%3~|%4~)%b${vcs_info_msg_0_}$ '
@@ -90,6 +92,7 @@ fi
 export PATH="$PATH:/usr/local/cuda/bin"
 export PATH="$PATH:$BUN_INSTALL/bin"
 export PATH="$PATH:$CARGO_HOME/bin"
+export PATH="$PATH:$ELAN_HOME/bin"
 export PATH="$PATH:$XDG_DATA_HOME/JetBrains/Toolbox/scripts"
 
 export EDITOR="nvim"
@@ -104,8 +107,8 @@ export GPG_TTY=$(tty)
 source $ZDOTDIR/.zsh_aliases
 
 zsh_plugin_dir=/usr/share/zsh/plugins
-for f in "${zsh_plugin_dir}"/**/*.plugin.zsh(N); do
-    source "$f"
+for plugin in zsh-autosuggestions zsh-syntax-highlighting zsh-vi-mode; do
+    source "${zsh_plugin_dir}/${plugin}/${plugin}.plugin.zsh"
 done
 source "${zsh_plugin_dir}/zsh-history-substring-search/zsh-history-substring-search.zsh"
 
@@ -119,9 +122,11 @@ function kitty_scrollback_edit_command_line() {
 zle -N kitty_scrollback_edit_command_line
 bindkey '^xi' kitty_scrollback_edit_command_line
 
+# For the ssh kitten
 if [[ -n "$SSH_CLIENT" && "$TERM" == "xterm-kitty" ]]; then
-    export KITTY_INSTALLATION_DIR=/usr/lib/kitty
+    export KITTY_INSTALLATION_DIR="$XDG_CONFIG_HOME/kitty/"
 fi
+
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="enabled"
     autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration

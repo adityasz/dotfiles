@@ -83,7 +83,7 @@ wm_bind("V", hl.dsp.workspace.toggle_special("four"))
 wm_bind("B", hl.dsp.workspace.toggle_special("five"))
 
 -- Do things to the window
-wm_bind("mouse:274", hl.dsp.window.resize(), { mouse = true })
+wm_bind("mouse:273", hl.dsp.window.resize(), { mouse = true })
 wm_bind("W", hl.dsp.window.close())
 if ENABLE_PLUGIN_WM then
     wm_bind("T", function()

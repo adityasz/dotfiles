@@ -1,10 +1,14 @@
-set hlsearch incsearch
-set ideajoin ideaput
+set hlsearch
+set incsearch
+set inccommand=nosplit
+set ideajoin
+set ideaput
 set textobj-indent " https://youtrack.jetbrains.com/issue/VIM-1151
-set NERDTree
+set VimEverywhere
+"set NERDTree
 
-let g:NERDTreeMapCloseDir = "h"
-let g:NERDTreeMapActivateNode = "l"
+"let g:NERDTreeMapCloseDir = "h"
+"let g:NERDTreeMapActivateNode = "l"
 
 nnoremap <F3>      :noh<CR>
 nnoremap <SPACE>   <Nop>
@@ -39,6 +43,8 @@ let mapleader = " "
 " https://github.com/JetBrains/ideavim/wiki/sethandler
 sethandler <S-F5>    n-v-i:ide " i:vim
 sethandler <C-S-F10> n-v-i:ide " i:vim
+sethandler <M-H>     n-v-i:vim
+sethandler <M-L>     n-v-i:vim
 
 map <F2>       <Action>(EditorToggleShowLineNumbers)
 map <Tab>      <Action>(RecentFiles)

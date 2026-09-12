@@ -1,6 +1,11 @@
 // Docs: https://zed.dev/docs/configuring-zed
 // Default settings: `zed: open default settings` command
 {
+  "gutter": {
+    "folds": true
+  },
+  "cli_default_open_behavior": "existing_window",
+  "proxy": "",
   "project_panel": {
     "indent_guides": {
       "show": "never"
@@ -47,13 +52,37 @@
   "agent_buffer_font_size": 16.0,
   "resize_all_panels_in_dock": [],
   "agent": {
+    "profiles": {
+      "foo": {
+        "default_model": {
+          "provider": "zed.dev",
+          "model": "claude-sonnet-4-6",
+          "enable_thinking": true,
+          "effort": "high"
+        },
+        "name": "Foo",
+        "tools": {
+          "list_directory": false
+        },
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      },
+      "ask": {
+        "name": "Ask",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
     "sidebar_side": "right",
     "dock": "right",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-opus-4.6",
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "zed.dev",
+      "model": "gpt-5.6-sol",
     },
-    "default_profile": "ask",
+    "default_profile": "write",
   },
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 18,
@@ -87,6 +116,7 @@
   },
   "base_keymap": "VSCode",
   "edit_predictions": {
+    "allow_data_collection": "no",
     "provider": "zed",
     "mode": "subtle",
   },
@@ -119,6 +149,7 @@
     },
   },
   "git_panel": {
+    "group_by": "status",
     "dock": "left",
     "tree_view": true,
     "sort_by_path": true,
@@ -141,6 +172,10 @@
     "C++": {
       "tab_size": 4,
       "hard_tabs": true,
+    },
+    "CMake": {
+      "tab_size": 4,
+      "hard_tabs": false,
     },
     "Python": {
       "indent_guides": {

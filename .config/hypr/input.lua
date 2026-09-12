@@ -21,10 +21,12 @@ if DEBUG_CONFIG then
     })
 end
 
-local sens_800 = -0.53891213400000004
+local function sens(dpi)
+    return -0.53891213400000004 * dpi / 800
+end
 
 hl.device({
-    name = "logitech-usb-optical-mouse",
-    sensitivity = sens_800 * 8 / 10,
+    name = "hp--inc-hyperx-pulsefire-fuse-wireless",
+    sensitivity = sens(800),
     accel_profile = "flat",
 })

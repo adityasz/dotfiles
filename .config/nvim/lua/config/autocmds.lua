@@ -127,3 +127,13 @@ vim.api.nvim_create_autocmd("User", {
     pattern = "VimtexEventViewReverse",
     callback = function() vim.fn["vimtex#ui#blink"]() end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = {
+        vim.env.ZDOTDIR .. "/.zshrc",
+        vim.env.ZDOTDIR .. "/.zsh_aliases",
+    },
+    callback = function(ev)
+        vim.system({ "zsh", "-fc", 'zcompile -- "$1"', "zsh", ev.file })
+    end,
+})

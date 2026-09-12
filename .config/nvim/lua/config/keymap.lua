@@ -27,9 +27,9 @@ map({'n', 'v'}, 'g0', '0', opts)
 
 map('v', '<M-c>', '"+y', opts)
 map('n', '<leader>r', ':IncRename ', opts)
-map('n', '<leader>d', ':lua vim.diagnostic.open_float()<CR>', opts)
-map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', opts)
-map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', opts)
+map('n', '<leader>d', function() vim.diagnostic.open_float() end, opts)
+map('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, opts)
+map('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, opts)
 
 -- I no longer use Neotree as it conflicts with Oil.nvim and I do not want to
 -- spend the time to look up how to know if the current buffer is a directory
