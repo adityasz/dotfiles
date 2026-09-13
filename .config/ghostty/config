@@ -33,7 +33,7 @@ keybind = alt+v=paste_from_clipboard
 keybind = alt+minus=decrease_font_size:1
 keybind = alt+equal=increase_font_size:1
 keybind = alt+shift+n=new_window
-keybind = alt+shift+t=new_tab
+keybind = ctrl+alt+t=new_tab
 
 keybind = ctrl+alt+1=goto_tab:1
 keybind = ctrl+alt+2=goto_tab:2
