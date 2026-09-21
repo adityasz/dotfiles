@@ -140,7 +140,11 @@
         "format-plugged": "",
         "format-alt": "{time} {icon}",
         "tooltip-format": "{capacity}% | {timeTo}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "events": {
+            "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+            "on-discharging-critical": "notify-send -u critical 'Very Low Battery'"
+        }
     },
     "backlight": {
         "interval": 1000,  // this anyways updates when using brightness keys (which is what I do), so no need to poll
