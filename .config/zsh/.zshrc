@@ -12,6 +12,7 @@ setopt BEEP
 setopt AUTO_CD
 setopt PROMPT_SUBST
 setopt INTERACTIVE_COMMENTS
+setopt MAGIC_EQUAL_SUBST
 
 unsetopt LIST_BEEP
 
