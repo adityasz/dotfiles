@@ -16,11 +16,17 @@ setopt MAGIC_EQUAL_SUBST
 
 unsetopt LIST_BEEP
 
+FZF_CTRL_R_COMMAND=''
+source /usr/share/fzf/key-bindings.zsh
+zle -N fzf-history-widget
+
 bindkey -v
+bindkey -M vicmd '/' fzf-history-widget
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
 
 function zvm_after_init() {
+    bindkey -M vicmd '/' fzf-history-widget
     bindkey -M viins "^K" clear-screen
     bindkey -M vicmd "^K" clear-screen
 }
@@ -31,6 +37,10 @@ autoload -Uz vcs_info
 autoload -Uz "${ZDOTDIR}"/functions/*(:t)
 
 function precmd() {
+    if (( _command_finished )); then
+        print
+        _command_finished=0
+    fi
     # Set the terminal window title to the current working directory path
     print -Pn "\e]0;%~\a"
     vcs_info
@@ -39,6 +49,7 @@ function precmd() {
 # The escape code has to be emitted in preexec and not precmd; don't care about why
 # Credits: https://tanutaran.medium.com/tmux-jump-between-prompt-output-with-osc-133-shell-integration-standard-84241b2defb5
 function preexec() {
+    _command_finished=1
     if [[ -n "$TMUX" ]]; then
         echo -n "\\x1b]133;A\\x1b\\"
     fi
@@ -75,8 +86,8 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 
 unset tmpdir suffix zcompdump
 
-zstyle ':vcs_info:git:*' formats ' (%b)'
-prompt='%B%n@%m:%(5~|%-1~/…/%3~|%4~)%b${vcs_info_msg_0_}$ '
+zstyle ':vcs_info:git:*' formats '(%b)'
+prompt='%B%(5~|%-1~/…/%3~|%4~)%b ${vcs_info_msg_0_}%(?..%F{red}[%?]%f )$ '
 
 if [[ -o login && -f ~/.config/environment.d/all.conf ]]; then
     while IFS= read -r line; do
@@ -125,7 +136,7 @@ bindkey '^xi' kitty_scrollback_edit_command_line
 
 # For the ssh kitten
 if [[ -n "$SSH_CLIENT" && "$TERM" == "xterm-kitty" ]]; then
-    export KITTY_INSTALLATION_DIR="$XDG_CONFIG_HOME/kitty/"
+    export KITTY_INSTALLATION_DIR="/usr/lib/kitty/"
 fi
 
 if test -n "$KITTY_INSTALLATION_DIR"; then
