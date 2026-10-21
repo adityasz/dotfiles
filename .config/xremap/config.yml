@@ -44,6 +44,7 @@ keymap:
       not: [kitty,
             aquamarine,
             zen,
+            imv,
             zen-twilight,
             zen-beta,
             zen-alpha,

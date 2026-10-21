@@ -1,0 +1,32 @@
+[options]
+scaling_mode   = shrink
+
+[binds]
+q              = quit
+f              = fullscreen
+h              = prev
+l              = next
+<Left>         = prev
+<Right>        = next
+w              = pan 0 50
+a              = pan 50 0
+s              = pan 0 -50
+d              = pan -50 0
+<equal>        = reset
+0              = zoom actual
+<Meta+equal>   = zoom 1
+<Meta+minus>   = zoom -1
+<minus>        = zoom -1
+<Shift+plus>   = zoom 1
+<KP_Add>       = zoom 1
+<KP_Subtract>  = zoom -1
+r              = rotate by 90
+<bracketleft>  = rotate by -90
+<bracketright> = rotate by 90
+c              = center
+i              = overlay
+z              = upscaling next
+<space>        = toggle_playing
+<period>       = next_frame
+gg             = goto 1
+<Shift+G>      = goto -1
