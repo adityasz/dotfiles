@@ -20,28 +20,28 @@ class TabColors:
     index_fg: int
     title_fg: int
     exe_fg: int
+    bg: int
+    sep_fg: int
+    sep_bg: int
 
 
 @dataclass(frozen=True, slots=True)
 class Theme:
     bg: int
-    sep_fg: int
     active: TabColors
     inactive: TabColors
 
 
 NORMAL = Theme(
-    bg=0xF7F8FA,
-    sep_fg=0xCCCCCC,
-    active=TabColors(0x3584E4, 0x000000, 0x26A269),
-    inactive=TabColors(0x808080, 0x888888, 0x8FF0A4),
+    0xFFFFFF,
+    TabColors(0x3584E4, 0x000000, 0x000000, 0xBBBBBB, 0x000000, 0xFFFFFF),
+    TabColors(0x808080, 0x888888, 0x888888, 0xFFFFFF, 0x000000, 0xFFFFFF),
 )
 
 SCROLL = Theme(
-    bg=0x6A9FB5,
-    sep_fg=0xE0ECF0,
-    active=TabColors(0xE8F4FF, 0xFFFFFF, 0x8FF0A4),
-    inactive=TabColors(0xC0D4DC, 0xD8E4EC, 0xA8E6CF),
+    0x6A9FB5,
+    TabColors(0xE8F4FF, 0xFFFFFF, 0x8FF0A4, 0x35596A, 0xFFFFFF, 0x6A9FB5),
+    TabColors(0xC0D4DC, 0xD8E4EC, 0xA8E6CF, 0x6A9FB5, 0xE0ECF0, 0x6A9FB5),
 )
 
 SGR_RE = re.compile(r"\x1b\[[^m]*m")
@@ -153,15 +153,14 @@ def draw_title(
             title_w = wcswidth(title) if title else 0
             sep_w = 1 if (exe and title) else 0
 
-        if exe_w + sep_w + title_w > remaining:
-            # truncate exe with ellipsis
-            if exe_w > remaining:
-                if remaining >= 2:
-                    exe = take_width(exe, remaining - 1) + "…"
-                elif remaining == 1:
-                    exe = "…"
-                else:
-                    exe = ""
+        # truncate exe with ellipsis
+        if exe_w + sep_w + title_w > remaining and exe_w > remaining:
+            if remaining >= 2:
+                exe = take_width(exe, remaining - 1) + "…"
+            elif remaining == 1:
+                exe = "…"
+            else:
+                exe = ""
 
     # Draw
     screen.cursor.bold = False
@@ -209,7 +208,7 @@ def draw_tab(
     theme = (
         SCROLL if get_boss().mappings.current_keyboard_mode_name == "scroll" else NORMAL
     )
-    bg = as_rgb(theme.bg)
+    bg = as_rgb((theme.active if tab.is_active else theme.inactive).bg)
 
     screen.cursor.bg = bg
     screen.color_profile.default_bg = color_from_int(theme.bg)
@@ -234,8 +233,16 @@ def draw_tab(
     end = screen.cursor.x
 
     if not is_last:
-        screen.cursor.fg = as_rgb(theme.sep_fg)
-        screen.cursor.bg = as_rgb(theme.bg)
+        sep_colors = (
+            theme.active
+            if (
+                tab.is_active
+                or (extra_data.next_tab is not None and extra_data.next_tab.is_active)
+            )
+            else theme.inactive
+        )
+        screen.cursor.fg = as_rgb(sep_colors.sep_fg)
+        screen.cursor.bg = as_rgb(sep_colors.sep_bg)
         screen.draw(draw_data.sep)
 
     screen.cursor.fg = 0
