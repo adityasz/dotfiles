@@ -44,6 +44,7 @@ function precmd() {
     # Set the terminal window title to the current working directory path
     print -Pn "\e]0;%~\a"
     vcs_info
+    [[ -n $vcs_info_msg_0_ ]] && vcs_info_msg_0_+=' '
 }
 
 # The escape code has to be emitted in preexec and not precmd; don't care about why
@@ -83,11 +84,11 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':vcs_info:git:*' formats '(%b)'
 
 unset tmpdir suffix zcompdump
 
-zstyle ':vcs_info:git:*' formats '(%b)'
-prompt='%B%(5~|%-1~/…/%3~|%4~)%b ${vcs_info_msg_0_}%(?..%F{red}[%?]%f )$ '
+prompt='%B%(5~|%-1~/…/%3~|%4~)%b ${vcs_info_msg_0_}%(?..%F{red}[%?]%f )❯ '
 
 if [[ -o login && -f ~/.config/environment.d/all.conf ]]; then
     while IFS= read -r line; do
