@@ -1,16 +1,12 @@
 * {
 	/* `otf-font-awesome` is required to be installed for icons */
 	font-family: Inter, "Font Awesome 7 Free";
-	font-size: 16px;
+	font-size: 12pt;
 	min-height: 0;
 	padding: 0;
 }
 
 #waybar {
-	/* background-color: rgba(255, 255, 255, 0.90); */
-	/* margin: 0; */
-	/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-	/* color: #000000; */
 	background-color: rgba(255, 255, 255, 0.00);
 	margin: 0;
 	color: #ffffff;
@@ -23,15 +19,15 @@
 .modules-left,
 .modules-center,
 .modules-right {
-	padding: 0 2px;
+	padding: 0 0.125em;
 }
 
 .modules-left {
-	margin-left: 10px;
+	margin-left: 0.625em;
 }
 
 .modules-right {
-	margin-right: 10px;
+	margin-right: 0.625em;
 }
 
 #clock,
@@ -54,62 +50,48 @@
 #mpd,
 #window,
 #workspaces {
-	padding: 6px 4px;
+	padding: 0 0.25em;
 }
 
-#network.wifi {
-	font-size: 14px;
-}
-
-#custom-power {
-	font-size: 14px;
-}
-
-#workspaces {
-	padding-left: 0;
-	padding-top: 8px;
-	padding-right: 2px;
+#network.wifi, #custom-power {
+	font-size: 0.875em;
 }
 
 #workspaces label {
 	color: #ffffff;
-	font-size: 10px;
+	font-size: 0.625em;
 }
 
 #backlight {
-	padding: 0 2px;
-	font-size: 24px;
-}
-
-#pulseaudio.output.muted {
-	padding-right: 2px;
+	/* padding: 0 0.125em; */
+	font-size: 1.3em;
 }
 
 #window {
-	padding: 0px 10px;
+	padding: 0 0.625em;
 }
 
 #backlight-slider, #pulseaudio-slider {
-	margin-left: 0px;
-	padding-left: 5px;
-	padding-right: 10px;
+	margin-left: 0;
+	padding-left: 0.3125em;
+	padding-right: 0.625em;
 }
 #backlight-slider slider, #pulseaudio-slider slider {
-	min-height: 15px;
-	min-width: 15px;
+	min-height: 0.9375em;
+	min-width: 0.9375em;
 	opacity: 0;
 	background-image: none;
 	border: 1px solid rgba(128, 128, 128, 0.5);
 	box-shadow: none;
 }
 #backlight-slider trough, #pulseaudio-slider trough {
-	min-height: 10px;
-	min-width: 80px;
-	border-radius: 5px;
+	min-height: 0.625em;
+	min-width: 5em;
+	border-radius: 0.3125em;
 	background-color: rgba(255, 255, 255, 0.31);
 }
 #backlight-slider highlight, #pulseaudio-slider highlight {
-	border-radius: 5px;
+	border-radius: 0.3125em;
 	background-color: white;
 	border: 1px solid rgba(128, 128, 128, 0.5);
 }
@@ -117,7 +99,6 @@
 @keyframes blink {
 	to {
 		background-color: #ffffff;
-		/* color: #000000; */
 	}
 }
 
@@ -132,14 +113,10 @@
 	animation-direction: alternate;
 }
 
-label:focus {
-	/* background-color: #000000; */
-}
-
 #custom-media {
 	background-color: #66cc99;
 	color: #2a5c45;
-	min-width: 100px;
+	min-width: 6.25em;
 }
 
 #tray > .passive {

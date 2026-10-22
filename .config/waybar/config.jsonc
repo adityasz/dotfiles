@@ -23,10 +23,8 @@
         "battery",
         "power-profiles-daemon",
         "pulseaudio#source",
-        "pulseaudio#output",
-        "pulseaudio/slider",
-        "backlight",
-        "backlight/slider",
+        "group/volume",
+        "group/brightness",
         "clock",
         "custom/notification"
     ],
@@ -34,7 +32,6 @@
     /// ===------------------------------------------------------------------===
     /// LEFT (left to right)
     /// ===------------------------------------------------------------------===
-
 	"hyprland/workspaces": {
 		"format": "{icon}",
         "show-special": false,
@@ -59,7 +56,6 @@
     /// ===------------------------------------------------------------------===
     /// CENTER
     /// ===------------------------------------------------------------------===
-
     "hyprland/window#title": {
 		"icon": false,
 	    "icon-size": 20,
@@ -72,7 +68,6 @@
     /// ===------------------------------------------------------------------===
     /// RIGHT (right to left)
     /// ===------------------------------------------------------------------===
-
     "custom/notification": {
         "tooltip": true,
         "format": "<span size='18pt'>{icon}</span>",
@@ -93,7 +88,6 @@
         "on-click-right": "swaync-client -d -sw",
         "escape": true
     },
-
     "clock": {
 		"format": "{:%a %b %d %H:%M}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>\n<span>{tz_list}</span>",
@@ -115,6 +109,28 @@
             "America/New_York",
             "Etc/UTC",
             "Asia/Kolkata"
+        ]
+    },
+    "group/volume": {
+        "orientation": "horizontal",
+        "drawer": {
+            "click-to-reveal": false,
+            "transition-duration": 200
+        },
+        "modules": [
+            "pulseaudio#output",
+            "pulseaudio/slider"
+        ]
+    },
+    "group/brightness": {
+        "orientation": "horizontal",
+        "drawer": {
+            "click-to-reveal": false,
+            "transition-duration": 200
+        },
+        "modules": [
+            "backlight",
+            "backlight/slider"
         ]
     },
     "power-profiles-daemon": {
@@ -156,8 +172,8 @@
         "format": "{format_source}",
         "format-source": "",
         "format-source-muted": "",
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-        "on-click-right": "pavucontrol"
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-middle": "pavucontrol"
     },
     "pulseaudio#output": {
         "format": "{icon}",
@@ -174,8 +190,8 @@
             "default": ["", "", ""]
         },
         "tooltip-format": "{volume}%",
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "pavucontrol"
+        "on-click-right-release": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-middle-release": "pavucontrol"
     },
     "network#wifi": {
         "interface": "wlp*",
