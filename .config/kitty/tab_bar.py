@@ -1,9 +1,9 @@
-"""Assisted-by: Claude:claude-sonnet-4.6"""
+"""Assisted-by: Claude:claude-sonnet-{4.6,5.5}"""
 
 import re
 from dataclasses import dataclass
 
-from kitty.fast_data_types import Screen, get_boss, wcswidth
+from kitty.fast_data_types import Screen, get_boss, get_options, wcswidth
 from kitty.rgb import color_from_int
 from kitty.tab_bar import (
     DrawData,
@@ -21,30 +21,27 @@ class TabColors:
     title_fg: int
     exe_fg: int
     bg: int
-    sep_fg: int
-    sep_bg: int
 
 
 @dataclass(frozen=True, slots=True)
 class Theme:
     bg: int
+    sep_fg: int
     active: TabColors
     inactive: TabColors
 
 
-NORMAL = Theme(
-    0xFFFFFF,
-    TabColors(0x3584E4, 0x000000, 0x000000, 0xBBBBBB, 0x000000, 0xFFFFFF),
-    TabColors(0x808080, 0x888888, 0x888888, 0xFFFFFF, 0x000000, 0xFFFFFF),
-)
-
 SCROLL = Theme(
     0x6A9FB5,
-    TabColors(0xE8F4FF, 0xFFFFFF, 0x8FF0A4, 0x35596A, 0xFFFFFF, 0x6A9FB5),
-    TabColors(0xC0D4DC, 0xD8E4EC, 0xA8E6CF, 0x6A9FB5, 0xE0ECF0, 0x6A9FB5),
+    0xE0ECF0,
+    TabColors(0xE8F4FF, 0xFFFFFF, 0x8FF0A4, 0x35596A),
+    TabColors(0xC0D4DC, 0xD8E4EC, 0xA8E6CF, 0x6A9FB5),
 )
 
 SGR_RE = re.compile(r"\x1b\[[^m]*m")
+CAP_L = "\ue0b6"
+CAP_R = "\ue0b4"
+CAP_W = 1
 
 
 def strip_sgr(s: str) -> str:
@@ -96,11 +93,10 @@ def draw_title(
     screen: Screen,
     tab: TabBarData,
     index: int,
-    theme: Theme,
+    tab_colors: TabColors,
     max_length: int,
 ) -> None:
     """Draw: [bell/activity] index: [progress] [exe] [title]"""
-    tab_colors = theme.active if tab.is_active else theme.inactive
     ta = TabAccessor(tab.tab_id)
 
     # Fixed-width pieces
@@ -205,44 +201,68 @@ def draw_tab(
     is_last: bool,
     extra_data: ExtraData,
 ) -> int:
+    if limit := get_options().tab_title_max_length:
+        max_tab_length = min(max_tab_length, limit)
     theme = (
-        SCROLL if get_boss().mappings.current_keyboard_mode_name == "scroll" else NORMAL
+        SCROLL
+        if get_boss().mappings.current_keyboard_mode_name == "scroll"
+        else Theme(
+            int(draw_data.default_bg),
+            0xAAAAAA,
+            TabColors(
+                0x3584E4,
+                int(draw_data.active_fg),
+                int(draw_data.active_fg),
+                int(draw_data.active_bg),
+            ),
+            TabColors(
+                0x808080,
+                int(draw_data.inactive_fg),
+                int(draw_data.inactive_fg),
+                int(draw_data.inactive_bg),
+            ),
+        )
     )
-    bg = as_rgb((theme.active if tab.is_active else theme.inactive).bg)
+    colors = theme.active if tab.is_active else theme.inactive
+    bg = as_rgb(colors.bg)
+    theme_bg = as_rgb(theme.bg)
+    next_active = extra_data.next_tab is not None and extra_data.next_tab.is_active
 
-    screen.cursor.bg = bg
+    # The active pill absorbs one separator width on each side. An inactive tab
+    # at an end reserves that width outside, so the bar width stays constant.
+    pad = wcswidth(draw_data.sep)
+    inner = pad if tab.is_active else 0
+    edge_l = pad if not tab.is_active and extra_data.prev_tab is None else 0
+    edge_r = pad if not tab.is_active and is_last else 0
+
+    lead = draw_data.leading_spaces + inner
+    trail = min(max_tab_length - 1, draw_data.trailing_spaces) + inner
+    title_budget = max_tab_length - lead - trail - 2 * CAP_W - edge_l - edge_r
+
     screen.color_profile.default_bg = color_from_int(theme.bg)
+    screen.cursor.fg = bg
+    screen.cursor.bg = theme_bg
+    screen.draw(" " * edge_l + CAP_L)
+    screen.cursor.bg = bg
+    screen.draw(" " * lead)
 
-    leading = draw_data.leading_spaces
-    trailing = min(max_tab_length - 1, draw_data.trailing_spaces)
-    title_budget = max_tab_length - leading - trailing
+    draw_title(draw_data, screen, tab, index, colors, title_budget)
 
-    if draw_data.leading_spaces:
-        screen.draw(" " * draw_data.leading_spaces)
-
-    draw_title(draw_data, screen, tab, index, theme, title_budget)
-
-    trailing_spaces = min(max_tab_length - 1, draw_data.trailing_spaces)
-    max_tab_length -= trailing_spaces
+    max_tab_length -= trail + CAP_W + edge_r
     extra = screen.cursor.x - before - max_tab_length
     if extra > 0:
         screen.cursor.x -= extra + 1
         screen.draw("…")
-    if trailing_spaces:
-        screen.draw(" " * trailing_spaces)
+    screen.draw(" " * trail)
+    screen.cursor.fg = bg
+    screen.cursor.bg = theme_bg
+    screen.draw(CAP_R)
     end = screen.cursor.x
+    screen.draw(" " * edge_r)
 
-    if not is_last:
-        sep_colors = (
-            theme.active
-            if (
-                tab.is_active
-                or (extra_data.next_tab is not None and extra_data.next_tab.is_active)
-            )
-            else theme.inactive
-        )
-        screen.cursor.fg = as_rgb(sep_colors.sep_fg)
-        screen.cursor.bg = as_rgb(sep_colors.sep_bg)
+    if not (is_last or tab.is_active or next_active):
+        screen.cursor.fg = as_rgb(theme.sep_fg)
+        screen.cursor.bg = theme_bg
         screen.draw(draw_data.sep)
 
     screen.cursor.fg = 0
