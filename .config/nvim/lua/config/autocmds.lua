@@ -1,13 +1,22 @@
 local utils = require("config.utils")
 
+local function kitty_socket_available()
+    local v = vim.env.KITTY_LISTEN_ON
+    return v ~= nil and v ~= ""
+end
+
 -- credits: Kovid Goyal
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume", "UIEnter" }, {
     group = vim.api.nvim_create_augroup("KittySetVarVimEnter", { clear = true }),
     callback = function()
+        local seq = "\x1b]1337;SetUserVar=in_editor=MQ==\007"
+        if kitty_socket_available() then
+            seq = seq .. "\x1b]1337;SetUserVar=in_nvim=MQ==\007"
+        end
         if vim.api.nvim_ui_send then
-            vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor=MQ==\007")
+            vim.api.nvim_ui_send(seq)
         else
-            io.stdout:write("\x1b]1337;SetUserVar=in_editor=MQ==\007")
+            io.stdout:write(seq)
         end
     end,
 })
@@ -18,8 +27,10 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
     callback = function()
         if vim.api.nvim_ui_send then
             vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_editor\007")
+            vim.api.nvim_ui_send("\x1b]1337;SetUserVar=in_nvim\007")
         else
             io.stdout:write("\x1b]1337;SetUserVar=in_editor\007")
+            io.stdout:write("\x1b]1337;SetUserVar=in_nvim\007")
         end
     end,
 })
